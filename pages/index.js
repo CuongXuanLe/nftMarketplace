@@ -1,9 +1,13 @@
 import React from "react";
+import Style from "../styles/index.module.css";
+import { HeroSection } from "../components/componentsindex";
 
-const index = () => {
-  return <>
-    <div>hehe check</div>
-  </>
+const Home = () => {
+  return (
+    <div className={Style.homePage}>
+      <HeroSection />
+    </div>
+  );
 };
 
-export default index;
+export default Home;
