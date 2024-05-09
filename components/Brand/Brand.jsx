@@ -9,7 +9,7 @@ const Brand = () => {
     <div className={Style.Brand}>
       <div className={Style.Brand_box}>
         <div className={Style.Brand_box_left}>
-          <Image src={images.logo} alt="brand logo" width={100} height={100} />
+          <Image src={images.logo} alt="brand logo" height={75} width={125} />
           <h1>Earn free crypto with Ciscrypt</h1>
           <p>A creative agency that lead and inspire.</p>
 
