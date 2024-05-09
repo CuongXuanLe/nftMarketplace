@@ -59,11 +59,6 @@ a {
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
-    /* --box-shadow: 0.5rem 0.5rem 0.5rem var(--shadow-dark-color),
-      -0.5rem -0.5rem 0.5rem var(--shadow-light-color);
-
-    --box-shadow-2: 0rem 0rem 0rem var(--shadow-dark-color),
-      -0.15rem -0.15rem 0.5rem var(--shadow-dark-color); */
   }
   body {
     color: white;

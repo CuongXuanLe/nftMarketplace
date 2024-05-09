@@ -1,8 +1,6 @@
 import React, { useState, useMemo, useCallback, useContext } from "react";
 import Image from "next/image";
 import { useDropzone } from "react-dropzone";
-
-//INTERNAL IMPORT
 import Style from "../styles/account.module.css";
 import images from "../img";
 import From from "../AccountPage/Form/Form";
