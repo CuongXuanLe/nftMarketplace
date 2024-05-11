@@ -12,8 +12,6 @@ import {
 import { AiFillCloseCircle } from "react-icons/ai";
 import { MdVerified } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
-
-//INTERNAL IMPORT
 import Style from "./Filter.module.css";
 
 const Filter = () => {
@@ -22,7 +20,6 @@ const Filter = () => {
   const [video, setVideo] = useState(true);
   const [music, setMusic] = useState(true);
 
-  //FUNCTION SECTION
   const openFilter = () => {
     if (!filter) {
       setFilter(true);
