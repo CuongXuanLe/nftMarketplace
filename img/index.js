@@ -24,8 +24,8 @@ import service1 from "./service-1.png";
 import service2 from "./service-2.png";
 import service3 from "./service-3.png";
 import service4 from "./service-4.png";
-import logoLight from "./logo.png";
-import logo from "./logo.png";
+import logoLight from "./logo-light.svg";
+import logo from "./logo.svg";
 import facebook from "./facebook.svg";
 import twitter from "./twitter.svg";
 import telegram from "./telegram.svg";
@@ -41,8 +41,32 @@ import nft_image_2 from "./nft-image-2.png";
 import nft_image_3 from "./nft-image-3.png";
 import musiceWave from "./musicwave.png";
 import update from "./update.png";
+import earn from "./earn.png";
+import NFTVideo from "./update.png";
+import hero2 from "./hero2.png";
+import upload from "./upload.png";
+import provider1 from "./provider-1.png";
+import provider2 from "./provider-2.png";
+import provider3 from "./provider-3.png";
+import provider4 from "./provider-4.png";
+import founder1 from "./founder1.jpg";
+import founder2 from "./founder2.jpg";
+import founder3 from "./founder3.jpg";
+import founder4 from "./founder4.jpg";
 
 export default {
+  hero2,
+  founder1,
+  founder2,
+  founder3,
+  founder4,
+  provider1,
+  provider2,
+  provider3,
+  provider4,
+  upload,
+  NFTVideo,
+  earn,
   collection,
   update,
   musiceWave,
