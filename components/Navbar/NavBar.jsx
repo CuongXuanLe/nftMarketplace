@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { MdNotifications } from "react-icons/md";
@@ -8,7 +8,7 @@ import Style from "./NavBar.module.css";
 import { Discover, HelpCenter, Notification, Profile, SideBar } from "./index";
 import { Button } from "../componentsindex";
 import images from "../../img";
-
+// import { useAccountFunctions, useAccountState } from "../../Contexts/AccountContext";
 const NavBar = () => {
   const [discover, setDiscover] = useState(false);
   const [help, setHelp] = useState(false);
@@ -16,25 +16,38 @@ const NavBar = () => {
   const [profile, setProfile] = useState(false);
   const [openSideMenu, setOpenSideMenu] = useState(false);
 
-  const openMenu = (e) => {
-    const btnText = e.target.innerText;
-    if (btnText == "Discover") {
-      setDiscover(true);
+  const navRef = useRef(null);
+
+  const toggleMenu = (menuName) => {
+    const btnText = menuName.target.innerText;
+    if (btnText === "Discover") {
+      setDiscover(prev => !prev);
       setHelp(false);
       setNotification(false);
       setProfile(false);
-    } else if (btnText == "Help Center") {
+    } else if (btnText === "Support") {
+      setHelp(prev => !prev);
       setDiscover(false);
-      setHelp(true);
       setNotification(false);
       setProfile(false);
-    } else {
+    }
+  };
+
+  const handleOutsideClick = (event) => {
+    if (navRef.current && !navRef.current.contains(event.target)) {
       setDiscover(false);
       setHelp(false);
       setNotification(false);
       setProfile(false);
     }
   };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
 
   const openNotification = () => {
     if (!notification) {
@@ -67,28 +80,24 @@ const NavBar = () => {
   };
 
   return (
-    <div className={Style.navbar}>
+    <div className={Style.navbar} ref={navRef}>
       <div className={Style.navbar_container}>
         <div className={Style.navbar_container_left}>
-          <div className={Style.logo}>
-            <Image
-              src={images.logo}
-              alt="NFT MARKET PLACE"
-              height={75}
-              width={125}
-            />
-          </div>
-          <div className={Style.navbar_container_left_box_input}>
-            <div className={Style.navbar_container_left_box_input_box}>
-              <input type="text" placeholder="Search NFT" />
-              <BsSearch onClick={() => {}} className={Style.search_icon} />
+          <Link href={{ pathname: `/` }}>
+            <div className={Style.logo}>
+              <Image
+                src={images.logo}
+                alt="NFT MARKET PLACE"
+                height={75}
+                width={125}
+              />
             </div>
-          </div>
-        </div>
-
-        <div className={Style.navbar_container_right}>
+          </Link>
+          <div className={Style.nav_split}></div>
           <div className={Style.navbar_container_right_discover}>
-            <p onClick={(e) => openMenu(e)}>Discover</p>
+            <div className={Style.navbar_container_right_discover_text}>
+              <p onClick={(e) => toggleMenu(e)}>Discover</p>
+            </div>
             {discover && (
               <div className={Style.navbar_container_right_discover_box}>
                 <Discover />
@@ -97,14 +106,24 @@ const NavBar = () => {
           </div>
 
           <div className={Style.navbar_container_right_help}>
-            <p onClick={(e) => openMenu(e)}>Help Center</p>
+            <div className={Style.navbar_container_right_help_text}>
+              <p onClick={(e) => toggleMenu(e)}>Support</p>
+            </div>
             {help && (
               <div className={Style.navbar_container_right_help_box}>
                 <HelpCenter />
               </div>
             )}
           </div>
+        </div>
 
+        <div className={Style.navbar_container_right}>
+          <div className={Style.navbar_container_left_box_input}>
+            <div className={Style.navbar_container_left_box_input_box}>
+              <input type="text" placeholder="Search NFT" />
+              <BsSearch onClick={() => {}} className={Style.search_icon} />
+            </div>
+          </div>
           <div className={Style.navbar_container_right_notify}>
             <MdNotifications
               className={Style.notify}

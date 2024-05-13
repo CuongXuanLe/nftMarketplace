@@ -21,6 +21,10 @@ const loginAndSignUp = () => {
       name: "Continue with Facebook",
     },
   ];
+
+  const handleLogin = () => {
+    console.log('login')
+  }
   return (
     <div className={Style.user}>
       <div className={Style.user_box}>
@@ -68,7 +72,7 @@ const loginAndSignUp = () => {
           </div>
         </div>
 
-        <Button btnName="Continue" classStyle={Style.button} />
+        <Button btnName="Continue" classStyle={Style.button} handleClick={handleLogin()}/>
       </div>
     </div>
   );

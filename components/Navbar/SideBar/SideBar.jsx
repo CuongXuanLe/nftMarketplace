@@ -44,10 +44,6 @@ const SideBar = ({ setOpenSideMenu }) => {
       name: "Connect Wallet",
       link: "connect-wallet",
     },
-    {
-      name: "Blog",
-      link: "blog",
-    },
   ];
 
   const helpCenter = [
