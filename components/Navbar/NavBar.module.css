@@ -1,14 +1,24 @@
 .navbar {
   width: 100%;
-  padding-block: 1.5rem;
+  padding-block: 0.7rem;
   position: relative;
   z-index: 111111111;
+  transition: all 0.3s ease-in-out;
 }
 
-.nav_split{
+.nav_split {
   height: 65%;
   width: 1px;
   border-right: 1px solid #fff;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 99999999999;
+  background-color: rgba(0, 0, 0, 0.95);
+  border-bottom: 1px solid #fff;
 }
 
 .logo:hover {
@@ -16,7 +26,7 @@
 }
 
 .navbar_container {
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -27,17 +37,17 @@
 
 .navbar_container_left {
   display: grid;
-  grid-template-columns: 0.5fr 0.15fr 0.45fr 1fr;
+  grid-template-columns: 0.25fr 0.05fr 0.25fr 0.3fr;
   align-items: center;
 }
 
 .navbar_container_left_box_input_box {
-  width: 80%;
+  width: 100%;
   border: 1px solid #fff;
   display: flex;
   align-items: center;
-  padding: 0.5rem;
-  border-radius: 2rem;
+  padding: 0.8rem;
+  border-radius: 10px;
 }
 
 .navbar_container_left_box_input_box input {
@@ -45,6 +55,7 @@
   border: none;
   outline: none;
   background-color: transparent;
+  margin-left: 10px;
 }
 
 .search_icon {
@@ -75,11 +86,11 @@
   font-size: 1.4rem;
 }
 
-.navbar_container_right_discover_text :hover, .navbar_container_right_help_text :hover {
+.navbar_container_right_discover_text :hover,
+.navbar_container_right_help_text :hover {
   color: var(--shadow-dark-color);
   border-bottom: 3px solid var(--shadow-dark-color);
 }
-
 
 .navbar_container_right_discover_box,
 .navbar_container_right_help_box {
@@ -95,6 +106,17 @@
 .navbar_container_right_notify {
   position: relative;
   cursor: pointer;
+  margin: auto;
+}
+
+.navbar_container_left_box_input :hover {
+  border-color: transparent;
+  transition: background-color 0.2s cubic-bezier(0.05, 0, 0.2, 1) 0s;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.navbar_container_left_box_input_box :hover {
+  background-color: transparent;
 }
 
 .notify {

@@ -8,25 +8,26 @@ import Style from "./NavBar.module.css";
 import { Discover, HelpCenter, Notification, Profile, SideBar } from "./index";
 import { Button } from "../componentsindex";
 import images from "../../img";
-// import { useAccountFunctions, useAccountState } from "../../Contexts/AccountContext";
+
 const NavBar = () => {
   const [discover, setDiscover] = useState(false);
   const [help, setHelp] = useState(false);
   const [notification, setNotification] = useState(false);
   const [profile, setProfile] = useState(false);
   const [openSideMenu, setOpenSideMenu] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
 
   const navRef = useRef(null);
 
   const toggleMenu = (menuName) => {
     const btnText = menuName.target.innerText;
     if (btnText === "Discover") {
-      setDiscover(prev => !prev);
+      setDiscover((prev) => !prev);
       setHelp(false);
       setNotification(false);
       setProfile(false);
     } else if (btnText === "Support") {
-      setHelp(prev => !prev);
+      setHelp((prev) => !prev);
       setDiscover(false);
       setNotification(false);
       setProfile(false);
@@ -79,8 +80,23 @@ const NavBar = () => {
     }
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsSticky(window.scrollY > 100);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className={Style.navbar} ref={navRef}>
+    <div
+      className={`${Style.navbar} ${isSticky ? Style.sticky : ""}`}
+      ref={navRef}
+    >
       <div className={Style.navbar_container}>
         <div className={Style.navbar_container_left}>
           <Link href={{ pathname: `/` }}>
@@ -120,8 +136,8 @@ const NavBar = () => {
         <div className={Style.navbar_container_right}>
           <div className={Style.navbar_container_left_box_input}>
             <div className={Style.navbar_container_left_box_input_box}>
-              <input type="text" placeholder="Search NFT" />
               <BsSearch onClick={() => {}} className={Style.search_icon} />
+              <input type="text" placeholder="Search NFT" />
             </div>
           </div>
           <div className={Style.navbar_container_right_notify}>
