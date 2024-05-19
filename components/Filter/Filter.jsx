@@ -93,7 +93,7 @@ const Filter = () => {
             </div>
           </div>
 
-          <div className={Style.filter_box_items_box}>
+          {/* <div className={Style.filter_box_items_box}>
             <div
               className={Style.filter_box_items_box_item_trans}
               onClick={() => openVideo()}
@@ -111,7 +111,7 @@ const Filter = () => {
               <FaMusic /> <small>Musics</small>
               {music ? <AiFillCloseCircle /> : <TiTick />}
             </div>
-          </div>
+          </div> */}
 
           <div className={Style.filter_box_items_box}>
             <div className={Style.filter_box_items_box_item}>
