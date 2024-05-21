@@ -42,7 +42,7 @@ a {
 }
 
 ::-webkit-scrollbar {
-  width: 1rem;
+  width: 0.5rem;
   border: 1px solid var(--main-bg-color);
 }
 
