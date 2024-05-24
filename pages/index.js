@@ -21,13 +21,7 @@ const Home = () => {
   return (
     <div className={Style.homePage}>
       <HeroSection />
-      <Service />
       <BigNFTSlider />
-      <Title
-        heading="Audio Collection"
-        paragraph="Discover the most outstanding NFTs in all topics of life."
-      />
-      <AudioLive />
       <FollowerTab />
       <Slider />
       <Collection />
@@ -44,7 +38,7 @@ const Home = () => {
       <Category />
       <Subscribe />
       <Brand />
-      <Video />
+      {/* <Video /> */}
     </div>
   );
 };

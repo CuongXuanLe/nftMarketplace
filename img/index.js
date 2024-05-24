@@ -53,8 +53,26 @@ import founder1 from "./founder1.jpg";
 import founder2 from "./founder2.jpg";
 import founder3 from "./founder3.jpg";
 import founder4 from "./founder4.jpg";
+import item1 from "./1.jpg";
+import item2 from "./2.jpg";
+// import item3 from "./3.avif";
+// import item4 from "./4.avif";
+// import item5 from "./5.avif";
+// import item6 from "./6.avif";
+// import item7 from "./7.avif";
+import item8 from "./11.webp";
+import item9 from "./12.webp";
 
 export default {
+  item1,
+  item2,
+  // item3,
+  // item4,
+  // item5,
+  // item6,
+  // item7,
+  item8,
+  item9,
   hero2,
   founder1,
   founder2,

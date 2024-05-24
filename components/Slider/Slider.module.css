@@ -40,10 +40,34 @@
 .slider_box_button_btn_icon:hover{
     background-color: var(--icons-color);
     color: var(--main-bg-color);
-    box-shadow: var(--box-shadow);
+}
+
+.container_slider_box_button_btn_icon_1{
+    position: absolute;
+    display: flex;
+    width: 77%;
+    justify-content: space-between;
+    top: 40%;
+    z-index: 99;
+}
+
+.slider_box_button_btn_icon_1{
+    border: 1px solid var(--icons-color);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+    transition:  all .3s ease-in;
+    cursor: pointer;
+}
+
+.slider_box_button_btn_icon_1:hover{
+    background-color: var(--icons-color);
+    color: var(--main-bg-color);
 }
 
 .slider_box_itmes{
+    position: relative;
     width: 100%;
     overflow: hidden;
 }
@@ -75,6 +99,10 @@
     }
 
     .slider_box_button_btn_icon{
+        padding: .5rem;
+    }
+
+    .slider_box_button_btn_icon_1{
         padding: .5rem;
     }
 }

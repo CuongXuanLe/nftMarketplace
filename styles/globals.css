@@ -6,7 +6,7 @@
   --icons-bg-color: #e2e6e9;
   --shadow-dark-color: #9cbfff;
   --shadow-light-color: #fff;
-  --main-bg-color: #000000;
+  --main-bg-color: rgb(18,18,18);
   --main-bg-color-hovered: #fff;
 
   --box-shadow: 0.5rem 0.5rem 0.5rem var(--shadow-dark-color),
@@ -62,6 +62,6 @@ a {
   }
   body {
     color: white;
-    background: black;
+    /* background: black; */
   }
 }

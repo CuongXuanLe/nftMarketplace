@@ -5,14 +5,14 @@ import Style from "./Slider.module.css";
 import SliderCard from "./SliderCard/SliderCard";
 import images from "../../img";
 
-const Slider = () => {
+const Slider = ({location}) => {
   const FollowingArray = [
     {
-      background: images.creatorbackground3,
+      background: images.item1,
       user: images.user3,
     },
     {
-      background: images.creatorbackground4,
+      background: images.item2,
       user: images.user4,
     },
     {
@@ -20,7 +20,7 @@ const Slider = () => {
       user: images.user5,
     },
     {
-      background: images.creatorbackground6,
+      background: images.item8,
       user: images.user6,
     },
     {
@@ -28,7 +28,7 @@ const Slider = () => {
       user: images.user1,
     },
     {
-      background: images.creatorbackground2,
+      background: images.item9,
       user: images.user2,
     },
   ];
@@ -53,25 +53,41 @@ const Slider = () => {
   return (
     <div className={Style.slider}>
       <div className={Style.slider_box}>
-        <h2>Top Collector Buys Today</h2>
-        <div className={Style.slider_box_button}>
-          <p>Click on play icon & enjoy Nfts Video</p>
-          <div className={Style.slider_box_button_btn}>
-            <div
-              className={Style.slider_box_button_btn_icon}
+        {location === 'HeroSection' ? 
+          <div className={Style.container_slider_box_button_btn_icon_1}>
+            <div className={Style.slider_box_button_btn_icon_1}
               onClick={() => handleScroll("left")}
             >
               <TiArrowLeftThick />
             </div>
             <div
-              className={Style.slider_box_button_btn_icon}
+              className={Style.slider_box_button_btn_icon_1}
               onClick={() => handleScroll("right")}
             >
               <TiArrowRightThick />
             </div>
+          </div> :
+          <>
+            <h2>Top Collector Buys Today</h2>
+            <div className={Style.slider_box_button}>
+              <p>Click on play icon & enjoy Nfts Video</p>
+              <div className={Style.slider_box_button_btn}>
+                <div
+                  className={Style.slider_box_button_btn_icon}
+                  onClick={() => handleScroll("left")}
+                >
+                  <TiArrowLeftThick />
+                </div>
+                <div
+                  className={Style.slider_box_button_btn_icon}
+                  onClick={() => handleScroll("right")}
+                >
+                  <TiArrowRightThick />
+                </div>
+              </div>
           </div>
-        </div>
-
+          </>
+        }
         <motion.div className={Style.slider_box_itmes} ref={dragSlider}>
           <motion.div
             ref={dragSlider}
@@ -80,7 +96,7 @@ const Slider = () => {
             dragConstraints={{ right: 0, left: -width }}
           >
             {FollowingArray.map((el, i) => (
-              <SliderCard key={i + 1} el={el} i={i} />
+              <SliderCard key={i + 1} el={el} i={i} card_location={location}/>
             ))}
           </motion.div>
         </motion.div>
