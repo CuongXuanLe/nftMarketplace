@@ -14,7 +14,7 @@
     position: relative;
     width: 100%;
     overflow: hidden;
-    border-radius: 2rem;
+    border-radius: 1rem;
 
 }
 
@@ -23,7 +23,6 @@
     top: 55%;
     width: 100%;
     background-color: black;
-    /* border-bottom-right-radius: 1rem;; */
 }
 
 .sliderCard_box_img_img{
@@ -102,8 +101,6 @@
     font-size: 0.8rem;
 }
 
-
-
 .exploreButton {
     background: #ff4081;
     border: none;
@@ -123,10 +120,8 @@
 }
 
 .sliderCard_box:hover .sliderCard_box_content_1 {
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.6);
     justify-content: flex-start;
-    /* transform: translateY(0%);
-    transition: transform 0.3s ease-in, opacity 0.3s ease-in; */
 }
 
 .sliderCard_box:hover .sliderCard_box_description {
