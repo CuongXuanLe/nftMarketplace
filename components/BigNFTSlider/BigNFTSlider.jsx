@@ -108,7 +108,7 @@ const BigNFTSlider = () => {
                 <h4>
                   {sliderData[idNumber].name}{" "}
                   <span>
-                    <MdVerified />
+                    <MdVerified color={'rgb(32, 129, 226)'}/>
                   </span>
                 </h4>
               </div>

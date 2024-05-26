@@ -6,7 +6,6 @@ import images from "../../../img";
 import LikeProfile from "../../LikeProfile/LikeProfile";
 
 const SliderCard = ({ el, i, card_location}) => {
-  console.log('check card_location: ', card_location)
   return (
     <motion.div className={Style.sliderCard}>
       <div className={Style.sliderCard_box}>

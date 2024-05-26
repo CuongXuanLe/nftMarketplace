@@ -11,15 +11,15 @@ import images from "../../img";
 const FollowerTab = () => {
   const CardArray = [
     {
-      background: images.creatorbackground1,
+      background: images.item9,
       user: images.user1,
     },
     {
-      background: images.creatorbackground2,
+      background: images.item10,
       user: images.user2,
     },
     {
-      background: images.creatorbackground3,
+      background: images.item8,
       user: images.user3,
     },
     {
@@ -27,7 +27,7 @@ const FollowerTab = () => {
       user: images.user4,
     },
     {
-      background: images.creatorbackground5,
+      background: images.item1,
       user: images.user5,
     },
     {
@@ -35,7 +35,7 @@ const FollowerTab = () => {
       user: images.user6,
     },
     {
-      background: images.creatorbackground7,
+      background: images.item4,
       user: images.user7,
     },
     {
@@ -49,7 +49,7 @@ const FollowerTab = () => {
       user: images.user3,
     },
     {
-      background: images.creatorbackground4,
+      background: images.item8,
       user: images.user4,
     },
     {
@@ -57,7 +57,7 @@ const FollowerTab = () => {
       user: images.user5,
     },
     {
-      background: images.creatorbackground6,
+      background: images.item4,
       user: images.user6,
     },
     {
@@ -65,37 +65,37 @@ const FollowerTab = () => {
       user: images.user1,
     },
     {
-      background: images.creatorbackground2,
+      background: images.item2,
       user: images.user2,
     },
   ];
   const NewsArray = [
     {
-      background: images.creatorbackground1,
+      background: images.item2,
       user: images.user1,
     },
     {
-      background: images.creatorbackground2,
+      background: images.item10,
       user: images.user2,
     },
     {
-      background: images.creatorbackground3,
+      background: images.item3,
       user: images.user3,
     },
     {
-      background: images.creatorbackground4,
+      background: images.item5,
       user: images.user4,
     },
     {
-      background: images.creatorbackground5,
+      background: images.item4,
       user: images.user5,
     },
     {
-      background: images.creatorbackground6,
+      background: images.item1,
       user: images.user6,
     },
     {
-      background: images.creatorbackground7,
+      background: images.item9,
       user: images.user7,
     },
     {
@@ -104,11 +104,13 @@ const FollowerTab = () => {
     },
   ];
 
+  const [activeTab, setActiveTab] = useState('popular');
   const [popular, setPopular] = useState(true);
   const [following, setFollowing] = useState(false);
   const [news, setNews] = useState(false);
 
   const openPopular = () => {
+    setActiveTab('popular');
     if (!popular) {
       setPopular(true);
       setFollowing(false);
@@ -116,6 +118,7 @@ const FollowerTab = () => {
     }
   };
   const openFollower = () => {
+    setActiveTab('follower');
     if (!following) {
       setPopular(false);
       setFollowing(true);
@@ -123,6 +126,7 @@ const FollowerTab = () => {
     }
   };
   const openNews = () => {
+    setActiveTab('news');
     if (!news) {
       setPopular(false);
       setFollowing(false);
@@ -133,16 +137,16 @@ const FollowerTab = () => {
   return (
     <div className={Style.followerTab}>
       <div className={Style.followerTab_title}>
-        <h2> Top Creators List..</h2>
+        <h2>Top Creators List</h2>
         <div className={Style.followerTab_tabs}>
           <div className={Style.followerTab_tabs_btn}>
-            <button onClick={() => openPopular()}>
+            <button onClick={openPopular} className={activeTab === 'popular' ? Style.active : ''}>
               <RiUserFollowFill /> Popular
             </button>
-            <button onClick={() => openFollower()}>
+            <button onClick={openFollower} className={activeTab === 'follower' ? Style.active : ''}>
               <RiUserFollowFill /> Following
             </button>
-            <button onClick={() => openNews()}>
+            <button onClick={openNews} className={activeTab === 'news' ? Style.active : ''}>
               <RiAwardLine /> NoteWorthy
             </button>
           </div>

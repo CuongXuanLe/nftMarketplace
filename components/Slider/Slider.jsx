@@ -55,8 +55,6 @@ const Slider = ({location}) => {
     setWidth(dragSlider.current.scrollWidth - dragSlider.current.offsetWidth);
   });
 
-  console.log('check setWidth: ', width)
-
   useEffect(() => {
     const smoothScroll = (start, end, duration) => {
       if (start === end) return;
