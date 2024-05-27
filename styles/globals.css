@@ -7,7 +7,7 @@
   --icons-bg-color: #e2e6e9;
   --shadow-dark-color: #9cbfff;
   --shadow-light-color: #fff;
-  --main-bg-color: rgb(18,18,18);
+  --main-bg-color: rgb(18, 18, 18);
   --main-color-hovered: rgb(42, 42, 42);
   --main-bg-color-hovered: #e0e0e0;
   --box-shadow: 0.5rem 0.5rem 0.5rem var(--shadow-dark-color),
@@ -53,7 +53,7 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 2rem;
+  border-radius: 1rem;
   background: var(--icons-color);
   width: 0.5rem;
 }

@@ -22,7 +22,7 @@
   border: none;
   outline: none;
   padding: 1rem 1.5rem;
-  border-radius: 2rem;
+  border-radius: 1rem;
   border: 1px solid var(--main-bg-color);
   transition: all 0.3s ease-in;
   font-size: 1.3rem;
@@ -38,7 +38,7 @@
 .filter_box_right_box {
   border: 1px solid var(--icons-color);
   padding: 1rem 2rem;
-  border-radius: 2rem;
+  border-radius: 1rem;
   color: var(--icons-color);
   box-shadow: var(--box-shadow);
   cursor: pointer;
@@ -62,7 +62,7 @@
 .filter_box_items_box_item {
   background-color: var(--icons-color);
   padding: 0.5rem 1rem;
-  border-radius: 2rem;
+  border-radius: 1rem;
   color: var(--main-bg-color);
   cursor: pointer;
 
@@ -75,7 +75,7 @@
   border: 1px solid var(--icons-color);
   color: var(--icons-color);
   padding: 0.5rem 1rem;
-  border-radius: 2rem;
+  border-radius: 1rem;
   cursor: pointer;
 
   display: flex;
