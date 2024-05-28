@@ -10,7 +10,7 @@ const DaysComponents = () => {
       <div className={Style.daysComponent_box}>
         <div className={Style.daysComponent_box_img}>
           <Image
-            src={images.creatorbackground1}
+            src={images.item1}
             className={Style.daysComponent_box_img_img}
             alt="profile background"
             width={500}
@@ -29,7 +29,7 @@ const DaysComponents = () => {
             objectFit="covers"
           />
           <Image
-            src={images.creatorbackground2}
+            src={images.item10}
             alt="profile"
             width={200}
             height={200}
@@ -37,7 +37,7 @@ const DaysComponents = () => {
             objectFit="covers"
           />
           <Image
-            src={images.creatorbackground2}
+            src={images.item9}
             alt="profile"
             width={200}
             height={200}

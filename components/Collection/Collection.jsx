@@ -9,13 +9,14 @@ import DaysComponent from "./DaysComponents/DaysComponents";
 import images from "../../img";
 
 const Collection = () => {
+  const [activeButton, setActiveButton] = useState("popular");
   const [popular, setPopular] = useState(true);
   const [following, setFollowing] = useState(false);
   const [news, setNews] = useState(false);
 
   const CardArray = [
     {
-      background: images.creatorbackground1,
+      background: images.item3,
       user: images.user1,
     },
     {
@@ -23,7 +24,7 @@ const Collection = () => {
       user: images.user2,
     },
     {
-      background: images.creatorbackground3,
+      background: images.item4,
       user: images.user3,
     },
     {
@@ -35,7 +36,7 @@ const Collection = () => {
       user: images.user5,
     },
     {
-      background: images.creatorbackground6,
+      background: images.item5,
       user: images.user6,
     },
     {
@@ -43,7 +44,7 @@ const Collection = () => {
       user: images.user7,
     },
     {
-      background: images.creatorbackground8,
+      background: images.item9,
       user: images.user8,
     },
   ];
@@ -53,7 +54,7 @@ const Collection = () => {
       user: images.user3,
     },
     {
-      background: images.creatorbackground4,
+      background: images.item8,
       user: images.user4,
     },
     {
@@ -61,7 +62,7 @@ const Collection = () => {
       user: images.user5,
     },
     {
-      background: images.creatorbackground6,
+      background: images.item9,
       user: images.user6,
     },
     {
@@ -75,15 +76,15 @@ const Collection = () => {
   ];
   const followingArray = [
     {
-      background: images.creatorbackground1,
+      background: images.item1,
       user: images.user1,
     },
     {
-      background: images.creatorbackground2,
+      background: images.item10,
       user: images.user2,
     },
     {
-      background: images.creatorbackground3,
+      background: images.item2,
       user: images.user3,
     },
     {
@@ -109,6 +110,7 @@ const Collection = () => {
   ];
 
   const openPopular = () => {
+    setActiveButton("popular");
     if (!popular) {
       setPopular(true);
       setFollowing(false);
@@ -117,6 +119,7 @@ const Collection = () => {
   };
 
   const openFollower = () => {
+    setActiveButton("following");
     if (!following) {
       setPopular(false);
       setFollowing(true);
@@ -125,25 +128,36 @@ const Collection = () => {
   };
 
   const openNews = () => {
+    setActiveButton("news");
     if (!news) {
       setPopular(false);
       setFollowing(false);
       setNews(true);
     }
   };
+
   return (
     <div className={Style.collection}>
       <div className={Style.collection_title}>
         <h2>Top List Creators</h2>
         <div className={Style.collection_collections}>
           <div className={Style.collection_collections_btn}>
-            <button onClick={() => openPopular()}>
+            <button
+              onClick={() => openPopular()}
+              className={activeButton === "popular" ? Style.active : ""}
+            >
               <BsFillAlarmFill /> 24 hours
             </button>
-            <button onClick={() => openFollower()}>
+            <button
+              onClick={() => openFollower()}
+              className={activeButton === "following" ? Style.active : ""}
+            >
               <BsCalendar3 /> 7 days
             </button>
-            <button onClick={() => openNews()}>
+            <button
+              onClick={() => openNews()}
+              className={activeButton === "news" ? Style.active : ""}
+            >
               <BsFillCalendarDateFill /> 30 days
             </button>
           </div>

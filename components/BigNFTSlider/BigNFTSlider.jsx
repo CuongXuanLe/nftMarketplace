@@ -9,7 +9,6 @@ import Button from "../Button/Button";
 
 const BigNFTSlider = () => {
   const [idNumber, setIdNumber] = useState(0);
-  const [hovered, setHovered] = useState({ left: false, right: false });
 
   const sliderData = [
     {
@@ -78,18 +77,6 @@ const BigNFTSlider = () => {
     },
   ];
 
-  // const inc = useCallback(() => {
-  //   if (idNumber + 1 < sliderData.length) {
-  //     setIdNumber(idNumber + 1);
-  //   }
-  // }, [idNumber, sliderData.length]);
-
-  // const dec = useCallback(() => {
-  //   if (idNumber > 0) {
-  //     setIdNumber(idNumber - 1);
-  //   }
-  // }, [idNumber]);
-
   const inc = useCallback(() => {
     if (idNumber + 1 < sliderData.length) {
       setIdNumber(idNumber + 1);
@@ -101,14 +88,6 @@ const BigNFTSlider = () => {
       setIdNumber(idNumber - 1);
     }
   }, [idNumber]);
-
-  const handleMouseEnter = (direction) => {
-    setHovered({ ...hovered, [direction]: true });
-  };
-
-  const handleMouseLeave = (direction) => {
-    setHovered({ ...hovered, [direction]: false });
-  };
 
   return (
     <div className={Style.bigNFTSlider}>
@@ -200,7 +179,7 @@ const BigNFTSlider = () => {
             </div>
           </div>
 
-          {/* <div className={Style.bigNFTSlider_box_left_sliderBtn}>
+          <div className={Style.bigNFTSlider_box_left_sliderBtn}>
             <TbArrowBigLeftLines
               className={Style.bigNFTSlider_box_left_sliderBtn_icon}
               onClick={() => dec()}
@@ -208,23 +187,6 @@ const BigNFTSlider = () => {
             <TbArrowBigRightLine
               className={Style.bigNFTSlider_box_left_sliderBtn_icon}
               onClick={() => inc()}
-            />
-          </div> */}
-
-          <div className={Style.bigNFTSlider_box_left_sliderBtn}>
-            <TbArrowBigLeftLines
-              className={Style.bigNFTSlider_box_left_sliderBtn_icon}
-              onClick={dec}
-              onMouseEnter={() => handleMouseEnter("left")}
-              onMouseLeave={() => handleMouseLeave("left")}
-              style={{ color: hovered.left ? "#000" : "#fff" }}
-            />
-            <TbArrowBigRightLine
-              className={Style.bigNFTSlider_box_left_sliderBtn_icon}
-              onClick={inc}
-              onMouseEnter={() => handleMouseEnter("right")}
-              onMouseLeave={() => handleMouseLeave("right")}
-              style={{ color: hovered.right ? "#000" : "#fff" }}
             />
           </div>
         </div>
