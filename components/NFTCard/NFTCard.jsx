@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { BsImages } from "react-icons/bs";
 import Image from "next/image";
-
-//INTERNAL IMPORT
 import Style from "./NFTCard.module.css";
 import images from "../../img";
 
@@ -26,7 +24,7 @@ const NFTCard = () => {
         <div className={Style.NFTCard_box} key={i + 1}>
           <div className={Style.NFTCard_box_img}>
             <Image
-              src={images.nft_image_1}
+              src={images.item3}
               alt="NFT images"
               width={600}
               height={600}

@@ -32,7 +32,7 @@ const Home = () => {
       <Filter />
       <NFTCard />
       <Title
-        heading="Browse by category"
+        heading="Explore Categories"
         paragraph="Explore the NFTs in the most featured categories."
       />
       <Category />

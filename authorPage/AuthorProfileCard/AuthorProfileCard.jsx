@@ -63,7 +63,7 @@ const AuthorProfileCard = () => {
           <h2>
             Dony Herrera{""}{" "}
             <span>
-              <MdVerified />
+              <MdVerified marginLeft="5" color={"rgb(32, 129, 226)"} />
             </span>{" "}
           </h2>
 

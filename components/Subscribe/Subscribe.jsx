@@ -1,42 +1,21 @@
 import React from "react";
-import { RiSendPlaneFill } from "react-icons/ri";
-import Image from "next/image";
 import Style from "./Subscribe.module.css";
-import images from "../../img";
 
 const Subscribe = () => {
   return (
     <div className={Style.subscribe}>
       <div className={Style.subscribe_box}>
-        <div className={Style.subscribe_box_left}>
-          <h2>Never miss a drop</h2>
-          <p>
-            Subcribe to our super-exclusive drop list and be the first to know
-            abour upcoming drops
-          </p>
-          <div className={Style.subscribe_box_left_box}>
-            <span>01</span>
-            <small>Get more discount</small>
-          </div>
-
-          <div className={Style.subscribe_box_left_box}>
-            <span>02</span>
-            <small>Get premium magazines</small>
-          </div>
-
-          <div className={Style.subscribe_box_left_input}>
-            <input type="email" placeholder="Enter your email" />
-            <RiSendPlaneFill className={Style.subscribe_box_left_input_icon} />
-          </div>
+        <div className={Style.subscribe_box_heading}>
+          <h2>Stay in the loop</h2>
+          <h2>Get the latest insights</h2>
         </div>
-
-        <div className={Style.subscribe_box_right}>
-          <Image
-            src={images.update}
-            alt="get update"
-            height={600}
-            width={800}
-          />
+        <div className={Style.subscribe_box_email}>
+          <div className={Style.subscribe_box_input}>
+            <input type="email" placeholder="Enter your email" />
+            <button className={Style.subscribe_btn}>Sign up</button>
+          </div>
+          <p>By clicking send you'll receive occasional emails from NFT marketPlace.
+          You always have the choice to unsubscribe within every email you receive.</p>
         </div>
       </div>
     </div>

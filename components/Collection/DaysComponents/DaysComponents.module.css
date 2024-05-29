@@ -3,27 +3,24 @@
   border-radius: 1rem;
   transition: all 0.3s ease-in;
   cursor: pointer;
+  padding: 5px;
+  background-color: rgba(50, 50, 50, 0.4)
+}
+
+.daysComponent_box_img_container{
+  border-radius: 0.75rem;
+  overflow: hidden;
 }
 
 .daysComponent:hover {
-  box-shadow: var(--box-shadow);
-}
-
-.daysComponent_box_img_img {
-  border-radius: 1rem;
+  border: 1px solid #cdcdcd;
+  transform: translateY(-10px);
 }
 
 .daysComponent_box_profile {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.5rem;
-}
-
-.daysComponent_box_img_1 {
-  border-bottom-left-radius: 1rem;
-}
-.daysComponent_box_img_3 {
-  border-bottom-right-radius: 1rem;
 }
 
 .daysComponent_box_title {

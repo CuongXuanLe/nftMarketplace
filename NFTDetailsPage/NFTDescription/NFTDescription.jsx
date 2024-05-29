@@ -164,7 +164,7 @@ const NFTDescription = () => {
               <div className={Style.NFTDescription_box_profile_box_left_info}>
                 <small>Creator</small> <br />
                 <span>
-                  Karli Costa <MdVerified />
+                  Karli Costa <MdVerified color={"rgb(32, 129, 226)"} />
                 </span>
               </div>
             </div>
@@ -181,7 +181,7 @@ const NFTDescription = () => {
               <div className={Style.NFTDescription_box_profile_box_right_info}>
                 <small>Creator</small> <br />
                 <span>
-                  Karli Costa <MdVerified />
+                  Karli Costa <MdVerified color={"rgb(32, 129, 226)"} />
                 </span>
               </div>
             </div>
@@ -276,7 +276,7 @@ const NFTDescription = () => {
 
             {owner && (
               <div className={Style.NFTDescription_box_profile_biding_box_card}>
-                <NFTTabs dataTab={ownerArray} icon=<MdVerified /> />
+                <NFTTabs dataTab={ownerArray} icon=<MdVerified color={"rgb(32, 129, 226)"} /> />
               </div>
             )}
           </div>

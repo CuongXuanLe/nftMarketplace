@@ -32,7 +32,7 @@ const FollowerTabCard = ({ i, el }) => {
             <h4>
               Giada Mann{""}{" "}
               <span>
-                <MdVerified color={"rgb(32, 129, 226)"} />
+                <MdVerified marginLeft="5" color={"rgb(32, 129, 226)"} />
               </span>
             </h4>
             <p>12.321 ETH</p>

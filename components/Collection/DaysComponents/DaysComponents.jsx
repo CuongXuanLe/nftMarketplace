@@ -4,48 +4,50 @@ import { MdVerified } from "react-icons/md";
 import Style from "./DaysComponents.module.css";
 import images from "../../../img";
 
-const DaysComponents = () => {
+const DaysComponents = ({el}) => {
+  console.log('check el: ', el)
   return (
     <div className={Style.daysComponent}>
       <div className={Style.daysComponent_box}>
-        <div className={Style.daysComponent_box_img}>
-          <Image
-            src={images.item1}
-            className={Style.daysComponent_box_img_img}
-            alt="profile background"
-            width={500}
-            height={300}
-            objectFit="covers"
-          />
-        </div>
+        <div className={Style.daysComponent_box_img_container}>
+          <div className={Style.daysComponent_box_img}>
+            <Image
+              src={images.item1}
+              className={Style.daysComponent_box_img_img}
+              alt="profile background"
+              width={500}
+              height={300}
+              objectFit="covers"
+            />
+          </div>
 
-        <div className={Style.daysComponent_box_profile}>
-          <Image
-            src={images.creatorbackground2}
-            alt="profile"
-            width={200}
-            height={200}
-            className={Style.daysComponent_box_img_1}
-            objectFit="covers"
-          />
-          <Image
-            src={images.item10}
-            alt="profile"
-            width={200}
-            height={200}
-            className={Style.daysComponent_box_img_2}
-            objectFit="covers"
-          />
-          <Image
-            src={images.item9}
-            alt="profile"
-            width={200}
-            height={200}
-            className={Style.daysComponent_box_img_3}
-            objectFit="covers"
-          />
+          <div className={Style.daysComponent_box_profile}>
+            <Image
+              src={images.creatorbackground2}
+              alt="profile"
+              width={200}
+              height={200}
+              className={Style.daysComponent_box_img_1}
+              objectFit="covers"
+            />
+            <Image
+              src={images.item10}
+              alt="profile"
+              width={200}
+              height={200}
+              className={Style.daysComponent_box_img_2}
+              objectFit="covers"
+            />
+            <Image
+              src={images.item9}
+              alt="profile"
+              width={200}
+              height={200}
+              className={Style.daysComponent_box_img_3}
+              objectFit="covers"
+            />
+          </div>
         </div>
-
         <div className={Style.daysComponent_box_title}>
           <h2>Amazing Collection</h2>
           <div className={Style.daysComponent_box_title_info}>
@@ -64,7 +66,7 @@ const DaysComponents = () => {
                 <span>
                   Shoaib Bhai
                   <small>
-                    <MdVerified />
+                    <MdVerified color={"rgb(32, 129, 226)"} />
                   </small>
                 </span>
               </p>

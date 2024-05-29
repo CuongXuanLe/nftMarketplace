@@ -16,15 +16,17 @@
     border-radius: 1rem;
     overflow: hidden;
     cursor: pointer;
-    padding-bottom: 1rem;
+    padding: 5px 5px 1rem;
+    background-color: rgba(50, 50, 50, 0.4);
 }
 
 .category_box:hover{
-    box-shadow: var(--box-shadow);
+    transform: translateY(-10px);
+    border: 1px solid #fff;
 }
 
 .category_box_img{
-    border-radius: 1rem;
+    border-radius: 0.75rem;
 }
 
 .category_box_title{

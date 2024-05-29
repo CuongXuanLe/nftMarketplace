@@ -6,12 +6,12 @@ import images from "../../img";
 
 const Category = () => {
   const CategoryArray = [
-    images.creatorbackground1,
-    images.creatorbackground10,
+    images.item10,
+    images.item9,
     images.creatorbackground11,
-    images.creatorbackground2,
+    images.item1,
     images.creatorbackground4,
-    images.creatorbackground5,
+    images.item8,
   ];
   return (
     <div className={Style.box_category}>
@@ -28,9 +28,6 @@ const Category = () => {
             />
 
             <div className={Style.category_box_title}>
-              <span>
-                <BsCircleFill />
-              </span>
               <div className={Style.category_box_title_info}>
                 <h4>Enterainment</h4>
                 <small>1995 NFTS</small>

@@ -58,8 +58,6 @@ const Filter = () => {
         <div className={Style.filter_box_left}>
           <button onClick={() => {}}>NFTs</button>
           <button onClick={() => {}}>Arts</button>
-          <button onClick={() => {}}>Musics</button>
-          <button onClick={() => {}}>Sports</button>
           <button onClick={() => {}}>Photography</button>
         </div>
 
@@ -93,30 +91,10 @@ const Filter = () => {
             </div>
           </div>
 
-          {/* <div className={Style.filter_box_items_box}>
-            <div
-              className={Style.filter_box_items_box_item_trans}
-              onClick={() => openVideo()}
-            >
-              <FaVideo /> <small>Videos</small>
-              {video ? <AiFillCloseCircle /> : <TiTick />}
-            </div>
-          </div>
-
-          <div className={Style.filter_box_items_box}>
-            <div
-              className={Style.filter_box_items_box_item_trans}
-              onClick={() => openMusic()}
-            >
-              <FaMusic /> <small>Musics</small>
-              {music ? <AiFillCloseCircle /> : <TiTick />}
-            </div>
-          </div> */}
-
           <div className={Style.filter_box_items_box}>
             <div className={Style.filter_box_items_box_item}>
               <FaUserAlt /> <span>Verified</span>
-              <MdVerified />
+              <MdVerified color={"rgb(32, 129, 226)"} />
             </div>
           </div>
         </div>
