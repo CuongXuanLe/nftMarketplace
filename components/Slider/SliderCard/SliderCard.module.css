@@ -1,0 +1,207 @@
+.sliderCard{
+    padding: 1rem;
+}
+
+.sliderCard_box{
+    position: relative;
+    border-radius: 1rem;
+    padding-bottom: 1rem;
+    overflow: hidden;
+    transition: all 0.3s ease-in;
+}
+
+.sliderCard_box:hover{
+    transform: translateY(-10px);
+}
+
+.sliderCard_box_img{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 1rem;
+
+}
+
+.sliderCard_box_title_hover {
+    position: absolute;
+    top: 55%;
+    width: 100%;
+    background-color: black;
+}
+
+.sliderCard_box_img_img{
+    border-radius: 1rem;
+    width: 100%;
+    height: auto;
+}
+
+.sliderCard_box_title{
+    display: flex;
+    align-items: center;
+    padding-inline: 2rem ;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.sliderCard_box_content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
+    padding: 1rem;
+}
+
+.sliderCard_box_content_1{
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+    bottom: 6px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: left;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.sliderCard_box_title_1 {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    opacity: 1;
+    transition: opacity 0.3s ease-in;
+    transform: translateY(170%);
+    transition: transform 0.3s ease-in, opacity 0.3s ease-in;
+}
+
+.sliderCard_box_description {
+    opacity: 1;
+    transform: translateY(110%);
+    transition: transform 0.3s ease-in, opacity 0.3s ease-in;
+}
+  
+.sliderCard_box_title_1 p {
+    font-weight: 800;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.organization_name {
+    background: rgb(18, 18, 18);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.2rem;
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.exploreButton {
+    background: #ff4081;
+    border: none;
+    padding: 1rem 1rem;
+    border-radius: 0.5rem;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+}
+
+.exploreButton:hover {
+    background: #fa1c66;
+}
+
+.sliderCard_box_description p {
+    margin-top: 1rem
+}
+
+.sliderCard_box:hover .sliderCard_box_content_1 {
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: flex-start;
+}
+
+.sliderCard_box:hover .sliderCard_box_description {
+    transform: translateY(0%);
+    transition: transform 0.3s ease-in, opacity 0.3s ease-in;
+}
+
+.sliderCard_box:hover .sliderCard_box_title_1 {
+    transform: translateY(-10%);
+    transition: transform 0.3s ease-in, opacity 0.3s ease-in;
+}
+
+.sliderCard_box_title p{
+    font-size: 1.2rem;
+    line-height: .5;
+    font-weight: 800;
+}
+
+.sliderCard_box_title_like{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.sliderCard_box_price{
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 2rem;
+    line-height: 0;
+    margin-top: 1rem;
+    text-align: end;
+}
+
+.sliderCard_box_price_box{
+    border: 1px solid var(--icons-color);
+    padding: .2rem 1rem;
+    border-radius: .2rem;
+}
+
+.sliderCard_box_price_box small{
+    background-color: var(--icons-color);
+    padding: .2rem .5rem;
+    border-radius: .2rem;
+    color: var(--main-bg-color);
+}
+
+.sliderCard_box_price_box p{
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    line-height: 0;
+}
+
+.sliderCard_box_price_time{
+    align-items: flex-end;
+    display: grid;
+}
+
+.sliderCard_box_price_time p{
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+@media screen and (min-device-width: 320px) and (max-device-width: 375px) {
+    .sliderCard{
+        padding: .5rem;
+    }
+
+    .sliderCard_box_title p{
+        font-size: 1rem;
+    }
+    .sliderCard_box_price_box{
+        padding: .2rem;
+    }
+
+    .sliderCard_box_price_time p{
+        font-size: 1rem;
+    }
+}
