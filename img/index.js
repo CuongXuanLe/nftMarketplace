@@ -63,6 +63,8 @@ import item7 from "./111.webp";
 import item8 from "./113.webp";
 import item9 from "./112.webp";
 import item10 from "./115.png";
+import item11 from "./1111.png";
+
 export default {
   item1,
   item2,
@@ -74,6 +76,7 @@ export default {
   item8,
   item9,
   item10,
+  item11,
   hero2,
   founder1,
   founder2,

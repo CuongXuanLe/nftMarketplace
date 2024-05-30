@@ -28,6 +28,7 @@ const NFTDescription = () => {
   const [history, setHistory] = useState(true);
   const [provanance, setProvanance] = useState(false);
   const [owner, setOwner] = useState(false);
+  const [curTab, setCurTab] = useState();
 
   const historyArray = [
     images.user1,
@@ -51,15 +52,6 @@ const NFTDescription = () => {
     images.user5,
   ];
 
-  const openSocial = () => {
-    if (!social) {
-      setSocial(true);
-      setNFTMenu(false);
-    } else {
-      setSocial(false);
-    }
-  };
-
   const openNFTMenu = () => {
     if (!NFTMenu) {
       setNFTMenu(true);
@@ -71,20 +63,22 @@ const NFTDescription = () => {
 
   const openTabs = (e) => {
     const btnText = e.target.innerText;
-
     if (btnText == "Bid History") {
+      setCurTab("Bid History");
       setHistory(true);
       setProvanance(false);
       setOwner(false);
     } else if (btnText == "Provanance") {
+      setCurTab("Provanance");
       setHistory(false);
       setProvanance(true);
       setOwner(false);
     }
   };
 
-  const openOwmer = () => {
+  const openOwner = () => {
     if (!owner) {
+      setCurTab("Owner");
       setOwner(true);
       setHistory(false);
       setProvanance(false);
@@ -97,35 +91,9 @@ const NFTDescription = () => {
   return (
     <div className={Style.NFTDescription}>
       <div className={Style.NFTDescription_box}>
-        {/* //Part ONE */}
         <div className={Style.NFTDescription_box_share}>
           <p>Virtual Worlds</p>
           <div className={Style.NFTDescription_box_share_box}>
-            <MdCloudUpload
-              className={Style.NFTDescription_box_share_box_icon}
-              onClick={() => openSocial()}
-            />
-
-            {social && (
-              <div className={Style.NFTDescription_box_share_box_social}>
-                <a href="#">
-                  <TiSocialFacebook /> Facebooke
-                </a>
-                <a href="#">
-                  <TiSocialInstagram /> Instragram
-                </a>
-                <a href="#">
-                  <TiSocialLinkedin /> LinkedIn
-                </a>
-                <a href="#">
-                  <TiSocialTwitter /> Twitter
-                </a>
-                <a href="#">
-                  <TiSocialYoutube /> YouTube
-                </a>
-              </div>
-            )}
-
             <BsThreeDots
               className={Style.NFTDescription_box_share_box_icon}
               onClick={() => openNFTMenu()}
@@ -149,7 +117,6 @@ const NFTDescription = () => {
             )}
           </div>
         </div>
-        {/* //Part TWO */}
         <div className={Style.NFTDescription_box_profile}>
           <h1>BearX #23453</h1>
           <div className={Style.NFTDescription_box_profile_box}>
@@ -239,7 +206,13 @@ const NFTDescription = () => {
                 </p>
               </div>
 
-              <span>[96 in stock]</span>
+              <span
+                className={
+                  Style.NFTDescription_box_profile_biding_box_price_span
+                }
+              >
+                [96 in stock]
+              </span>
             </div>
 
             <div className={Style.NFTDescription_box_profile_biding_box_button}>
@@ -258,9 +231,24 @@ const NFTDescription = () => {
             </div>
 
             <div className={Style.NFTDescription_box_profile_biding_box_tabs}>
-              <button onClick={(e) => openTabs(e)}>Bid History</button>
-              <button onClick={(e) => openTabs(e)}>Provanance</button>
-              <button onClick={() => openOwmer()}>Owner</button>
+              <button
+                className={curTab === "Bid History" ? Style.active : ""}
+                onClick={(e) => openTabs(e)}
+              >
+                Bid History
+              </button>
+              <button
+                className={curTab === "Provanance" ? Style.active : ""}
+                onClick={(e) => openTabs(e)}
+              >
+                Provanance
+              </button>
+              <button
+                className={curTab === "Owner" ? Style.active : ""}
+                onClick={() => openOwner()}
+              >
+                Owner
+              </button>
             </div>
 
             {history && (
@@ -276,7 +264,10 @@ const NFTDescription = () => {
 
             {owner && (
               <div className={Style.NFTDescription_box_profile_biding_box_card}>
-                <NFTTabs dataTab={ownerArray} icon=<MdVerified color={"rgb(32, 129, 226)"} /> />
+                <NFTTabs
+                  dataTab={ownerArray}
+                  icon=<MdVerified color={"rgb(32, 129, 226)"} />
+                />
               </div>
             )}
           </div>

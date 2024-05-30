@@ -10,8 +10,8 @@ const LikeProfile = () => {
         <div className={Style.like_box} key={i + 1}>
           <Image
             src={el}
-            width={15}
-            height={15}
+            width={20}
+            height={20}
             key={i + 1}
             className={Style.like_box_img}
           />

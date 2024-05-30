@@ -83,62 +83,10 @@ const AuthorProfileCard = () => {
             Punk #4786 / An OG Cryptopunk Collector, hoarder of NFTs.
             Contributing to @ether_cards, an NFT Monetization Platform.
           </p>
-
-          <div className={Style.AuthorProfileCard_box_info_social}>
-            <a href="#">
-              <TiSocialFacebook />
-            </a>
-            <a href="#">
-              <TiSocialInstagram />
-            </a>
-            <a href="#">
-              <TiSocialLinkedin />
-            </a>
-            <a href="#">
-              <TiSocialYoutube />
-            </a>
-          </div>
         </div>
 
         <div className={Style.AuthorProfileCard_box_share}>
           <Button btnName="Follow" handleClick={() => {}} />
-          <MdCloudUpload
-            onClick={() => openShare()}
-            className={Style.AuthorProfileCard_box_share_icon}
-          />
-
-          {share && (
-            <div className={Style.AuthorProfileCard_box_share_upload}>
-              <p>
-                <span>
-                  <TiSocialFacebook />
-                </span>{" "}
-                {""}
-                Facebook
-              </p>
-              <p>
-                <span>
-                  <TiSocialInstagram />
-                </span>{" "}
-                {""}
-                Instragram
-              </p>
-              <p>
-                <span>
-                  <TiSocialLinkedin />
-                </span>{" "}
-                {""}
-                LinkedIn
-              </p>
-              <p>
-                <span>
-                  <TiSocialYoutube />
-                </span>{" "}
-                {""}
-                YouTube
-              </p>
-            </div>
-          )}
 
           <BsThreeDots
             onClick={() => openReport()}

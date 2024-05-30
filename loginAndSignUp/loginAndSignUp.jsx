@@ -16,15 +16,11 @@ const loginAndSignUp = () => {
       social: images.twitter,
       name: "Continue with twitter",
     },
-    {
-      social: images.facebook,
-      name: "Continue with Facebook",
-    },
   ];
 
   const handleLogin = () => {
-    console.log('login')
-  }
+    console.log("login");
+  };
   return (
     <div className={Style.user}>
       <div className={Style.user_box}>
@@ -65,14 +61,18 @@ const loginAndSignUp = () => {
             >
               <p>Password</p>
               <p>
-                <a href="#">Forget password</a>
+                <a href="#">Forget password ?</a>
               </p>
             </label>
-            <input type="password" />
+            <input type="password" placeholder="Enter your password" />
           </div>
         </div>
 
-        <Button btnName="Continue" classStyle={Style.button} handleClick={handleLogin()}/>
+        <Button
+          btnName="Continue"
+          classStyle={Style.button}
+          handleClick={handleLogin()}
+        />
       </div>
     </div>
   );

@@ -5,41 +5,18 @@ import { Brand } from "../components/componentsindex";
 import images from "../img";
 
 const aboutus = () => {
-  const founderArray = [
-    {
-      name: "Niamh O'Shea",
-      position: "Co-founder and Chief Executive",
-      images: images.founder1,
-    },
-    {
-      name: "Danien Jame",
-      position: "Co-founder and Chief Executive",
-      images: images.founder2,
-    },
-    {
-      name: "Orla Dwyer",
-      position: "Co-founder, Chairman",
-      images: images.founder3,
-    },
-    {
-      name: "Dara Frazier",
-      position: "Co-Founder, Chief Strategy Officer",
-      images: images.founder4,
-    },
-  ];
-
   const factsArray = [
     {
-      title: "10 million",
-      info: "Articles have been public around the world (as of Sept. 30, 2021)",
+      title: "10M",
+      info: "Articles have been public around the world (as of May. 30, 2024)",
     },
     {
       title: "100,000",
-      info: "Registered users account (as of Sept. 30, 2021)",
+      info: "Registered users account (as of May. 30. 30, 2024)",
     },
     {
       title: "220+",
-      info: "Countries and regions have our presence (as of Sept. 30, 2021",
+      info: "Countries and regions have our presence (as of May. 30, 2024)",
     },
   ];
   return (
@@ -56,32 +33,6 @@ const aboutus = () => {
           </div>
           <div className={Style.aboutus_box_hero_right}>
             <Image src={images.hero2} />
-          </div>
-        </div>
-
-        <div className={Style.aboutus_box_title}>
-          <h2>⛱ Founder</h2>
-          <p>
-            We’re impartial and independent, and every day we create
-            distinctive, world-class programmes and content
-          </p>
-        </div>
-
-        <div className={Style.aboutus_box_founder}>
-          <div className={Style.aboutus_box_founder_box}>
-            {founderArray.map((el, i) => (
-              <div className={Style.aboutus_box_founder_box_img}>
-                <Image
-                  src={el.images}
-                  alt={el.name}
-                  width={500}
-                  height={500}
-                  className={Style.aboutus_box_founder_box_img_img}
-                />
-                <h3>{el.name}</h3>
-                <p>{el.position}</p>
-              </div>
-            ))}
           </div>
         </div>
 

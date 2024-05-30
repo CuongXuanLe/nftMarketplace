@@ -21,7 +21,6 @@
 }
 
 .NFTCard_box:hover {
-  /* box-shadow: var(--box-shadow-2); */
   transform: translateY(-10px);
 }
 

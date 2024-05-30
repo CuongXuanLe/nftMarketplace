@@ -22,19 +22,15 @@ const UloadNFT = () => {
 
   const categoryArry = [
     {
-      image: images.nft_image_1,
+      image: images.item2,
       category: "Sports",
     },
     {
-      image: images.nft_image_2,
+      image: images.item8,
       category: "Arts",
     },
     {
-      image: images.nft_image_3,
-      category: "Music",
-    },
-    {
-      image: images.nft_image_1,
+      image: images.item5,
       category: "Digital",
     },
     {
@@ -42,7 +38,7 @@ const UloadNFT = () => {
       category: "Time",
     },
     {
-      image: images.nft_image_3,
+      image: images.item10,
       category: "Photography",
     },
   ];
@@ -68,7 +64,7 @@ const UloadNFT = () => {
           <label htmlFor="nft">Item Name</label>
           <input
             type="text"
-            placeholder="shoaib bhai"
+            placeholder="Cognizance"
             className={formStyle.Form_box_input_userName}
             onChange={(e) => setItemName(e.target.value)}
           />
@@ -83,15 +79,15 @@ const UloadNFT = () => {
 
             <input
               type="text"
-              placeholder="website"
+              placeholder="https://rarible.com/collection/rari/0x1DfCEE225aD4DD33DAa7f511853a125ec2a27cd8/drops"
               onChange={(e) => setWebsite(e.target.value)}
             />
           </div>
 
           <p className={Style.upload_box_input_para}>
-            Ciscrypt will include a link to this URL on this item's detail page,
-            so that users can click to learn more about it. You are welcome to
-            link to your own webpage with more details.
+            NFT Market will include a link to this URL on this item's detail
+            page, so that users can click to learn more about it. You are
+            welcome to link to your own webpage with more details.
           </p>
         </div>
 
@@ -174,14 +170,14 @@ const UloadNFT = () => {
             </div>
           </div>
           <div className={formStyle.Form_box_input}>
-            <label htmlFor="Propertie">Propertie</label>
+            <label htmlFor="Properties">Properties</label>
             <div className={formStyle.Form_box_input_box}>
               <div className={formStyle.Form_box_input_box_icon}>
                 <AiTwotonePropertySafety />
               </div>
               <input
                 type="text"
-                placeholder="Propertie"
+                placeholder="Properties"
                 onChange={(e) => setProperties(e.target.value)}
               />
             </div>

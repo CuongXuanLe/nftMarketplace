@@ -14,19 +14,16 @@
   position: relative;
 }
 
-.NFTDescription_box_share_box_icon {
-  cursor: pointer;
-}
-
 .NFTDescription_box_share_box_social {
   position: absolute;
-  top: 5rem;
-  left: 65%;
-  width: 14rem;
-  background-color: var(--main-bg-color);
-  box-shadow: var(--box-shadow);
+  top: 3rem;
+  left: 52%;
+  width: 16rem;
+  background-color: rgba(0, 0, 0, 0.95);
+  border: 1px solid #fff;
   border-radius: 0.5rem;
   padding: 1rem;
+  z-index: 999999;
 }
 
 .NFTDescription_box_share_box_social a {
@@ -48,7 +45,7 @@
   background-color: var(--icons-color);
   color: var(--main-bg-color);
   padding: 0.2rem 0.8rem;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
 }
 
 .NFTDescription_box_share_box {
@@ -129,11 +126,10 @@
 }
 
 .NFTDescription_box_profile_biding_box_price {
+  position: relative;
   line-height: 0;
   margin-top: 4rem;
-
   display: grid;
-  grid-template-columns: 4fr 1fr;
   gap: 3rem;
   align-items: flex-end;
   justify-content: space-between;
@@ -142,6 +138,7 @@
 .NFTDescription_box_profile_biding_box_price_bid {
   border: 2px solid var(--icons-color);
   border-radius: 0.5rem;
+  padding: 0 30px;
 }
 
 .NFTDescription_box_profile_biding_box_price_bid small {
@@ -157,6 +154,10 @@
   padding: 1rem;
   font-size: 1.5rem;
   font-weight: 900;
+}
+
+.NFTDescription_box_profile_biding_box_price_span {
+  text-align: right;
 }
 
 .NFTDescription_box_profile_biding_box_button {
@@ -176,11 +177,21 @@
   font-size: 1rem;
   padding: 1rem 2rem;
   border: 0;
-  background-color: var(--shadow-dark-color);
+  background-color: rgb(18, 18, 18);
+  border: 1px solid #fff;
   color: var(--icons-color);
   border-radius: 1rem;
   cursor: pointer;
   font-weight: 600;
+}
+
+.NFTDescription_box_profile_biding_box_tabs button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.active {
+  background-color: rgba(255, 255, 255, 01) !important;
+  color: rgb(18, 18, 18) !important;
 }
 
 .NFTDescription_box_profile_biding_box_card {

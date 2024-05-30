@@ -1,13 +1,6 @@
 import React from "react";
 import { HiOutlineMail } from "react-icons/hi";
 import { MdOutlineHttp, MdOutlineContentCopy } from "react-icons/md";
-import {
-  TiSocialFacebook,
-  TiSocialTwitter,
-  TiSocialInstagram,
-} from "react-icons/ti";
-
-//INTERNAL IMPORT
 import Style from "./Form.module.css";
 import { Button } from "../../components/componentsindex.js";
 
@@ -20,7 +13,7 @@ const Form = () => {
             <label htmlFor="name">Username</label>
             <input
               type="text"
-              placeholder="shoaib bhai"
+              placeholder="Le Xuan Cuong"
               className={Style.Form_box_input_userName}
             />
           </div>
@@ -31,7 +24,7 @@ const Form = () => {
               <div className={Style.Form_box_input_box_icon}>
                 <HiOutlineMail />
               </div>
-              <input type="text" placeholder="Email*" />
+              <input type="text" placeholder="cuong.le322002@gmail.com" />
             </div>
           </div>
 
@@ -42,7 +35,7 @@ const Form = () => {
               id=""
               cols="30"
               rows="6"
-              placeholder="something about yourself in few words"
+              placeholder="something about yourself in few words ..."
             ></textarea>
           </div>
 
@@ -54,36 +47,6 @@ const Form = () => {
               </div>
 
               <input type="text" placeholder="website" />
-            </div>
-          </div>
-
-          <div className={Style.Form_box_input_social}>
-            <div className={Style.Form_box_input}>
-              <label htmlFor="facebook">Facebook</label>
-              <div className={Style.Form_box_input_box}>
-                <div className={Style.Form_box_input_box_icon}>
-                  <TiSocialFacebook />
-                </div>
-                <input type="text" placeholder="http://shoaib" />
-              </div>
-            </div>
-            <div className={Style.Form_box_input}>
-              <label htmlFor="Twitter">Twitter</label>
-              <div className={Style.Form_box_input_box}>
-                <div className={Style.Form_box_input_box_icon}>
-                  <TiSocialTwitter />
-                </div>
-                <input type="text" placeholder="http://shoaib" />
-              </div>
-            </div>
-            <div className={Style.Form_box_input}>
-              <label htmlFor="Instragram">Instragram</label>
-              <div className={Style.Form_box_input_box}>
-                <div className={Style.Form_box_input_box_icon}>
-                  <TiSocialInstagram />
-                </div>
-                <input type="text" placeholder="http://shoaib" />
-              </div>
             </div>
           </div>
 

@@ -9,17 +9,25 @@ const Brand = () => {
     <div className={Style.Brand}>
       <div className={Style.Brand_box}>
         <div className={Style.Brand_box_left}>
-          <Image src={images.logo} alt="brand logo" height={75} width={125} />
-          <h1>Earn free crypto with Ciscrypt</h1>
+          <h1>Earn free crypto with NFT Market</h1>
           <p>A creative agency that lead and inspire.</p>
 
           <div className={Style.Brand_box_left_btn}>
-            <Button btnName="Create" handleClick={() => {}} />
-            <Button btnName="Discover" handleClick={() => {}} />
+            <a href="/login">
+              <Button btnName="Create" onClick={() => handleClick()} />
+            </a>
+            <a href="/collection">
+              <Button btnName="Discover" onClick={() => handleClick()} />
+            </a>
           </div>
         </div>
         <div className={Style.Brand_box_right}>
-          <Image src={images.earn} alt="brand logo" width={800} height={600} />
+          <Image
+            src={images.item11}
+            alt="brand logo"
+            width={800}
+            height={600}
+          />
         </div>
       </div>
     </div>
