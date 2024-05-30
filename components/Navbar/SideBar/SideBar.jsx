@@ -44,10 +44,6 @@ const SideBar = ({ setOpenSideMenu }) => {
       name: "Connect Wallet",
       link: "connect-wallet",
     },
-    {
-      name: "Blog",
-      link: "blog",
-    },
   ];
 
   const helpCenter = [
@@ -101,7 +97,7 @@ const SideBar = ({ setOpenSideMenu }) => {
       />
 
       <div className={Style.sideBar_box}>
-        <Image src={images.logo} alt="logo" width={150} height={150} />
+        <Image src={images.logo} alt="logo" height={70} width={120} />
         <p>
           Discover the most outstanding articles on all topices of NFT & write
           your own stories and share them

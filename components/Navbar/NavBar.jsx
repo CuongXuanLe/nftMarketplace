@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { MdNotifications } from "react-icons/md";
@@ -15,26 +15,40 @@ const NavBar = () => {
   const [notification, setNotification] = useState(false);
   const [profile, setProfile] = useState(false);
   const [openSideMenu, setOpenSideMenu] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
 
-  const openMenu = (e) => {
-    const btnText = e.target.innerText;
-    if (btnText == "Discover") {
-      setDiscover(true);
+  const navRef = useRef(null);
+
+  const toggleMenu = (menuName) => {
+    const btnText = menuName.target.innerText;
+    if (btnText === "Discover") {
+      setDiscover((prev) => !prev);
       setHelp(false);
       setNotification(false);
       setProfile(false);
-    } else if (btnText == "Help Center") {
+    } else if (btnText === "Support") {
+      setHelp((prev) => !prev);
       setDiscover(false);
-      setHelp(true);
       setNotification(false);
       setProfile(false);
-    } else {
+    }
+  };
+
+  const handleOutsideClick = (event) => {
+    if (navRef.current && !navRef.current.contains(event.target)) {
       setDiscover(false);
       setHelp(false);
       setNotification(false);
       setProfile(false);
     }
   };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
 
   const openNotification = () => {
     if (!notification) {
@@ -66,29 +80,40 @@ const NavBar = () => {
     }
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsSticky(window.scrollY > 100);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className={Style.navbar}>
+    <div
+      className={`${Style.navbar} ${isSticky ? Style.sticky : ""}`}
+      ref={navRef}
+    >
       <div className={Style.navbar_container}>
         <div className={Style.navbar_container_left}>
-          <div className={Style.logo}>
-            <Image
-              src={images.logo}
-              alt="NFT MARKET PLACE"
-              width={100}
-              height={100}
-            />
-          </div>
-          <div className={Style.navbar_container_left_box_input}>
-            <div className={Style.navbar_container_left_box_input_box}>
-              <input type="text" placeholder="Search NFT" />
-              <BsSearch onClick={() => {}} className={Style.search_icon} />
+          <Link href={{ pathname: `/` }}>
+            <div className={Style.logo}>
+              <Image
+                src={images.logo}
+                alt="NFT MARKET PLACE"
+                height={75}
+                width={125}
+              />
             </div>
-          </div>
-        </div>
-
-        <div className={Style.navbar_container_right}>
+          </Link>
+          <div className={Style.nav_split}></div>
           <div className={Style.navbar_container_right_discover}>
-            <p onClick={(e) => openMenu(e)}>Discover</p>
+            <div className={Style.navbar_container_right_discover_text}>
+              <p onClick={(e) => toggleMenu(e)}>Discover</p>
+            </div>
             {discover && (
               <div className={Style.navbar_container_right_discover_box}>
                 <Discover />
@@ -97,14 +122,24 @@ const NavBar = () => {
           </div>
 
           <div className={Style.navbar_container_right_help}>
-            <p onClick={(e) => openMenu(e)}>Help Center</p>
+            <div className={Style.navbar_container_right_help_text}>
+              <p onClick={(e) => toggleMenu(e)}>Support</p>
+            </div>
             {help && (
               <div className={Style.navbar_container_right_help_box}>
                 <HelpCenter />
               </div>
             )}
           </div>
+        </div>
 
+        <div className={Style.navbar_container_right}>
+          <div className={Style.navbar_container_left_box_input}>
+            <div className={Style.navbar_container_left_box_input_box}>
+              <BsSearch onClick={() => {}} className={Style.search_icon} />
+              <input type="text" placeholder="Search NFT" />
+            </div>
+          </div>
           <div className={Style.navbar_container_right_notify}>
             <MdNotifications
               className={Style.notify}

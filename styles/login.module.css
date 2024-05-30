@@ -1,0 +1,53 @@
+.login {
+  width: 100%;
+  padding: 20px 0 10px;
+  overflow: hidden;
+  position: relative;
+  height: 150vh;
+}
+
+.login::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../img/135.jpg") center/cover no-repeat;
+  filter: blur(5px);
+}
+
+.login_box {
+  width: 30%;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.login_box h1 {
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 5rem;
+}
+
+.login_box_para {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  line-height: 0;
+  margin-top: 3rem;
+  font-weight: 700;
+}
+
+.login_box_para a {
+  font-weight: 500;
+  margin-left: 1rem;
+}
+
+@media screen and (max-width: 35em) {
+  .login_box {
+    width: 90%;
+  }
+}

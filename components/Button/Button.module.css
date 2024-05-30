@@ -1,17 +1,20 @@
 .button {
-    background-color: var(--icons-color);
-    padding: 1rem 2rem;
-    border: 1px solid var(--icons-color);
-    border-radius: 2rem;
-    font-size: 1.1rem;
-    color: var(--shadow-light-color);
-    cursor: pointer;
-    transition:  all .2s ease-in;
-    box-shadow: var(--box-shadow);
+  background: rgba(255, 255, 255, 0.2);
+  padding: 1rem 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 1rem;
+  font-size: 1.1rem;
+  color: var(--shadow-light-color);
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.button:hover{
-    background-color: var(--main-bg-color);
-    border:  1px solid var(--icons-color);
-    color:  var(--icons-color);
+.button:hover {
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: var(--icons-color);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
