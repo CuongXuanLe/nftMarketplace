@@ -11,3 +11,5 @@ Our NFT Marketplace DApp provides a decentralized marketplace where creators can
   NodeJs: v18.12.1
   NPM: 8.19.2
 ```
+
+![123](https://github.com/CuongXuanLe/nftMarketplace/assets/90383072/b7d9f9b7-d167-46b5-9c83-3d1bff66f038)
