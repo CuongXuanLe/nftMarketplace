@@ -1,17 +1,17 @@
 pragma solidity ^0.8.4;
 
-import “@openzeppelin/contracts/utils/Counters.sol”;
-import “@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol”;
-import “@openzeppelin/contracts/token/ERC721/ERC721.sol”;
+import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
-import “hardhat/console.sol”;
+import "hardhat/console.sol";
 
 contract NFTMarketplace is ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
     Counters.Counter private _itemsSold;
 
-    uint256 listingPrice = 0.025 ether;
+    uint256 listingPrice = 0.015 ether;
     address payable owner;
 
     mapping(uint256 => MarketItem) private idToMarketItem;
@@ -32,14 +32,14 @@ contract NFTMarketplace is ERC721URIStorage {
         bool sold
     );
 
-    constructor() ERC721(“Metaverse Tokens”, “METT”) {
+    constructor() ERC721("Metaverse Tokens", "METT") {
         owner = payable(msg.sender);
     }
 
     function updateListingPrice(uint256 _listingPrice) public payable {
         require(
             owner == msg.sender,
-            “Only marketplace owner can update listing price.”
+            "Only marketplace owner can update listing price."
         );
         listingPrice = _listingPrice;
     }
@@ -63,10 +63,10 @@ contract NFTMarketplace is ERC721URIStorage {
     }
 
     function createMarketItem(uint256 tokenId, uint256 price) private {
-        require(price > 0, “Price must be at least 1 wei”);
+        require(price > 0, "Price must be at least 1 wei");
         require(
             msg.value == listingPrice,
-            “Price must be equal to listing price”
+            "Price must be equal to listing price"
         );
 
         idToMarketItem[tokenId] = MarketItem(
@@ -90,11 +90,11 @@ contract NFTMarketplace is ERC721URIStorage {
     function resellToken(uint256 tokenId, uint256 price) public payable {
         require(
             idToMarketItem[tokenId].owner == msg.sender,
-            “Only item owner can perform this operation”
+            "Only item owner can perform this operation"
         );
         require(
             msg.value == listingPrice,
-            “Price must be equal to listing price”
+            "Price must be equal to listing price"
         );
         idToMarketItem[tokenId].sold = false;
         idToMarketItem[tokenId].price = price;
@@ -109,7 +109,7 @@ contract NFTMarketplace is ERC721URIStorage {
         uint256 price = idToMarketItem[tokenId].price;
         require(
             msg.value == price,
-            “Please submit the asking price in order to complete the purchase”
+            "Please submit the asking price in order to complete the purchase"
         );
         idToMarketItem[tokenId].owner = payable(msg.sender);
         idToMarketItem[tokenId].sold = true;
@@ -122,7 +122,7 @@ contract NFTMarketplace is ERC721URIStorage {
 
     function fetchMarketItems() public view returns (MarketItem[] memory) {
         uint256 itemCount = _tokenIds.current();
-        uint256 unsoldItemCount = _tokenIds.current() – _itemsSold.current();
+        uint256 unsoldItemCount = _tokenIds.current() - _itemsSold.current();
         uint256 currentIndex = 0;
 
         MarketItem[] memory items = new MarketItem[](unsoldItemCount);

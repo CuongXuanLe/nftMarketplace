@@ -38,7 +38,6 @@ const Home = () => {
       <Category />
       <Subscribe />
       <Brand />
-      {/* <Video /> */}
     </div>
   );
 };
