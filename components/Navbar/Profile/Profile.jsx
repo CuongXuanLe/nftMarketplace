@@ -27,39 +27,39 @@ const Profile = () => {
 
       <div className={Style.profile_menu}>
         <div className={Style.profile_menu_one}>
-          <div className={Style.profile_menu_one_item}>
-            <FaUserAlt />
-            <p>
-              <Link href={{ pathname: "/myprofile" }}>My Profile</Link>
-            </p>
-          </div>
-          <div className={Style.profile_menu_one_item}>
-            <FaRegImage />
-            <p>
-              <Link href={{ pathname: "/my-items" }}>My Items</Link>
-            </p>
-          </div>
-          <div className={Style.profile_menu_one_item}>
-            <FaUserEdit />
-            <p>
-              <Link href={{ pathname: "/edit-profile" }}>Edit Profile</Link>
-            </p>
-          </div>
+          <Link href={{ pathname: "/account" }}>
+            <div className={Style.profile_menu_one_item}>
+              <FaUserAlt />
+              <p>My Profile</p>
+            </div>
+          </Link>
+          <Link href={{ pathname: "/my-items" }}>
+            <div className={Style.profile_menu_one_item}>
+              <FaRegImage />
+              <p>My Items</p>
+            </div>
+          </Link>
+          <Link href={{ pathname: "/edit-profile" }}>
+            <div className={Style.profile_menu_one_item}>
+              <FaUserEdit />
+              <p>Edit Profile</p>
+            </div>
+          </Link>
         </div>
 
         <div className={Style.profile_menu_two}>
-          <div className={Style.profile_menu_one_item}>
-            <MdHelpCenter />
-            <p>
-              <Link href={{ pathname: "/help" }}>Help</Link>
-            </p>
-          </div>
-          <div className={Style.profile_menu_one_item}>
-            <TbDownload />
-            <p>
-              <Link href={{ pathname: "/disconnet" }}>Disconnet</Link>
-            </p>
-          </div>
+          <Link href={{ pathname: "/help" }}>
+            <div className={Style.profile_menu_one_item}>
+              <MdHelpCenter />
+              <p>Help</p>
+            </div>
+          </Link>
+          <Link href={{ pathname: "/disconnet" }}>
+            <div className={Style.profile_menu_one_item}>
+              <TbDownload />
+              <p>Disconnet</p>
+            </div>
+          </Link>
         </div>
       </div>
     </div>
