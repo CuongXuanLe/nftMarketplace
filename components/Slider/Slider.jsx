@@ -49,33 +49,52 @@ const Slider = ({location}) => {
     },
   ];
   const [width, setWidth] = useState(0);
-  const dragSlider = useRef();
+  const dragSlider = useRef(null);
 
   useEffect(() => {
-    setWidth(dragSlider.current.scrollWidth - dragSlider.current.offsetWidth);
-  });
+    // setWidth(dragSlider.current.scrollWidth - dragSlider.current.offsetWidth);
+    if (dragSlider.current) {
+      setWidth(dragSlider.current.scrollWidth - dragSlider.current.offsetWidth);
+    }
+  }, []);
 
   useEffect(() => {
     const smoothScroll = (start, end, duration) => {
       if (start === end) return;
       const difference = end - start;
-      const perTick = difference / duration * 10;
+      const perTick = (difference / duration) * 10;
 
       requestAnimationFrame(() => {
-        dragSlider.current.scrollLeft = start + perTick;
-        if (dragSlider.current.scrollLeft !== end) {
-          smoothScroll(start + perTick, end, duration - 10);
+        // dragSlider.current.scrollLeft = start + perTick;
+        // if (dragSlider.current.scrollLeft !== end) {
+        //   smoothScroll(start + perTick, end, duration - 10);
+        // }
+        if (dragSlider.current) {
+          dragSlider.current.scrollLeft = start + perTick;
+          if (dragSlider.current.scrollLeft !== end) {
+            smoothScroll(start + perTick, end, duration - 10);
+          }
         }
       });
     };
 
     const autoScroll = setInterval(() => {
-      const { current } = dragSlider;
-      const scrollAmount = window.innerWidth > 1800 ? 384 : 384;
-      if (current.scrollLeft + current.clientWidth >= current.scrollWidth) {
-        smoothScroll(current.scrollLeft, 0, 500);
-      } else {
-        smoothScroll(current.scrollLeft, current.scrollLeft + scrollAmount, 500);
+      // const { current } = dragSlider;
+      // const scrollAmount = window.innerWidth > 1800 ? 384 : 384;
+
+      // if (current.scrollLeft + current.clientWidth >= current.scrollWidth) {
+      //   smoothScroll(current.scrollLeft, 0, 500);
+      // } else {
+      //   smoothScroll(current.scrollLeft, current.scrollLeft + scrollAmount, 500);
+      // }
+      if (dragSlider.current) {
+        const { current } = dragSlider;
+        const scrollAmount = window.innerWidth > 1800 ? 384 : 384;
+        if (current.scrollLeft + current.clientWidth >= current.scrollWidth) {
+          smoothScroll(current.scrollLeft, 0, 500);
+        } else {
+          smoothScroll(current.scrollLeft, current.scrollLeft + scrollAmount, 500);
+        }
       }
     }, 5000);
 
@@ -83,20 +102,22 @@ const Slider = ({location}) => {
   }, []);
 
   const handleScroll = (direction) => {
-    const { current } = dragSlider;
-    const scrollAmount = window.innerWidth > 1800 ? 384 : 384;
+    if (dragSlider.current) {
+      const { current } = dragSlider;
+      const scrollAmount = window.innerWidth > 1800 ? 384 : 384;
 
-    if (direction === "left") {
-      if (current.scrollLeft === 0) {
-        current.scrollTo({ left: current.scrollWidth, behavior: "smooth" });
+      if (direction === "left") {
+        if (current.scrollLeft === 0) {
+          current.scrollTo({ left: current.scrollWidth, behavior: "smooth" });
+        } else {
+          current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+        }
       } else {
-        current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-      }
-    } else {
-      if (current.scrollLeft + current.offsetWidth >= current.scrollWidth) {
-        current.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+        if (current.scrollLeft + current.offsetWidth >= current.scrollWidth) {
+          current.scrollTo({ left: 0, behavior: "smooth" });
+        } else {
+          current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+        }
       }
     }
   };

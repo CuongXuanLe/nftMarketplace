@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { MdNotifications } from "react-icons/md";
@@ -8,6 +8,7 @@ import Style from "./NavBar.module.css";
 import { Discover, HelpCenter, Notification, Profile, SideBar } from "./index";
 import { Button } from "../componentsindex";
 import images from "../../img";
+import { NFTMarketplaceContext } from "../../Contexts/NFTMarketplaceContext";
 
 const NavBar = () => {
   const [discover, setDiscover] = useState(false);
@@ -92,6 +93,9 @@ const NavBar = () => {
     };
   }, []);
 
+  //connect smart contract
+  const { currentAccount, connectWallet } = useContext(NFTMarketplaceContext)
+
   return (
     <div
       className={`${Style.navbar} ${isSticky ? Style.sticky : ""}`}
@@ -147,9 +151,16 @@ const NavBar = () => {
             />
             {notification && <Notification />}
           </div>
-
+          
+          {/* create button */}
           <div className={Style.navbar_container_right_button}>
-            <Button btnName="Create" handleClick={() => {}} />
+            {currentAccount == "" ?
+              <Button btnName="Connect" handleClick={()=> {connectWallet()}}/>
+              :
+              <Link href={{pathname: "/uploadNFT"}}>
+                <Button btnName="Create" handleClick={() => {}}/>
+              </Link>
+            }
           </div>
 
           <div className={Style.navbar_container_right_profile_box}>

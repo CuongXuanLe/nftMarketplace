@@ -6,10 +6,12 @@ import { NFTMarketplaceContext } from "../../Contexts/NFTMarketplaceContext";
 const HeroSection = () => {
   const { titleData } = useContext(NFTMarketplaceContext);
   return (
+  <>
+    {/* <h1>{titleData}</h1> */}
     <div className={Style.heroSection}>
-      <h1>{titleData}</h1>
       <Slider location={"HeroSection"} />
     </div>
+  </>
   );
 };
 

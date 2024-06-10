@@ -5,7 +5,6 @@ import Style from "./DaysComponents.module.css";
 import images from "../../../img";
 
 const DaysComponents = ({el}) => {
-  console.log('check el: ', el)
   return (
     <div className={Style.daysComponent}>
       <div className={Style.daysComponent_box}>
