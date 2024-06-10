@@ -1,5 +1,5 @@
 {
-  "name": "nfttemplatevideo",
+  "name": "nft-marketPlace-Project",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -19,7 +19,7 @@
     "web3modal": "^1.9.12"
   },
   "devDependencies": {
-    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
-    "hardhat": "^2.22.4"
+    "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+    "hardhat": "^2.11.2"
   }
 }
