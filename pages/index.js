@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Style from "../styles/index.module.css";
 import {
   HeroSection,
@@ -17,11 +17,14 @@ import {
 import { NFTMarketplaceContext } from "../Contexts/NFTMarketplaceContext";
 
 const Home = () => {
-  const { checkIfWalletConnected } = useContext(NFTMarketplaceContext);
+  const { checkIfWalletConnected, checkContract } = useContext(
+    NFTMarketplaceContext
+  );
 
   useEffect(() => {
+    checkContract();
     checkIfWalletConnected();
-  }, [])
+  }, []);
 
   return (
     <div className={Style.homePage}>
