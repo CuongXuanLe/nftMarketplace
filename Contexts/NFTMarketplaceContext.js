@@ -56,7 +56,8 @@ export const NFTMarketplaceProvider = ({ children }) => {
       } else {
         console.log("No Account Found");
       }
-      console.log(currentAccount);
+
+      console.log("ehehhe: ", currentAccount);
     } catch (error) {
       console.log("Something wrong while connecting to wallet");
     }
@@ -74,6 +75,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
       const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",
       });
+      console.log("connect Wallet: ", accounts);
 
       setCurrentAccount(accounts[0]);
       window.location.reload();

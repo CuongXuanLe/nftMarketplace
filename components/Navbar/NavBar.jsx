@@ -159,6 +159,7 @@ const NavBar = () => {
                 btnName="Connect"
                 handleClick={() => {
                   connectWallet();
+                  console.log("click");
                 }}
               />
             ) : (
