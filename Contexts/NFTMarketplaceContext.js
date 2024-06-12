@@ -1,11 +1,26 @@
 import React, { useEffect, useState, useContext } from "react";
 import Web3Modal from "web3modal";
 import { ethers } from "ethers";
-import Router from "next/router";
+import {useRouter} from "next/router";
 import axios from "axios";
 import { create as ipfsHttpClient } from "ipfs-http-client";
 
-const client = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
+// const client = ipfsHttpClient("https://ipfs.infura.io:5001/api/v0");
+
+const projectId = "your project id here";
+const projectSecretKey = "project secret";
+const auth = `Basic ${Buffer.from(`${projectId}:${projectSecretKey}`).toString("base64")}`;
+
+const subdomain = "your domain";
+
+const client = ipfsHttpClient({
+  host: "infura-ipfs.io",
+  port: 5001,
+  protocol: "https",
+  headers: {
+    authorization: auth,
+  }
+})
 
 import { NFTMarketplaceAddress, NFTMarketplaceABI } from "./constants";
 
@@ -41,6 +56,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
   //useState
   const [currentAccount, setCurrentAccount] = useState("");
+  const router = useRouter(); 
 
   //check if wallet is connected
   const checkIfWalletConnected = async () => {
@@ -59,7 +75,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
       console.log("ehehhe: ", currentAccount);
     } catch (error) {
-      console.log("Something wrong while connecting to wallet");
+      console.log("Something wrong while connecting to wallet", error);
     }
   };
 
@@ -80,7 +96,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
       setCurrentAccount(accounts[0]);
       window.location.reload();
     } catch (error) {
-      console.log("Error while connecting to wallet");
+      console.log("Error while connecting to wallet", error);
     }
   };
 
@@ -88,23 +104,23 @@ export const NFTMarketplaceProvider = ({ children }) => {
   const uploadToIPFS = async (file) => {
     try {
       const added = await client.add({ content: file });
-      const url = `https://ipfs.infura.io/ipfs/${added.path}`;
+      const url = `${subdomain}/ipfs/${added.path}`;
       return url;
     } catch (error) {
-      console.log("Error Uploading to IPFS");
+      console.log("Error Uploading to IPFS", error);
     }
   };
 
-  const createNFT = async (formInput, fileUrl, router) => {
+  const createNFT = async (name, price, image, description, router) => {
     // try {
-    const { name, description, price } = formInput;
-    if (!name || !description || !price || !fileUrl)
+    // const { name, description, price } = formInput;
+    if (!name || !description || !price || !image)
       return console.log("Data is missing");
 
-    const data = JSON.stringify({ name, description, image: fileUrl });
+    const data = JSON.stringify({ name, description, image});
     try {
       const added = await client.add(data);
-      const url = `https://ipfs.infura.io/ipfs/${added.path}`;
+      const url = `https://infura-ipfs.io/ipfs/${added.path}`;
       await createSale(url, price);
     } catch (error) {
       console.log("Error while creating NFT");
@@ -130,6 +146,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
           });
 
       await transaction.wait();
+      router.push('/searchPage')
     } catch (error) {
       console.log("error while creating sale");
     }
@@ -174,6 +191,10 @@ export const NFTMarketplaceProvider = ({ children }) => {
       console.log("Error while fetching NFTs");
     }
   };
+
+  useEffect(() => {
+    fetchNFTs();
+  }, [])
 
   //fetch my nft or list nfts
   const fetchMyNFTsOrListedNFTs = async (type) => {
