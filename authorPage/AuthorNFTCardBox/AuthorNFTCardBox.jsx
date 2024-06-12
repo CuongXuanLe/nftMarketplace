@@ -10,6 +10,8 @@ const AuthorNFTCardBox = ({
   like,
   follower,
   following,
+  nfts,
+  myNFTS
 }) => {
   const collectiablesArray = [
     images.nft_image_1,
@@ -86,10 +88,11 @@ const AuthorNFTCardBox = ({
       user: images.user1,
     },
   ];
+
   return (
     <div className={Style.AuthorNFTCardBox}>
-      {collectiables && <NFTCardTwo NFTData={collectiablesArray} />}
-      {created && <NFTCardTwo NFTData={createdArray} />}
+      {collectiables && <NFTCardTwo NFTData={nfts} />}
+      {created && <NFTCardTwo NFTData={myNFTS} />}
       {like && <NFTCardTwo NFTData={likeArray} />}
       {follower && (
         <div className={Style.AuthorNFTCardBox_box}>

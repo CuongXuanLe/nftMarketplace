@@ -204,7 +204,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
       const data =
         type == "fetchItemsListed"
           ? await contract.fetchItemsListed()
-          : await contract.fetchMyNFT();
+          : await contract.fetchMyNFTs();
 
       const items = await Promise.all(
         data.map(
@@ -239,6 +239,10 @@ export const NFTMarketplaceProvider = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    fetchMyNFTsOrListedNFTs();
+  }, [])
+
   //buy nfts functions
   const buyNFT = async (nft) => {
     try {
@@ -250,6 +254,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
       });
 
       await transaction.wait();
+      router.push("/author")
     } catch (error) {
       console.log("buy nfts faileddddd");
     }
