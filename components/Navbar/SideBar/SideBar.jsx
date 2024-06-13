@@ -14,10 +14,12 @@ import {
 import Style from "./SideBar.module.css";
 import images from "../../../img";
 import Button from "../../Button/Button";
+import { useRouter } from "next/router";
 
 const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
   const [openDiscover, setOpenDiscover] = useState(false);
   const [openHelp, setOpenHelp] = useState(false);
+  const router = useRouter();
 
   const discover = [
     {
@@ -165,18 +167,19 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
 
       <div className={Style.sideBar_button}>
         {currentAccount == "" ? (
-            <Button
-              btnName="Connect"
-              handleClick={() => {
-                connectWallet();
-                console.log("click");
-              }}
-            />
-          ) : (
-            <a href="/uploadNFT">
-              <Button btnName="Create" handleClick={() => {}} />
-            </a>
-          )}
+          <Button
+            btnName="Connect"
+            handleClick={() => {
+              connectWallet();
+              console.log("click");
+            }}
+          />
+        ) : (
+          <Button
+            btnName="Create"
+            handleClick={() => router.push("/uploadNFT")}
+          />
+        )}
         {/* <Button btnName="Create" handleClick={() => {}} /> */}
         <Button btnName="Connect Wallet" handleClick={() => {}} />
       </div>

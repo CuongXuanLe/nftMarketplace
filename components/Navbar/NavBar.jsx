@@ -9,6 +9,7 @@ import { Discover, HelpCenter, Notification, Profile, SideBar } from "./index";
 import { Button } from "../componentsindex";
 import images from "../../img";
 import { NFTMarketplaceContext } from "../../Contexts/NFTMarketplaceContext";
+import { useRouter } from "next/router";
 
 const NavBar = () => {
   const [discover, setDiscover] = useState(false);
@@ -18,6 +19,7 @@ const NavBar = () => {
   const [openSideMenu, setOpenSideMenu] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
 
+  const router = useRouter();
   const navRef = useRef(null);
 
   const toggleMenu = (menuName) => {
@@ -163,9 +165,10 @@ const NavBar = () => {
                 }}
               />
             ) : (
-              <Link href={{ pathname: "/uploadNFT" }}>
-                <Button btnName="Create" handleClick={() => {}} />
-              </Link>
+              <Button
+                btnName="Create"
+                handleClick={() => router.push("/uploadNFT")}
+              />
             )}
           </div>
 
@@ -180,7 +183,7 @@ const NavBar = () => {
                 className={Style.navbar_container_right_profile}
               />
 
-              {profile && <Profile />}
+              {profile && <Profile currentAccount={currentAccount} />}
             </div>
           </div>
 
@@ -195,7 +198,11 @@ const NavBar = () => {
 
       {openSideMenu && (
         <div className={Style.sideBar}>
-          <SideBar setOpenSideMenu={setOpenSideMenu} currentAccount={currentAccount} connectWallet={connectWallet}/>
+          <SideBar
+            setOpenSideMenu={setOpenSideMenu}
+            currentAccount={currentAccount}
+            connectWallet={connectWallet}
+          />
         </div>
       )}
     </div>

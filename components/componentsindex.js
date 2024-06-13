@@ -16,6 +16,7 @@ import FollowerTab from "./FollowerTab/FollowerTab";
 import Slider from "./Slider/Slider";
 import Brand from "./Brand/Brand";
 import Video from "./Video/Video";
+import Loader from "./Loader/Loader";
 
 export {
   Button,
@@ -36,4 +37,5 @@ export {
   Slider,
   Brand,
   Video,
+  Loader,
 };

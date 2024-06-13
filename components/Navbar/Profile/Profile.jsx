@@ -7,7 +7,7 @@ import Link from "next/link";
 import Style from "./Profile.module.css";
 import images from "../../../img";
 
-const Profile = () => {
+const Profile = ({ currentAccount }) => {
   return (
     <div className={Style.profile}>
       <div className={Style.profile_account}>
@@ -21,25 +21,25 @@ const Profile = () => {
 
         <div className={Style.profile_account_info}>
           <p>check display name</p>
-          <small>X038499382920203...</small>
+          <small>{currentAccount.slice(0, 15)}...</small>
         </div>
       </div>
 
       <div className={Style.profile_menu}>
         <div className={Style.profile_menu_one}>
-          <Link href={{ pathname: "/account" }}>
+          <Link href={{ pathname: "/author" }}>
             <div className={Style.profile_menu_one_item}>
               <FaUserAlt />
               <p>My Profile</p>
             </div>
           </Link>
-          <Link href={{ pathname: "/my-items" }}>
+          <Link href={{ pathname: "/author" }}>
             <div className={Style.profile_menu_one_item}>
               <FaRegImage />
               <p>My Items</p>
             </div>
           </Link>
-          <Link href={{ pathname: "/edit-profile" }}>
+          <Link href={{ pathname: "/account" }}>
             <div className={Style.profile_menu_one_item}>
               <FaUserEdit />
               <p>Edit Profile</p>
@@ -48,16 +48,16 @@ const Profile = () => {
         </div>
 
         <div className={Style.profile_menu_two}>
-          <Link href={{ pathname: "/help" }}>
+          <Link href={{ pathname: "/contactus" }}>
             <div className={Style.profile_menu_one_item}>
               <MdHelpCenter />
               <p>Help</p>
             </div>
           </Link>
-          <Link href={{ pathname: "/disconnet" }}>
+          <Link href={{ pathname: "/aboutus" }}>
             <div className={Style.profile_menu_one_item}>
               <TbDownload />
-              <p>Disconnet</p>
+              <p>About Us</p>
             </div>
           </Link>
         </div>

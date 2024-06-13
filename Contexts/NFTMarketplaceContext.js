@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import Web3Modal from "web3modal";
 import { ethers } from "ethers";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import axios from "axios";
 import { create as ipfsHttpClient } from "ipfs-http-client";
 
@@ -9,7 +9,9 @@ import { create as ipfsHttpClient } from "ipfs-http-client";
 
 const projectId = "your project id here";
 const projectSecretKey = "project secret";
-const auth = `Basic ${Buffer.from(`${projectId}:${projectSecretKey}`).toString("base64")}`;
+const auth = `Basic ${Buffer.from(`${projectId}:${projectSecretKey}`).toString(
+  "base64"
+)}`;
 
 const subdomain = "your domain";
 
@@ -19,8 +21,8 @@ const client = ipfsHttpClient({
   protocol: "https",
   headers: {
     authorization: auth,
-  }
-})
+  },
+});
 
 import { NFTMarketplaceAddress, NFTMarketplaceABI } from "./constants";
 
@@ -56,7 +58,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
   //useState
   const [currentAccount, setCurrentAccount] = useState("");
-  const router = useRouter(); 
+  const router = useRouter();
 
   //check if wallet is connected
   const checkIfWalletConnected = async () => {
@@ -117,12 +119,12 @@ export const NFTMarketplaceProvider = ({ children }) => {
     if (!name || !description || !price || !image)
       return console.log("Data is missing");
 
-    const data = JSON.stringify({ name, description, image});
+    const data = JSON.stringify({ name, description, image });
     try {
       const added = await client.add(data);
       const url = `https://infura-ipfs.io/ipfs/${added.path}`;
       await createSale(url, price);
-      router.push('/searchPage')
+      router.push("/searchPage");
     } catch (error) {
       console.log("Error while creating NFT");
     }
@@ -147,7 +149,6 @@ export const NFTMarketplaceProvider = ({ children }) => {
           });
 
       await transaction.wait();
-      
     } catch (error) {
       console.log("error while creating sale");
     }
@@ -195,7 +196,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
   useEffect(() => {
     fetchNFTs();
-  }, [])
+  }, []);
 
   //fetch my nft or list nfts
   const fetchMyNFTsOrListedNFTs = async (type) => {
@@ -242,7 +243,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
   useEffect(() => {
     fetchMyNFTsOrListedNFTs();
-  }, [])
+  }, []);
 
   //buy nfts functions
   const buyNFT = async (nft) => {
@@ -255,7 +256,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
       });
 
       await transaction.wait();
-      router.push("/author")
+      router.push("/author");
     } catch (error) {
       console.log("buy nfts faileddddd");
     }
@@ -271,6 +272,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
         createNFT,
         fetchNFTs,
         fetchMyNFTsOrListedNFTs,
+        createSale,
         buyNFT,
         currentAccount,
         titleData,

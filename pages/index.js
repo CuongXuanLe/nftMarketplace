@@ -22,8 +22,20 @@ const Home = () => {
   );
 
   useEffect(() => {
-    checkContract();
+    // checkContract();
     checkIfWalletConnected();
+  }, []);
+
+  const { fetchNFTs } = useContext(NFTMarketplaceContext);
+  const [nfts, setNfts] = useState([]);
+  const [nftsCopy, setNftsCopy] = useState([]);
+
+  useEffect(() => {
+    fetchNFTs().then((item) => {
+      setNfts(item.reverse());
+      setNftsCopy(item);
+      console.log("check ???: ", nfts);
+    });
   }, []);
 
   return (
@@ -38,7 +50,7 @@ const Home = () => {
         paragraph="Discover the most outstanding NFTs in all topics of life."
       />
       <Filter />
-      <NFTCard />
+      <NFTCard NFTData={nfts} />
       <Title
         heading="Explore Categories"
         paragraph="Explore the NFTs in the most featured categories."
