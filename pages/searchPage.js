@@ -1,6 +1,6 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Style from "../styles/searchPage.module.css";
-import { Slider, Brand } from "../components/componentsindex";
+import { Slider, Brand, Loader } from "../components/componentsindex";
 import { SearchBar } from "../SearchPage/searchBarIndex";
 import { Filter } from "../components/componentsindex";
 import { NFTCardTwo, Banner } from "../collectionPage/collectionIndex";
@@ -17,27 +17,27 @@ const searchPage = () => {
     fetchNFTs().then((item) => {
       setNfts(item.reverse());
       setNftsCopy(item);
-      console.log('check ???: ', nfts)
-    })
-  }, [])
+      console.log("check ???: ", nfts);
+    });
+  }, []);
 
   const onHandleSearch = (value) => {
-    const filteredNFTS = nfts.filter(({name}) => {
-      name.toLowerCase().includes(value.toLowerCase())
-    })
+    const filteredNFTS = nfts.filter(({ name }) => {
+      name.toLowerCase().includes(value.toLowerCase());
+    });
 
     if (filteredNFTS.length === 0) {
       setNfts(nftsCopy);
     } else {
-      setNfts(filteredNFTS)
+      setNfts(filteredNFTS);
     }
-  }
+  };
 
   const onClearSearch = () => {
-    if(nfts.length && nftsCopy.length) {
-      setNfts(nftsCopy)
+    if (nfts.length && nftsCopy.length) {
+      setNfts(nftsCopy);
     }
-  }
+  };
 
   const collectionArray = [
     images.nft_image_1,
@@ -52,9 +52,12 @@ const searchPage = () => {
   return (
     <div className={Style.searchPage}>
       <Banner bannerImage={images.creatorbackground2} />
-      <SearchBar onHandleSearch={onHandleSearch} onClearSearch={onClearSearch}/>
+      <SearchBar
+        onHandleSearch={onHandleSearch}
+        onClearSearch={onClearSearch}
+      />
       <Filter />
-      <NFTCardTwo NFTData={nfts} />
+      {nfts.length === 0 ? <Loader /> : <NFTCardTwo NFTData={nfts} />}
       <Slider />
       <Brand />
     </div>

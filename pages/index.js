@@ -12,6 +12,7 @@ import {
   FollowerTab,
   Slider,
   Brand,
+  Loader,
 } from "../components/componentsindex";
 
 import { NFTMarketplaceContext } from "../Contexts/NFTMarketplaceContext";
@@ -50,7 +51,7 @@ const Home = () => {
         paragraph="Discover the most outstanding NFTs in all topics of life."
       />
       <Filter />
-      <NFTCard NFTData={nfts} />
+      {nfts.length === 0 ? <Loader /> : <NFTCard NFTData={nfts} />}
       <Title
         heading="Explore Categories"
         paragraph="Explore the NFTs in the most featured categories."
