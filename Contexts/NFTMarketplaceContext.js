@@ -122,6 +122,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
       const added = await client.add(data);
       const url = `https://infura-ipfs.io/ipfs/${added.path}`;
       await createSale(url, price);
+      router.push('/searchPage')
     } catch (error) {
       console.log("Error while creating NFT");
     }
@@ -141,12 +142,12 @@ export const NFTMarketplaceProvider = ({ children }) => {
         ? await contract.createToken(url, price, {
             value: listingPrice.toString(),
           })
-        : await contract.reSellToken(url, price, {
+        : await contract.reSellToken(id, price, {
             value: listingPrice.toString(),
           });
 
       await transaction.wait();
-      router.push('/searchPage')
+      
     } catch (error) {
       console.log("error while creating sale");
     }

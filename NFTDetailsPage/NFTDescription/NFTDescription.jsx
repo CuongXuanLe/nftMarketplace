@@ -22,7 +22,7 @@ import images from "../../img";
 import { Button } from "../../components/componentsindex.js";
 import { NFTTabs } from "../NFTDetailsIndex";
 import Link from "next/link";
-
+import { useRouter } from "next/router";
 import { NFTMarketplaceContext } from "../../Contexts/NFTMarketplaceContext.js";
 
 const NFTDescription = ({nft}) => {
@@ -32,6 +32,8 @@ const NFTDescription = ({nft}) => {
   const [provanance, setProvanance] = useState(false);
   const [owner, setOwner] = useState(false);
   const [curTab, setCurTab] = useState();
+
+  const router = useRouter()
 
   const historyArray = [
     images.user1,
@@ -231,7 +233,7 @@ const NFTDescription = ({nft}) => {
                 <Button
                   icon=<FaWallet />
                   btnName="List on Marketplace"
-                  handleClick={() => {}}
+                  handleClick={() => router.push(`/reSellToken?id=${nft.tokenId}&tokenURI=${nft.tokenURI}`)}
                   classStyle={Style.button}
                 />
                 ) : (
