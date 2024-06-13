@@ -11,7 +11,7 @@ import { Button } from "../components/componentsindex.js";
 import { DropZone } from "../UploadNFT/uploadNFTIndex.js";
 import { useRouter } from "next/router";
 
-const UloadNFT = ({ uploadToIPFS, createNFT }) => {
+const UloadNFT = ({ uploadToPinata, createNFT }) => {
   const [price, setPrice] = useState("");
   const [active, setActive] = useState(0);
   const [name, setName] = useState("");
@@ -23,7 +23,7 @@ const UloadNFT = ({ uploadToIPFS, createNFT }) => {
   const [properties, setProperties] = useState("");
   const [image, setImage] = useState(null);
 
-  const router = useRouter()
+  const router = useRouter();
 
   const categoryArry = [
     {
@@ -62,7 +62,7 @@ const UloadNFT = ({ uploadToIPFS, createNFT }) => {
         category={category}
         properties={properties}
         setImage={setImage}
-        uploadToIPFS={uploadToIPFS}
+        uploadToPinata={uploadToPinata}
       />
 
       <div className={Style.upload_box}>
@@ -202,14 +202,25 @@ const UloadNFT = ({ uploadToIPFS, createNFT }) => {
               />
             </div>
           </div>
-
-          
         </div>
 
         <div className={Style.upload_box_btn}>
           <Button
             btnName="Upload"
-            handleClick={async () => createNFT(name, price, image, description, router, website, royalties, fileSize, category, properties)}
+            handleClick={async () =>
+              createNFT(
+                name,
+                price,
+                image,
+                description,
+                router,
+                website,
+                royalties,
+                fileSize,
+                category,
+                properties
+              )
+            }
             classStyle={Style.upload_box_btn_style}
           />
           <Button

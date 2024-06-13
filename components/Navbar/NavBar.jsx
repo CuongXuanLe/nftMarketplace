@@ -6,7 +6,7 @@ import { BsSearch } from "react-icons/bs";
 import { CgMenuLeft, CgMenuRight } from "react-icons/cg";
 import Style from "./NavBar.module.css";
 import { Discover, HelpCenter, Notification, Profile, SideBar } from "./index";
-import { Button } from "../componentsindex";
+import { Button, Error } from "../componentsindex";
 import images from "../../img";
 import { NFTMarketplaceContext } from "../../Contexts/NFTMarketplaceContext";
 import { useRouter } from "next/router";
@@ -96,7 +96,9 @@ const NavBar = () => {
   }, []);
 
   //connect smart contract
-  const { currentAccount, connectWallet } = useContext(NFTMarketplaceContext);
+  const { currentAccount, connectWallet, openError } = useContext(
+    NFTMarketplaceContext
+  );
 
   return (
     <div
@@ -205,6 +207,8 @@ const NavBar = () => {
           />
         </div>
       )}
+
+      {openError && <Error />}
     </div>
   );
 };

@@ -14,7 +14,7 @@ import {
   Brand,
   Loader,
 } from "../components/componentsindex";
-
+import { getTopCreator } from "../TopCreators/TopCreators";
 import { NFTMarketplaceContext } from "../Contexts/NFTMarketplaceContext";
 
 const Home = () => {
@@ -31,9 +31,12 @@ const Home = () => {
   const [nfts, setNfts] = useState([]);
   const [nftsCopy, setNftsCopy] = useState([]);
 
+  const creators = getTopCreator(nfts);
+  console.log(creators);
+
   useEffect(() => {
     fetchNFTs().then((item) => {
-      setNfts(item.reverse());
+      setNfts(item?.reverse());
       setNftsCopy(item);
       console.log("check ???: ", nfts);
     });
@@ -43,7 +46,7 @@ const Home = () => {
     <div className={Style.homePage}>
       <HeroSection />
       <BigNFTSlider />
-      <FollowerTab />
+      {creators.length > 0 ? <FollowerTab TopCreator={creators} /> : <Loader />}
       <Slider />
       <Collection />
       <Title
@@ -51,7 +54,7 @@ const Home = () => {
         paragraph="Discover the most outstanding NFTs in all topics of life."
       />
       <Filter />
-      {nfts.length === 0 ? <Loader /> : <NFTCard NFTData={nfts} />}
+      {nfts?.length > 0 ? <NFTCard NFTData={nfts} /> : <Loader />}
       <Title
         heading="Explore Categories"
         paragraph="Explore the NFTs in the most featured categories."

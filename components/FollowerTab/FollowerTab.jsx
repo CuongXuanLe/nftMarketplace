@@ -8,7 +8,7 @@ import Style from "./FollowerTab.module.css";
 import FollowerTabCard from "./FollowerTabCard/FollowerTabCard";
 import images from "../../img";
 
-const FollowerTab = () => {
+const FollowerTab = ({ TopCreator }) => {
   const CardArray = [
     {
       background: images.item9,
@@ -104,13 +104,13 @@ const FollowerTab = () => {
     },
   ];
 
-  const [activeTab, setActiveTab] = useState('popular');
+  const [activeTab, setActiveTab] = useState("popular");
   const [popular, setPopular] = useState(true);
   const [following, setFollowing] = useState(false);
   const [news, setNews] = useState(false);
 
   const openPopular = () => {
-    setActiveTab('popular');
+    setActiveTab("popular");
     if (!popular) {
       setPopular(true);
       setFollowing(false);
@@ -118,7 +118,7 @@ const FollowerTab = () => {
     }
   };
   const openFollower = () => {
-    setActiveTab('follower');
+    setActiveTab("follower");
     if (!following) {
       setPopular(false);
       setFollowing(true);
@@ -126,7 +126,7 @@ const FollowerTab = () => {
     }
   };
   const openNews = () => {
-    setActiveTab('news');
+    setActiveTab("news");
     if (!news) {
       setPopular(false);
       setFollowing(false);
@@ -140,13 +140,22 @@ const FollowerTab = () => {
         <h2>Top Creators List</h2>
         <div className={Style.followerTab_tabs}>
           <div className={Style.followerTab_tabs_btn}>
-            <button onClick={openPopular} className={activeTab === 'popular' ? Style.active : ''}>
+            <button
+              onClick={openPopular}
+              className={activeTab === "popular" ? Style.active : ""}
+            >
               <RiUserFollowFill /> Popular
             </button>
-            <button onClick={openFollower} className={activeTab === 'follower' ? Style.active : ''}>
+            <button
+              onClick={openFollower}
+              className={activeTab === "follower" ? Style.active : ""}
+            >
               <RiUserFollowFill /> Following
             </button>
-            <button onClick={openNews} className={activeTab === 'news' ? Style.active : ''}>
+            <button
+              onClick={openNews}
+              className={activeTab === "news" ? Style.active : ""}
+            >
               <RiAwardLine /> NoteWorthy
             </button>
           </div>
@@ -155,7 +164,7 @@ const FollowerTab = () => {
 
       {popular && (
         <div className={Style.followerTab_box}>
-          {CardArray.map((el, i) => (
+          {TopCreator.map((el, i) => (
             <FollowerTabCard key={i + 1} i={i} el={el} />
           ))}
         </div>

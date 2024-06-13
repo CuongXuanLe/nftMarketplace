@@ -9,16 +9,20 @@ import images from "../img";
 import { NFTMarketplaceContext } from "../Contexts/NFTMarketplaceContext";
 
 const searchPage = () => {
-  const { fetchNFTs } = useContext(NFTMarketplaceContext);
+  const { fetchNFTs, setError } = useContext(NFTMarketplaceContext);
   const [nfts, setNfts] = useState([]);
   const [nftsCopy, setNftsCopy] = useState([]);
 
   useEffect(() => {
-    fetchNFTs().then((item) => {
-      setNfts(item.reverse());
-      setNftsCopy(item);
-      console.log("check ???: ", nfts);
-    });
+    try {
+      fetchNFTs().then((item) => {
+        setNfts(item?.reverse());
+        setNftsCopy(item);
+        console.log("check ???: ", nfts);
+      });
+    } catch (error) {
+      setError("Please reload the browser");
+    }
   }, []);
 
   const onHandleSearch = (value) => {
@@ -34,21 +38,11 @@ const searchPage = () => {
   };
 
   const onClearSearch = () => {
-    if (nfts.length && nftsCopy.length) {
+    if (nfts?.length && nftsCopy?.length) {
       setNfts(nftsCopy);
     }
   };
 
-  const collectionArray = [
-    images.nft_image_1,
-    images.nft_image_2,
-    images.nft_image_3,
-    images.nft_image_1,
-    images.nft_image_2,
-    images.nft_image_3,
-    images.nft_image_1,
-    images.nft_image_2,
-  ];
   return (
     <div className={Style.searchPage}>
       <Banner bannerImage={images.creatorbackground2} />
@@ -57,7 +51,7 @@ const searchPage = () => {
         onClearSearch={onClearSearch}
       />
       <Filter />
-      {nfts.length === 0 ? <Loader /> : <NFTCardTwo NFTData={nfts} />}
+      {nfts?.length > 0 ? <NFTCardTwo NFTData={nfts} /> : <Loader />}
       <Slider />
       <Brand />
     </div>
