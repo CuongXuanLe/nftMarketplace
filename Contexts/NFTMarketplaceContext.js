@@ -27,6 +27,24 @@ const connectingWithSmartContract = async () => {
   }
 };
 
+const fetchTransferFundsContract = (signerOrProvider) =>
+  new ethers.Contract(TransferFundsAddress, TransferFundsABI, signerOrProvider);
+
+//transfer funds func
+const connectToTransferFunds = async () => {
+  try {
+    const web3Modal = new Web3Modal();
+    const connection = await web3Modal.connect();
+    const provider = new ethers.providers.Web3Provider(connection);
+    const signer = provider.getSigner();
+
+    const contract = fetchTransferFundsContract(signer);
+    return contract;
+  } catch (error) {
+    console.log("Something went wrong while connecting with contract", error);
+  }
+};
+
 export const NFTMarketplaceContext = React.createContext();
 
 export const NFTMarketplaceProvider = ({ children }) => {
@@ -279,6 +297,34 @@ export const NFTMarketplaceProvider = ({ children }) => {
     }
   };
 
+  //transfer fund
+  const [transactionCount, setTransactionCount] = useState("");
+  const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const transferEther = async (address, ether, message) => {
+    try {
+      if (currentAccount) {
+        const contract = await connectToTransferFunds(currentAccount);
+        console.log("transfer ether: ", address, ether, message);
+        const unFormattedPrice = ethers.utils.parseEther(ether);
+        // await ethereum.request({
+        //   method: "eth_sendTransaction",
+        //   params: [
+        //     {
+        //       from: currentAccount,
+        //       to: address,
+        //       gas: "0x5208",
+        //       value: unFormattedPrice._hex,
+        //     },
+        //   ],
+        // });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <NFTMarketplaceContext.Provider
       value={{
@@ -296,6 +342,8 @@ export const NFTMarketplaceProvider = ({ children }) => {
         openError,
         error,
         setOpenError,
+        transferEther,
+        loading,
       }}
     >
       {children}
