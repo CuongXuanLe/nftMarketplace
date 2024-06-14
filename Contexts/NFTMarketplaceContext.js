@@ -41,7 +41,10 @@ const connectToTransferFunds = async () => {
     const contract = fetchTransferFundsContract(signer);
     return contract;
   } catch (error) {
-    console.log("Something went wrong while connecting with contract", error);
+    console.log(
+      "Something went wrong while connecting with contract transferFund",
+      error
+    );
   }
 };
 
@@ -54,6 +57,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
   const [error, setError] = useState("");
   const [openError, setOpenError] = useState(false);
   const [currentAccount, setCurrentAccount] = useState("");
+  const [accountBalance, setAccountBalance] = useState("");
   const router = useRouter();
 
   const checkContract = async () => {
@@ -78,7 +82,12 @@ export const NFTMarketplaceProvider = ({ children }) => {
         setError("No Account Found");
       }
 
-      console.log("ehehhe: ", currentAccount);
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const getBalance = await provider.getBalance(account[0]);
+      const bal = ethers.utils.formatEther(getBalance);
+      setAccountBalance(bal);
+      // console.log("provider: ", provider);
+      // console.log("ehehhe: ", currentAccount);
     } catch (error) {
       setError("Something wrong while connecting to wallet");
       setError(true);
@@ -308,17 +317,17 @@ export const NFTMarketplaceProvider = ({ children }) => {
         const contract = await connectToTransferFunds(currentAccount);
         console.log("transfer ether: ", address, ether, message);
         const unFormattedPrice = ethers.utils.parseEther(ether);
-        // await ethereum.request({
-        //   method: "eth_sendTransaction",
-        //   params: [
-        //     {
-        //       from: currentAccount,
-        //       to: address,
-        //       gas: "0x5208",
-        //       value: unFormattedPrice._hex,
-        //     },
-        //   ],
-        // });
+        await ethereum.request({
+          method: "eth_sendTransaction",
+          params: [
+            {
+              from: currentAccount,
+              to: address,
+              gas: "0x5208",
+              value: unFormattedPrice._hex,
+            },
+          ],
+        });
       }
     } catch (error) {
       console.log(error);
@@ -344,6 +353,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
         setOpenError,
         transferEther,
         loading,
+        accountBalance,
       }}
     >
       {children}

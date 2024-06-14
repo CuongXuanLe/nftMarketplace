@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { FaEthereum, FaUserAlt } from "react-icons/fa";
-
+import Image from "next/image";
 import Style from "../styles/transferFunds.module.css";
 import formStyle from "../AccountPage/Form/Form.module.css";
 import images from "../img";
@@ -9,7 +9,7 @@ import { Button, Loader } from "../components/componentsindex";
 import { NFTMarketplaceContext } from "../Contexts/NFTMarketplaceContext";
 
 const transferFunds = () => {
-  const { currentAccount, transferEther, loading } = useContext(
+  const { currentAccount, transferEther, accountBalance, loading } = useContext(
     NFTMarketplaceContext
   );
   const [transferAmount, setTransferAmount] = useState("");
@@ -18,6 +18,7 @@ const transferFunds = () => {
   const [readMessage, setReadMessage] = useState("");
   const [openBox, setOpenBox] = useState(false);
 
+  console.log("check acc: ", currentAccount, "---", accountBalance);
   const transactions = [2312, 12312, 12, 3, 211];
 
   return (
@@ -34,7 +35,7 @@ const transferFunds = () => {
         </p>
         <div className={Style.transfer_box_box}>
           <div className={Style.transfer_box_box_left}>
-            <img src={images.transfer} width={400} height={400} alt="images" />
+            <Image src={images.item11} width={400} height={400} alt="images" />
           </div>
           <div className={Style.transfer_box_box_right}>
             <h2>Now you can transfer ether</h2>
@@ -45,7 +46,7 @@ const transferFunds = () => {
               <p className={Style.transfer_box_box_right_info_mobile}>
                 Account {currentAccount.slice(1, 30)} ..
               </p>
-              <p>Balance: 3355ETH</p>
+              <p>Balance: {accountBalance} ETH</p>
             </div>
 
             <div className={Style.transfer_box_box_right_box}>
@@ -111,13 +112,13 @@ const transferFunds = () => {
         <div className={Style.transfer_box_history}>
           {transactions.map((el, i) => {
             <div className={Style.transfer_box_history_item} key={i + 1}>
-              <img src={images.item0} width={200} height={200} alt="image" />
+              <Image src={images.item0} width={200} height={200} alt="image" />
               <div className={Style.transfer_box_history_item_info}>
                 <p>
                   <span>Transfer ID:</span> #1
                 </p>
                 <p>
-                  <span>Amount:</span> #1
+                  <span>Amount:</span> {el}
                 </p>
                 <p>
                   <span>From:</span> #1
