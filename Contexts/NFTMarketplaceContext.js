@@ -3,7 +3,6 @@ import Web3Modal from "web3modal";
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
 import axios from "axios";
-
 import { NFTMarketplaceAddress, NFTMarketplaceABI } from "./constants";
 
 const fetchContract = (signerOrProvider) =>
@@ -84,7 +83,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
       }
 
       const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const getBalance = await provider.getBalance(account[0]);
+      const getBalance = await provider.getBalance(accounts[0]);
       const bal = ethers.utils.formatEther(getBalance);
       setAccountBalance(bal);
     } catch (error) {
@@ -194,13 +193,16 @@ export const NFTMarketplaceProvider = ({ children }) => {
   //fetch nft function
   const fetchNFTs = async () => {
     try {
-      const provider = new ethers.providers.JsonRpcProvider(
-        "https://polygon-amoy.g.alchemy.com/v2/FbVL2i2loSp-ZDdf5HWnur4UzvNzhhx8"
-      );
+      // const provider = new ethers.providers.JsonRpcProvider(
+      //   "https://polygon-amoy.g.alchemy.com/v2/FbVL2i2loSp-ZDdf5HWnur4UzvNzhhx8"
+      // );
+      
+      const web3Modal = new Web3Modal();
+      const connection = await web3Modal.connect();
+      const provider = new ethers.providers.Web3Provider(connection);
+
       const contract = fetchContract(provider);
-      console.log("contract: ", contract);
       const data = await contract.fetchMarketItems();
-      console.log("fetchdata", data);
       const items = await Promise.all(
         data.map(
           async ({ tokenId, seller, owner, price: unformattedPrice }) => {
