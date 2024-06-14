@@ -19,8 +19,9 @@ const connectingWithSmartContract = async () => {
     const connection = await web3Modal.connect();
     const provider = new ethers.providers.Web3Provider(connection);
     const signer = provider.getSigner();
-
     const contract = fetchContract(signer);
+
+    console.log("check connect: ", web3Modal, connection, provider);
     return contract;
   } catch (error) {
     console.log("Something went wrong while connecting with contract", error);
@@ -86,8 +87,6 @@ export const NFTMarketplaceProvider = ({ children }) => {
       const getBalance = await provider.getBalance(account[0]);
       const bal = ethers.utils.formatEther(getBalance);
       setAccountBalance(bal);
-      // console.log("provider: ", provider);
-      // console.log("ehehhe: ", currentAccount);
     } catch (error) {
       setError("Something wrong while connecting to wallet");
       setError(true);
@@ -328,6 +327,44 @@ export const NFTMarketplaceProvider = ({ children }) => {
             },
           ],
         });
+
+        const transaction = await contract.addDataToBlockchain(
+          address,
+          unFormattedPrice,
+          message
+        );
+
+        setLoading(true);
+        transaction.wait();
+        setLoading(false);
+
+        const transactionCount = await contract.getTransactionsCount();
+        setTransactionCount(transactionCount.toNumber());
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getAllTransactions = async () => {
+    try {
+      if (ethereum) {
+        const contract = await connectToTransferFunds();
+
+        const availableTransactions = await contract.getAllTransactions();
+        const readTransactions = availableTransactions.map((transaction) => ({
+          addressTo: transaction.receiver,
+          addressFrom: transaction.sender,
+          timestamp: new Date(
+            transaction.timestamp.toNumber() * 1000
+          ).toLocaleString(),
+          message: transaction.message,
+          amount: parseInt(transaction.amount._hex) / 10 ** 18,
+        }));
+
+        setTransactions(readTransactions);
+      } else {
+        console.log("On Ethereum");
       }
     } catch (error) {
       console.log(error);
@@ -354,6 +391,9 @@ export const NFTMarketplaceProvider = ({ children }) => {
         transferEther,
         loading,
         accountBalance,
+        transactionCount,
+        transactions,
+        getAllTransactions,
       }}
     >
       {children}

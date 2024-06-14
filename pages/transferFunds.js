@@ -9,17 +9,20 @@ import { Button, Loader } from "../components/componentsindex";
 import { NFTMarketplaceContext } from "../Contexts/NFTMarketplaceContext";
 
 const transferFunds = () => {
-  const { currentAccount, transferEther, accountBalance, loading } = useContext(
-    NFTMarketplaceContext
-  );
+  const {
+    currentAccount,
+    transferEther,
+    accountBalance,
+    loading,
+    transactions,
+  } = useContext(NFTMarketplaceContext);
   const [transferAmount, setTransferAmount] = useState("");
   const [transferAccount, setTransferAccount] = useState("");
   const [message, setMessage] = useState("");
   const [readMessage, setReadMessage] = useState("");
   const [openBox, setOpenBox] = useState(false);
 
-  console.log("check acc: ", currentAccount, "---", accountBalance);
-  const transactions = [2312, 12312, 12, 3, 211];
+  console.log("check acc: ", currentAccount, "---", transactions);
 
   return (
     <div className={Style.transfer}>
@@ -115,16 +118,16 @@ const transferFunds = () => {
               <Image src={images.item0} width={200} height={200} alt="image" />
               <div className={Style.transfer_box_history_item_info}>
                 <p>
-                  <span>Transfer ID:</span> #1
+                  <span>Transfer ID:</span> #{i + 1} {el.timestamp}
                 </p>
                 <p>
-                  <span>Amount:</span> {el}
+                  <span>Amount:</span> {el.amount}
                 </p>
                 <p>
-                  <span>From:</span> #1
+                  <span>From:</span> {el.addressFrom}
                 </p>
                 <p>
-                  <span>To ID:</span> #1
+                  <span>To ID:</span> {el.addressTo}
                 </p>
                 <Button
                   btnName="Message"

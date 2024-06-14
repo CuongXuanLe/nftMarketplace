@@ -12,7 +12,7 @@ require("@nomicfoundation/hardhat-toolbox");
 // };
 
 module.exports = {
-  solidity: "0.8.24",
+  solidity: "0.8.17",
   networks: {
     hardhat: {},
     polygon_amoy: {
@@ -22,6 +22,8 @@ module.exports = {
       ],
     },
     localhost: {
+      chainId: `0x${Number(31337).toString(16)}`,
+      chainName: "localhost",
       url: "http://127.0.0.1:8545",
     },
   },
