@@ -63,7 +63,7 @@
 .transfer_box_history {
   margin-block: 5rem;
   display: grid;
-  grid-template-columns: repeat(5, 1rem);
+  grid-template-columns: repeat(5, 16rem);
   gap: 2rem;
 }
 

@@ -22,9 +22,12 @@ module.exports = {
       ],
     },
     localhost: {
-      chainId: `0x${Number(31337).toString(16)}`,
-      chainName: "localhost",
-      url: "http://127.0.0.1:8545",
+      hardhat: {
+        url: "http://127.0.0.1:8545",
+        accounts: [
+          "d1740eb356ec4794c793b8c32258e1fbc5f7165d690cdbc831eea72a427d4683",
+        ],
+      },
     },
   },
 };

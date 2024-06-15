@@ -15,6 +15,7 @@ const transferFunds = () => {
     accountBalance,
     loading,
     transactions,
+    getAllTransactions,
   } = useContext(NFTMarketplaceContext);
   const [transferAmount, setTransferAmount] = useState("");
   const [transferAccount, setTransferAccount] = useState("");
@@ -22,7 +23,9 @@ const transferFunds = () => {
   const [readMessage, setReadMessage] = useState("");
   const [openBox, setOpenBox] = useState(false);
 
-  console.log("check acc: ", currentAccount, "---", transactions);
+  useEffect(() => {
+    getAllTransactions();
+  }, []);
 
   return (
     <div className={Style.transfer}>
@@ -44,12 +47,12 @@ const transferFunds = () => {
             <h2>Now you can transfer ether</h2>
             <div className={Style.transfer_box_box_right_info}>
               <p className={Style.transfer_box_box_right_info_deskTop}>
-                Account: {currentAccount}
+                Account: {currentAccount.slice(0, 25)}..
               </p>
               <p className={Style.transfer_box_box_right_info_mobile}>
-                Account {currentAccount.slice(1, 30)} ..
+                Account {currentAccount.slice(0, 25)}..
               </p>
-              <p>Balance: {accountBalance} ETH</p>
+              <p>Balance: {parseFloat(accountBalance).toFixed(5)} ETH</p>
             </div>
 
             <div className={Style.transfer_box_box_right_box}>
@@ -103,41 +106,48 @@ const transferFunds = () => {
             </div>
           </div>
         </div>
-        <h1 className={Style.transfer_box_h1}> Transaction History</h1>
-        <p>
-          Adipisicing adipisicing exercitation nisi proident dolor non do
-          laborum aute eu qui eiusmod voluptate nulla. Sit quis aute aute aute
-          excepteur nisi aute adipisicing cupidatat. Commodo deserunt irure
-          ullamco aliquip dolore eiusmod ullamco qui reprehenderit eiusmod.
-          Ipsum tempor dolore ut reprehenderit enim ut tempor anim deserunt
-          cupidatat aute anim.
-        </p>
+
+        {currentAccount ? (
+          <h1 className={Style.transfer_box_h1}> Transaction History</h1>
+        ) : (
+          <h1 className={Style.transfer_box_h1}>
+            {" "}
+            Connect your account to see the latest transactions
+          </h1>
+        )}
         <div className={Style.transfer_box_history}>
           {transactions.map((el, i) => {
-            <div className={Style.transfer_box_history_item} key={i + 1}>
-              <Image src={images.item0} width={200} height={200} alt="image" />
-              <div className={Style.transfer_box_history_item_info}>
-                <p>
-                  <span>Transfer ID:</span> #{i + 1} {el.timestamp}
-                </p>
-                <p>
-                  <span>Amount:</span> {el.amount}
-                </p>
-                <p>
-                  <span>From:</span> {el.addressFrom}
-                </p>
-                <p>
-                  <span>To ID:</span> {el.addressTo}
-                </p>
-                <Button
-                  btnName="Message"
-                  handleClick={() => (
-                    setReadMessage("checked"), setOpenBox(true)
-                  )}
-                  className={Style.readButton}
+            return (
+              <div className={Style.transfer_box_history_item} key={i + 1}>
+                <Image
+                  src={images.item0}
+                  width={200}
+                  height={200}
+                  alt="image"
                 />
+                <div className={Style.transfer_box_history_item_info}>
+                  <p>
+                    <span>Transfer ID:</span> #{i + 1} {el.timestamp}
+                  </p>
+                  <p>
+                    <span>Amount:</span> {el.amount}
+                  </p>
+                  <p>
+                    <span>From:</span> {el.addressFrom.slice(0, 13)}..
+                  </p>
+                  <p>
+                    <span>To ID:</span> {el.addressTo.slice(0, 13)}..
+                  </p>
+                  <Button
+                    btnName="Message"
+                    handleClick={() => (
+                      setReadMessage(el.message), setOpenBox(true)
+                    )}
+                    className={Style.readButton}
+                  />
+                </div>
               </div>
-            </div>;
+            );
           })}
         </div>
         {openBox == false ? (
@@ -146,7 +156,7 @@ const transferFunds = () => {
           <div className={Style.messageBox} onClick={() => setOpenBox(false)}>
             <div className={Style.messageBox_box}>
               <h1>Transaction Message</h1>
-              <p>Hey your message</p>
+              <p>{readMessage}</p>
             </div>
           </div>
         )}

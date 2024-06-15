@@ -6,7 +6,6 @@ import Style from "./FollowerTabCard.module.css";
 import images from "../../../img";
 const FollowerTabCard = ({ i, el }) => {
   const [following, setFollowing] = useState(false);
-
   const followMe = () => {
     if (!following) {
       setFollowing(true);
@@ -31,7 +30,7 @@ const FollowerTabCard = ({ i, el }) => {
         <div className={Style.FollowerTabCard_box_info}>
           <div className={Style.FollowerTabCard_box_info_name}>
             <h4>
-              {el.seller.slice(0, 9)}
+              {el?.seller?.slice(0, 9)}
               {""}{" "}
               <span>
                 <MdVerified marginleft="5" color={"rgb(32, 129, 226)"} />

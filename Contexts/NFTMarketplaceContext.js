@@ -3,7 +3,12 @@ import Web3Modal from "web3modal";
 import { ethers } from "ethers";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { NFTMarketplaceAddress, NFTMarketplaceABI } from "./constants";
+import {
+  NFTMarketplaceAddress,
+  NFTMarketplaceABI,
+  TransferFundsAddress,
+  TransferFundsABI,
+} from "./constants";
 
 const fetchContract = (signerOrProvider) =>
   new ethers.Contract(
@@ -172,8 +177,11 @@ export const NFTMarketplaceProvider = ({ children }) => {
   const createSale = async (url, formInputPrice, isReselling, id) => {
     try {
       const price = ethers.utils.parseUnits(formInputPrice, "ether");
+      console.log("check price: ", price);
       const contract = await connectingWithSmartContract();
+      console.log("check contract: ", contract);
       const listingPrice = await contract.getListingPrice();
+      console.log("check listPrice: ", listingPrice);
 
       const transaction = !isReselling
         ? await contract.createToken(url, price, {
@@ -182,6 +190,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
         : await contract.reSellToken(id, price, {
             value: listingPrice.toString(),
           });
+      console.log("check transaction: ", transaction);
 
       await transaction.wait();
     } catch (error) {
@@ -196,7 +205,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
       // const provider = new ethers.providers.JsonRpcProvider(
       //   "https://polygon-amoy.g.alchemy.com/v2/FbVL2i2loSp-ZDdf5HWnur4UzvNzhhx8"
       // );
-      
+
       const web3Modal = new Web3Modal();
       const connection = await web3Modal.connect();
       const provider = new ethers.providers.Web3Provider(connection);
@@ -238,7 +247,9 @@ export const NFTMarketplaceProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchNFTs();
+    if (currentAccount) {
+      fetchNFTs();
+    }
   }, []);
 
   //fetch my nft or list nfts
@@ -293,11 +304,21 @@ export const NFTMarketplaceProvider = ({ children }) => {
   const buyNFT = async (nft) => {
     try {
       const contract = await connectingWithSmartContract();
-      const price = ethers.utils.parseUnits(nft.price.toString(), ethers);
+
+      console.log("check 1111: ", contract);
+      console.log(
+        "check price logic: ",
+        ethers.utils.parseUnits(nft.price.toString())
+      );
+      // const price = ethers.utils.parseUnits(nft.price.toString(), "ethers");
+      const price = ethers.utils.parseUnits(nft.price.toString(), "ether");
+      console.log("check priceeeee: ", price);
 
       const transaction = await contract.createMarketSale(nft.tokenId, {
         value: price,
       });
+
+      console.log("check transaction: ", transaction);
 
       await transaction.wait();
       router.push("/author");
@@ -342,6 +363,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
 
         const transactionCount = await contract.getTransactionsCount();
         setTransactionCount(transactionCount.toNumber());
+        window.location.reload();
       }
     } catch (error) {
       console.log(error);
