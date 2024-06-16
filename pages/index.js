@@ -27,7 +27,7 @@ const Home = () => {
     checkIfWalletConnected();
   }, []);
 
-  const { fetchNFTs } = useContext(NFTMarketplaceContext);
+  const { fetchNFTs, currentAccount } = useContext(NFTMarketplaceContext);
   const [nfts, setNfts] = useState([]);
   const [nftsCopy, setNftsCopy] = useState([]);
 
@@ -35,11 +35,13 @@ const Home = () => {
   console.log(creators);
 
   useEffect(() => {
-    fetchNFTs().then((item) => {
-      setNfts(item?.reverse());
-      setNftsCopy(item);
-      console.log("check ???: ", nfts);
-    });
+    if (currentAccount) {
+      fetchNFTs().then((item) => {
+        setNfts(item.reverse());
+        setNftsCopy(item);
+        console.log("check ???: ", nfts);
+      });
+    }
   }, []);
 
   return (

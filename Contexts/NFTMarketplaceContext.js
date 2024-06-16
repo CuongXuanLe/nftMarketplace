@@ -202,44 +202,46 @@ export const NFTMarketplaceProvider = ({ children }) => {
   //fetch nft function
   const fetchNFTs = async () => {
     try {
-      // const provider = new ethers.providers.JsonRpcProvider(
-      //   "https://polygon-amoy.g.alchemy.com/v2/FbVL2i2loSp-ZDdf5HWnur4UzvNzhhx8"
-      // );
+      if (currentAccount) {
+        // const provider = new ethers.providers.JsonRpcProvider(
+        //   "https://polygon-amoy.g.alchemy.com/v2/FbVL2i2loSp-ZDdf5HWnur4UzvNzhhx8"
+        // );
 
-      const web3Modal = new Web3Modal();
-      const connection = await web3Modal.connect();
-      const provider = new ethers.providers.Web3Provider(connection);
+        const web3Modal = new Web3Modal();
+        const connection = await web3Modal.connect();
+        const provider = new ethers.providers.Web3Provider(connection);
 
-      const contract = fetchContract(provider);
-      const data = await contract.fetchMarketItems();
-      const items = await Promise.all(
-        data.map(
-          async ({ tokenId, seller, owner, price: unformattedPrice }) => {
-            const tokenURI = await contract.tokenURI(tokenId);
+        const contract = fetchContract(provider);
+        const data = await contract.fetchMarketItems();
+        const items = await Promise.all(
+          data.map(
+            async ({ tokenId, seller, owner, price: unformattedPrice }) => {
+              const tokenURI = await contract.tokenURI(tokenId);
 
-            const {
-              data: { image, name, description },
-            } = await axios.get(tokenURI);
+              const {
+                data: { image, name, description },
+              } = await axios.get(tokenURI);
 
-            const price = ethers.utils.formatUnits(
-              unformattedPrice.toString(),
-              "ether"
-            );
+              const price = ethers.utils.formatUnits(
+                unformattedPrice.toString(),
+                "ether"
+              );
 
-            return {
-              price,
-              tokenId: tokenId.toNumber(),
-              seller,
-              owner,
-              image,
-              name,
-              description,
-              tokenURI,
-            };
-          }
-        )
-      );
-      return items;
+              return {
+                price,
+                tokenId: tokenId.toNumber(),
+                seller,
+                owner,
+                image,
+                name,
+                description,
+                tokenURI,
+              };
+            }
+          )
+        );
+        return items;
+      }
     } catch (error) {
       setError("Error while fetching NFTs");
       setOpenError(true);
@@ -255,41 +257,43 @@ export const NFTMarketplaceProvider = ({ children }) => {
   //fetch my nft or list nfts
   const fetchMyNFTsOrListedNFTs = async (type) => {
     try {
-      const contract = await connectingWithSmartContract();
+      if (currentAccount) {
+        const contract = await connectingWithSmartContract();
 
-      const data =
-        type == "fetchItemsListed"
-          ? await contract.fetchItemsListed()
-          : await contract.fetchMyNFTs();
+        const data =
+          type == "fetchItemsListed"
+            ? await contract.fetchItemsListed()
+            : await contract.fetchMyNFTs();
 
-      const items = await Promise.all(
-        data.map(
-          async ({ tokenId, seller, owner, price: unformattedPrice }) => {
-            const tokenURI = await contract.tokenURI(tokenId);
+        const items = await Promise.all(
+          data.map(
+            async ({ tokenId, seller, owner, price: unformattedPrice }) => {
+              const tokenURI = await contract.tokenURI(tokenId);
 
-            const {
-              data: { image, name, description },
-            } = await axios.get(tokenURI);
+              const {
+                data: { image, name, description },
+              } = await axios.get(tokenURI);
 
-            const price = ethers.utils.formatUnits(
-              unformattedPrice.toString(),
-              "ether"
-            );
+              const price = ethers.utils.formatUnits(
+                unformattedPrice.toString(),
+                "ether"
+              );
 
-            return {
-              price,
-              tokenId: tokenId.toNumber(),
-              seller,
-              owner,
-              image,
-              name,
-              description,
-              tokenURI,
-            };
-          }
-        )
-      );
-      return items;
+              return {
+                price,
+                tokenId: tokenId.toNumber(),
+                seller,
+                owner,
+                image,
+                name,
+                description,
+                tokenURI,
+              };
+            }
+          )
+        );
+        return items;
+      }
     } catch (error) {
       setError("Error while fetching listed NFTs");
       setOpenError(true);
