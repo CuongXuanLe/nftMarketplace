@@ -1,5 +1,5 @@
 {
-  "name": "nfttemplatevideo",
+  "name": "nft-marketPlace-Project",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,11 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@openzeppelin/contracts": "^4.7.3",
+    "ether": "^0.0.9",
+    "axios": "^1.7.2",
     "framer-motion": "^11.1.7",
+    "ipfs-http-client": "^58.0.0",
     "next": "12.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-dropzone": "^14.2.3",
-    "react-icons": "^4.12.0"
+    "react-icons": "^4.12.0",
+    "web3modal": "^1.9.9"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.0",
+    "hardhat": "^2.11.2"
   }
 }

@@ -17,7 +17,7 @@ import Style from "./AuthorProfileCard.module.css";
 import images from "../../img";
 import { Button } from "../../components/componentsindex.js";
 
-const AuthorProfileCard = () => {
+const AuthorProfileCard = ({currentAccount}) => {
   const [share, setShare] = useState(false);
   const [report, setReport] = useState(false);
 
@@ -63,14 +63,14 @@ const AuthorProfileCard = () => {
           <h2>
             Dony Herrera{""}{" "}
             <span>
-              <MdVerified marginLeft="5" color={"rgb(32, 129, 226)"} />
+              <MdVerified marginleft="5" color={"rgb(32, 129, 226)"} />
             </span>{" "}
           </h2>
 
           <div className={Style.AuthorProfileCard_box_info_address}>
             <input
               type="text"
-              value="0x829BD824B03D092293333..A830"
+              value={currentAccount}
               id="myInput"
             />
             <FiCopy

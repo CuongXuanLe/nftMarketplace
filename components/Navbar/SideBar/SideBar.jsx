@@ -14,10 +14,12 @@ import {
 import Style from "./SideBar.module.css";
 import images from "../../../img";
 import Button from "../../Button/Button";
+import { useRouter } from "next/router";
 
-const SideBar = ({ setOpenSideMenu }) => {
+const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
   const [openDiscover, setOpenDiscover] = useState(false);
   const [openHelp, setOpenHelp] = useState(false);
+  const router = useRouter();
 
   const discover = [
     {
@@ -135,7 +137,9 @@ const SideBar = ({ setOpenSideMenu }) => {
             <div className={Style.sideBar_discover}>
               {discover.map((el, i) => (
                 <p key={i + 1}>
-                  <Link href={{ pathname: `${el.link}` }}>{el.name}</Link>
+                  <Link href={{ pathname: `${el.link}` }} key={i + 1}>
+                    {el.name}
+                  </Link>
                 </p>
               ))}
             </div>
@@ -155,7 +159,9 @@ const SideBar = ({ setOpenSideMenu }) => {
             <div className={Style.sideBar_discover}>
               {helpCenter.map((el, i) => (
                 <p key={i + 1}>
-                  <Link href={{ pathname: `${el.link}` }}>{el.name}</Link>
+                  <Link href={{ pathname: `${el.link}` }} key={i + 1}>
+                    {el.name}
+                  </Link>
                 </p>
               ))}
             </div>
@@ -164,7 +170,21 @@ const SideBar = ({ setOpenSideMenu }) => {
       </div>
 
       <div className={Style.sideBar_button}>
-        <Button btnName="Create" handleClick={() => {}} />
+        {currentAccount == "" ? (
+          <Button
+            btnName="Connect"
+            handleClick={() => {
+              connectWallet();
+              console.log("click");
+            }}
+          />
+        ) : (
+          <Button
+            btnName="Create"
+            handleClick={() => router.push("/uploadNFT")}
+          />
+        )}
+        {/* <Button btnName="Create" handleClick={() => {}} /> */}
         <Button btnName="Connect Wallet" handleClick={() => {}} />
       </div>
     </div>

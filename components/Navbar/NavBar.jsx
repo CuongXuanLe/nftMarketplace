@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { MdNotifications } from "react-icons/md";
@@ -6,8 +6,10 @@ import { BsSearch } from "react-icons/bs";
 import { CgMenuLeft, CgMenuRight } from "react-icons/cg";
 import Style from "./NavBar.module.css";
 import { Discover, HelpCenter, Notification, Profile, SideBar } from "./index";
-import { Button } from "../componentsindex";
+import { Button, Error } from "../componentsindex";
 import images from "../../img";
+import { NFTMarketplaceContext } from "../../Contexts/NFTMarketplaceContext";
+import { useRouter } from "next/router";
 
 const NavBar = () => {
   const [discover, setDiscover] = useState(false);
@@ -17,6 +19,7 @@ const NavBar = () => {
   const [openSideMenu, setOpenSideMenu] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
 
+  const router = useRouter();
   const navRef = useRef(null);
 
   const toggleMenu = (menuName) => {
@@ -92,6 +95,11 @@ const NavBar = () => {
     };
   }, []);
 
+  //connect smart contract
+  const { currentAccount, connectWallet, openError } = useContext(
+    NFTMarketplaceContext
+  );
+
   return (
     <div
       className={`${Style.navbar} ${isSticky ? Style.sticky : ""}`}
@@ -148,8 +156,22 @@ const NavBar = () => {
             {notification && <Notification />}
           </div>
 
+          {/* create button */}
           <div className={Style.navbar_container_right_button}>
-            <Button btnName="Create" handleClick={() => {}} />
+            {currentAccount == "" ? (
+              <Button
+                btnName="Connect"
+                handleClick={() => {
+                  connectWallet();
+                  console.log("click");
+                }}
+              />
+            ) : (
+              <Button
+                btnName="Create"
+                handleClick={() => router.push("/uploadNFT")}
+              />
+            )}
           </div>
 
           <div className={Style.navbar_container_right_profile_box}>
@@ -163,7 +185,7 @@ const NavBar = () => {
                 className={Style.navbar_container_right_profile}
               />
 
-              {profile && <Profile />}
+              {profile && <Profile currentAccount={currentAccount} />}
             </div>
           </div>
 
@@ -178,9 +200,15 @@ const NavBar = () => {
 
       {openSideMenu && (
         <div className={Style.sideBar}>
-          <SideBar setOpenSideMenu={setOpenSideMenu} />
+          <SideBar
+            setOpenSideMenu={setOpenSideMenu}
+            currentAccount={currentAccount}
+            connectWallet={connectWallet}
+          />
         </div>
       )}
+
+      {openError && <Error />}
     </div>
   );
 };

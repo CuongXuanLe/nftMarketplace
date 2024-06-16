@@ -64,8 +64,13 @@ import item8 from "./113.webp";
 import item9 from "./112.webp";
 import item10 from "./115.png";
 import item11 from "./1111.png";
+import item12 from "./135.jpg";
+import item0 from "./0.webp";
+import loader from "./Loader.gif";
 
 export default {
+  item0,
+  item12,
   item1,
   item2,
   item3,
@@ -132,4 +137,5 @@ export default {
   vimeo,
   youtube,
   zgcmq,
+  loader,
 };
