@@ -14,9 +14,7 @@ require("@nomicfoundation/hardhat-toolbox");
 module.exports = {
   solidity: "0.8.17",
   networks: {
-    hardhat: {
-      chainId: 31337,
-    },
+    hardhat: {},
     polygon_amoy: {
       url: "https://polygon-amoy.g.alchemy.com/v2/FbVL2i2loSp-ZDdf5HWnur4UzvNzhhx8",
       accounts: [
