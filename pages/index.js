@@ -18,7 +18,7 @@ import { getTopCreator } from "../TopCreators/TopCreators";
 import { NFTMarketplaceContext } from "../Contexts/NFTMarketplaceContext";
 
 const Home = () => {
-  const { checkIfWalletConnected, checkContract } = useContext(
+  const { checkIfWalletConnected, currentAccount, fetchNFTs } = useContext(
     NFTMarketplaceContext
   );
 
@@ -27,7 +27,6 @@ const Home = () => {
     checkIfWalletConnected();
   }, []);
 
-  const { fetchNFTs, currentAccount } = useContext(NFTMarketplaceContext);
   const [nfts, setNfts] = useState([]);
   const [nftsCopy, setNftsCopy] = useState([]);
 

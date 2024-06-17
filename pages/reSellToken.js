@@ -29,6 +29,7 @@ const reSellToken = () => {
 
   const resell = async () => {
     try {
+      console.log(tokenURI, price, id);
       await createSale(tokenURI, price, true, id);
       router.push("/author");
     } catch (error) {
@@ -43,7 +44,7 @@ const reSellToken = () => {
           <label htmlFor="name">Price</label>
           <input
             type="number"
-            min={0.00005}
+            min={1}
             placeholder="reSell price"
             className={formStyle.Form_box_input_userName}
             onChange={(e) => setPrice(e.target.value)}
