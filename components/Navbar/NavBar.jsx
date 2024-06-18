@@ -101,8 +101,9 @@ const NavBar = () => {
     NFTMarketplaceContext
   );
 
-  const user = useSelector((state) => state.auth.login.currentUser?.data.user);
-  console.log("check user: ", user);
+  const user = useSelector((state) => state.auth.login.currentUser);
+
+  console.log('check user: ', user)
 
   return (
     <div

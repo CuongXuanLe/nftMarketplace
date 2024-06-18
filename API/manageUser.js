@@ -1,9 +1,15 @@
 import { manageService } from "./manageService";
 import {
+  registerStart,
   registerSuccess,
+  registerFailed,
+  loginStart,
   loginSuccess,
+  loginFailed,
+  logOutStart,
   logOutSuccess,
   logOutFailed,
+  updateSuccess,
 } from "../Redux/authSlice";
 
 const registerAction = (formData) => {
@@ -43,7 +49,6 @@ const logoutAction = () => {
       const res = await manageService.logout();
       const userData = null;
       if (res.status === 200) {
-        console.log("hehe");
         dispatch({ type: "auth/logOutSuccess", userData });
         console.log("check");
       }
@@ -53,4 +58,19 @@ const logoutAction = () => {
   };
 };
 
-export { registerAction, loginAction, logoutAction };
+const updateAction = (formData, token) => {
+  return async (dispatch) => {
+    try {
+      const res = await manageService.updateProfile(formData, token);
+      console.log(res)
+      if (res.status === 200) {
+        dispatch(updateSuccess({formData: res.data.data.user}));
+      }
+      location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+export { registerAction, loginAction, logoutAction, updateAction };

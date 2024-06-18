@@ -1,38 +1,57 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HiOutlineMail } from "react-icons/hi";
 import { MdOutlineHttp, MdOutlineContentCopy } from "react-icons/md";
 import Style from "./Form.module.css";
 import { Button } from "../../components/componentsindex.js";
+import {updateAction} from "../../API/manageUser.js"
+import { useDispatch } from "react-redux";
 
-const Form = ({ user, photo }) => {
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [description, setDescription] = useState();
-  const [website, setWebsite] = useState();
-  const [walletAddress, setWalletAddress] = useState();
+const Form = ({ user, photo, token }) => {
+  const [name, setName] = useState(user?.name);
+  const [email, setEmail] = useState(user?.email);
+  const [description, setDescription] = useState(user?.description || "");
+  const [website, setWebsite] = useState(user?.website || "");
+  const [walletAddress, setWalletAddress] = useState(user?.walletAddress || "");
+  const [image, setImage] = useState(user?.photo || photo)
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setName(user?.name);
+    setEmail(user?.email);
+    setDescription(user?.description || "");
+    setWebsite(user?.website || "");
+    setWalletAddress(user?.walletAddress || "");
+    setImage(photo || user?.photo)
+  }, [user, photo]);
+
+  console.log('photo: ', photo)
+  console.log('img: ', image)
 
   const handleUpdateProfile = () => {
+    
     const formData = {
       name: name,
       email: email,
       description: description,
       website: website,
-      photo: photo,
+      photo: image,
       walletAddress: walletAddress,
     };
 
-    console.log("formData: ", formData);
+    console.log(formData, '-', token)
+    const action = updateAction(formData, token);
+    dispatch(action);
   };
 
   return (
     <div className={Style.Form}>
       <div className={Style.Form_box}>
-        <form>
+        {/* <form> */}
           <div className={Style.Form_box_input}>
             <label htmlFor="name">Username</label>
             <input
               type="text"
-              placeholder={user.name}
+              placeholder={user?.name}
               className={Style.Form_box_input_userName}
               onChange={(e) => setName(e.target.value)}
             />
@@ -46,7 +65,7 @@ const Form = ({ user, photo }) => {
               </div>
               <input
                 type="text"
-                placeholder={user.email}
+                placeholder={user?.email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
@@ -59,7 +78,7 @@ const Form = ({ user, photo }) => {
               id=""
               cols="30"
               rows="6"
-              placeholder="something about yourself in few words ..."
+              placeholder={user?.description}
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>
           </div>
@@ -73,7 +92,7 @@ const Form = ({ user, photo }) => {
 
               <input
                 type="text"
-                placeholder="website"
+                placeholder={user?.website}
                 onChange={(e) => setWebsite(e.target.value)}
               />
             </div>
@@ -103,7 +122,7 @@ const Form = ({ user, photo }) => {
               classStyle={Style.button}
             />
           </div>
-        </form>
+        {/* </form> */}
       </div>
     </div>
   );

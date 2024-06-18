@@ -10,9 +10,13 @@ export class ManageService extends BaseServices {
   login = (formData) => {
     return this.post("login", formData);
   };
+  updateProfile = (formData, token) => {
+    return this.patch("updateMe", formData, token);
+  }
   logout = () => {
     return this.post("logout");
   };
+  
 }
 
 export const manageService = new ManageService();

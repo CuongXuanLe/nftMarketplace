@@ -7,7 +7,8 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 
 const account = () => {
-  const user = useSelector((state) => state.auth.login.currentUser?.data.user);
+  const user = useSelector((state) => state.auth.login.currentUser);
+  const token =  useSelector((state) => state.auth.login.token);
   const [fileUrl, setFileUrl] = useState(null);
 
   const onDrop = useCallback(async (acceptedFiles) => {
@@ -71,7 +72,7 @@ const account = () => {
           <p className={Style.account_box_img_para}>Change Image</p>
         </div>
         <div className={Style.account_box_from}>
-          <Form user={user} photo={fileUrl} />
+          <Form user={user} photo={fileUrl} token={token}/>
         </div>
       </div>
     </div>

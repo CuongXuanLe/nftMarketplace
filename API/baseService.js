@@ -1,37 +1,35 @@
 import axios from "axios";
-
 const DOMAIN = "http://127.0.0.1:5000/api/v1/users";
-const TOKEN = "token";
 
 export class BaseServices {
-  patch = (url, model) => {
+  patch = (url, model, token) => {
     return axios({
       url: `${DOMAIN}/${url}`,
       method: "PATCH",
       data: model,
-      headers: { Authorization: "Bearer " + localStorage.getItem(TOKEN) },
+      headers: { Authorization: "Bearer " + token },
     });
   };
-  post = (url, model) => {
+  post = (url, model, token) => {
     return axios({
       url: `${DOMAIN}/${url}`,
       method: "POST",
       data: model,
-      headers: { Authorization: "Bearer " + localStorage.getItem(TOKEN) },
+      headers: { Authorization: "Bearer " + localStorage.getItem(token) },
     });
   };
-  get = (url) => {
+  get = (url, token) => {
     return axios({
       url: `${DOMAIN}/${url}`,
       method: "GET",
-      headers: { Authorization: "Bearer " + localStorage.getItem(TOKEN) },
+      headers: { Authorization: "Bearer " + localStorage.getItem(token) },
     });
   };
-  delete = (url) => {
+  delete = (url, token) => {
     return axios({
       url: `${DOMAIN}/${url}`,
       method: "DELETE",
-      headers: { Authorization: "Bearer " + localStorage.getItem(TOKEN) },
+      headers: { Authorization: "Bearer " + localStorage.getItem(token) },
     });
   };
 }
