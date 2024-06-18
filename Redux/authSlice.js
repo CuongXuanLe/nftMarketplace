@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// const initialState = {
+ 
+// }
 const authSlice = createSlice({
   name: "auth",
   initialState: {
@@ -13,6 +16,7 @@ const authSlice = createSlice({
       error: false,
       success: false,
     },
+    userRegister: {}
   },
   reducers: {
     loginStart: (state) => {
@@ -30,7 +34,11 @@ const authSlice = createSlice({
     registerStart: (state) => {
       state.register.isFetching = true;
     },
-    registerSuccess: (state) => {
+    registerSuccess: (state, action) => {
+      console.log('slice: ', action);
+      
+      const {formRegis} = action;
+      state.userRegister = formRegis;
       state.register.isFetching = false;
       state.register.error = false;
       state.register.success = true;

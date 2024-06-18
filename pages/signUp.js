@@ -7,7 +7,7 @@ const signUp = () => {
     <div className={Style.login}>
       <div className={Style.login_box}>
         <h1>SignUp</h1>
-        <LoginAndSignUp />
+        <LoginAndSignUp pageName={"SignUp"}/>
       </div>
     </div>
   );

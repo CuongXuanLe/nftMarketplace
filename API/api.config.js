@@ -19,10 +19,11 @@ import {
   getUsersSuccess,
 } from "../Redux/userSlice";
 
-const register = async (user, dispatch, navigate) => {
+const registerUser = async (user, dispatch, navigate) => {
   dispatch(registerStart());
   try {
-    await axiosInstance.post("/users/signup", user);
+    const res = await axiosInstance.post("/users/signup", user);
+    console.log('check res regis: ', res)
     dispatch(registerSuccess());
     navigate("/login");
   } catch (error) {
@@ -36,7 +37,7 @@ const login = async (user, dispatch, navigate) => {
     const response = await axiosInstance.post("/users/login", user);
     dispatch(loginSuccess(res.data));
     console.log("User logged in successfully:", response.data);
-    // navigate("/");
+    navigate("/");
   } catch (error) {
     dispatch(loginFailed());
   }
@@ -99,7 +100,7 @@ const updatePassword = async (passwordCurrent, password, passwordConfirm) => {
   }
 };
 
-export const logOut = async (dispatch, id, navigate, accessToken, axiosJWT) => {
+const logOut = async (dispatch, id, navigate, accessToken, axiosJWT) => {
   dispatch(logOutStart());
   try {
     await axiosJWT.post("/v1/auth/logout", id, {
@@ -113,7 +114,7 @@ export const logOut = async (dispatch, id, navigate, accessToken, axiosJWT) => {
 };
 
 export {
-  register,
+  registerUser,
   login,
   forgotPassword,
   resetPassword,

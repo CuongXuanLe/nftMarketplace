@@ -24,7 +24,7 @@ const Home = () => {
 
   useEffect(() => {
     // checkContract();
-    checkIfWalletConnected();
+    // checkIfWalletConnected();
   }, []);
 
   const [nfts, setNfts] = useState([]);
