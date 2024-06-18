@@ -24,14 +24,13 @@ const Home = () => {
 
   useEffect(() => {
     // checkContract();
-    // checkIfWalletConnected();
+    checkIfWalletConnected();
   }, []);
 
   const [nfts, setNfts] = useState([]);
   const [nftsCopy, setNftsCopy] = useState([]);
 
   const creators = getTopCreator(nfts);
-  console.log(creators);
 
   useEffect(() => {
     if (currentAccount) {

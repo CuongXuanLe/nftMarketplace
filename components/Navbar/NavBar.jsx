@@ -10,6 +10,7 @@ import { Button, Error } from "../componentsindex";
 import images from "../../img";
 import { NFTMarketplaceContext } from "../../Contexts/NFTMarketplaceContext";
 import { useRouter } from "next/router";
+import {useDispatch, useSelector} from "react-redux";
 
 const NavBar = () => {
   const [discover, setDiscover] = useState(false);
@@ -100,6 +101,9 @@ const NavBar = () => {
     NFTMarketplaceContext
   );
 
+  const user = useSelector((state)=> state.auth.login.currentUser.data.user);
+  console.log('check user: ', user)
+
   return (
     <div
       className={`${Style.navbar} ${isSticky ? Style.sticky : ""}`}
@@ -173,21 +177,27 @@ const NavBar = () => {
               />
             )}
           </div>
+          {user ? (
+            <div className={Style.navbar_container_right_profile_box}>
+              <div className={Style.navbar_container_right_profile}>
+                <Image
+                  src={images.user1}
+                  alt="Profile"
+                  width={40}
+                  height={40}
+                  onClick={() => openProfile()}
+                  className={Style.navbar_container_right_profile}
+                />
 
-          <div className={Style.navbar_container_right_profile_box}>
-            <div className={Style.navbar_container_right_profile}>
-              <Image
-                src={images.user1}
-                alt="Profile"
-                width={40}
-                height={40}
-                onClick={() => openProfile()}
-                className={Style.navbar_container_right_profile}
-              />
-
-              {profile && <Profile currentAccount={currentAccount} />}
+                {profile && <Profile currentAccount={currentAccount} />}
+              </div>
             </div>
-          </div>
+            ) : (
+              <Button btnName="Login"
+                handleClick={() => router.push("/login")}/>
+            )
+          }
+          
 
           <div className={Style.navbar_container_right_menuBtn}>
             <CgMenuRight

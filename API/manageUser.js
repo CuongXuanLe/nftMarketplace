@@ -1,11 +1,10 @@
 import { manageService } from "./manageService"
-import { registerSuccess } from "../Redux/authSlice"
+import { registerSuccess, loginSuccess } from "../Redux/authSlice"
 
-export const registerAction =  (formData) => {
+const registerAction =  (formData) => {
     return async(dispatch) => {
         try {
             const res = await manageService.register(formData)
-            console.log('res: ', res.data, '-', res.status)
             if(res.status === 201) {
                 dispatch({ type: 'auth/registerSuccess', formRegis: res.data.data.user });
             }
@@ -13,4 +12,23 @@ export const registerAction =  (formData) => {
             console.log('err: ', err)
         }
     }
+}
+
+const loginAction =  (formData) => {
+    return async(dispatch) => {
+        try {
+            const res = await manageService.login(formData)
+            if(res.status === 200) {
+                dispatch({ type: 'auth/loginSuccess', dataUser: res.data });
+            }
+        } catch (err) {
+            console.log('err: ', err)
+        }
+    }
+}
+
+
+export {
+    registerAction,
+    loginAction,
 }

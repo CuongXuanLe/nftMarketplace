@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import Style from "./loginAndSignUp.module.css";
 import { Button } from "../components/componentsindex.js";
-import { registerUser } from "../API/api.config.js"
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { registerAction } from "../API/manageUser.js";
+import { registerAction, loginAction } from "../API/manageUser.js";
 
 const loginAndSignUp = ({ pageName }) => {
   const [email,setEmail] = useState("");
@@ -13,23 +12,38 @@ const loginAndSignUp = ({ pageName }) => {
   const [confirmPassword,setConfirmPassword] = useState("")
 
   const dispatch = useDispatch();
-  const router  = useRouter();
-  // const { userRegister } = useSelector((state) => state.authSlice);
-  const handleLogin = () => {
-    console.log("login");
+  const router = useRouter();
+  // const user = useSelector((state) => state.auth.login.currentUser);
+
+  const handleLogin = () => { 
+    try {
+      const user = {
+        email: email,
+        password: password,
+      }
+      const action = loginAction(user);
+      dispatch(action)
+      router.push('/')
+    } catch (error) {
+      console.log('login err: ', error)
+    }
   };
 
   const handleSignUp = () => {
-    const newUser = {
-      name:username,
-      email: email,
-      password:password,
-      passwordConfirm: confirmPassword,
-    };
-    // registerUser(newUser, dispatch, router);
-
-    const action = registerAction(newUser);
-    dispatch(action);
+    try {
+      const newUser = {
+        name:username,
+        email: email,
+        password:password,
+        passwordConfirm: confirmPassword,
+      };
+      const action = registerAction(newUser);
+      dispatch(action);
+      router.push('/login')
+    } catch (error) {
+      console.log('res err: ', error)
+    }
+    
   }
 
   return (
@@ -82,7 +96,7 @@ const loginAndSignUp = ({ pageName }) => {
               <div className={Style.user_box_input}>
                 <div className={Style.user_box_input_box}>
                   <label htmlFor="email">Email address</label>
-                  <input type="email" placeholder="example@emample.com" />
+                  <input type="email" placeholder="example@emample.com" onChange={(e)=> setEmail(e.target.value)}/>
                 </div>
 
                 <div className={Style.user_box_input_box}>
@@ -95,13 +109,13 @@ const loginAndSignUp = ({ pageName }) => {
                       <a href="#">Forget password ?</a>
                     </p>
                   </label>
-                  <input type="password" placeholder="Enter your password" />
+                  <input type="password" placeholder="Enter your password" onChange={(e)=> setPassword(e.target.value)}/>
                 </div>
               </div>
               <Button
                 btnName="Continue"
                 classStyle={Style.button}
-                handleClick={handleLogin()}
+                handleClick={() => handleLogin()}
               />
             </>
           )

@@ -7,6 +7,9 @@ export class ManageService extends BaseServices {
     register = (formData) => {
         return this.post('signup', formData);
     }
+    login = (formData) => {
+        return this.post('login', formData);
+    }
 }
 
 export const manageService = new ManageService();
