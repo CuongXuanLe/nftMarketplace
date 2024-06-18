@@ -10,7 +10,7 @@ import { Button, Error } from "../componentsindex";
 import images from "../../img";
 import { NFTMarketplaceContext } from "../../Contexts/NFTMarketplaceContext";
 import { useRouter } from "next/router";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 
 const NavBar = () => {
   const [discover, setDiscover] = useState(false);
@@ -101,8 +101,8 @@ const NavBar = () => {
     NFTMarketplaceContext
   );
 
-  const user = useSelector((state)=> state.auth.login.currentUser.data.user);
-  console.log('check user: ', user)
+  const user = useSelector((state) => state.auth.login.currentUser?.data.user);
+  console.log("check user: ", user);
 
   return (
     <div
@@ -128,7 +128,7 @@ const NavBar = () => {
             </div>
             {discover && (
               <div className={Style.navbar_container_right_discover_box}>
-                <Discover />
+                <Discover user={user} />
               </div>
             )}
           </div>
@@ -139,7 +139,7 @@ const NavBar = () => {
             </div>
             {help && (
               <div className={Style.navbar_container_right_help_box}>
-                <HelpCenter />
+                <HelpCenter user={user} />
               </div>
             )}
           </div>
@@ -180,24 +180,24 @@ const NavBar = () => {
           {user ? (
             <div className={Style.navbar_container_right_profile_box}>
               <div className={Style.navbar_container_right_profile}>
-                <Image
-                  src={images.user1}
+                <img
+                  src={user ? user.photo : images.item11}
                   alt="Profile"
                   width={40}
                   height={40}
+                  objectFit="cover"
                   onClick={() => openProfile()}
                   className={Style.navbar_container_right_profile}
                 />
 
-                {profile && <Profile currentAccount={currentAccount} />}
+                {profile && (
+                  <Profile user={user} currentAccount={currentAccount} />
+                )}
               </div>
             </div>
-            ) : (
-              <Button btnName="Login"
-                handleClick={() => router.push("/login")}/>
-            )
-          }
-          
+          ) : (
+            <Button btnName="Login" handleClick={() => router.push("/login")} />
+          )}
 
           <div className={Style.navbar_container_right_menuBtn}>
             <CgMenuRight

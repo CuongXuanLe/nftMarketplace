@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Style from "./HelpCenter.module.css";
 
-const HelpCenter = () => {
+const HelpCenter = ({ user }) => {
   const helpCenter = [
     {
       name: "About",
@@ -25,9 +25,26 @@ const HelpCenter = () => {
       link: "subscription",
     },
   ];
+
+  const helpCenterUser = [
+    {
+      name: "About",
+      link: "aboutus",
+    },
+    {
+      name: "Contact Us",
+      link: "contactus",
+    },
+    {
+      name: "Subscription",
+      link: "subscription",
+    },
+  ];
+
+  const configRouteForUser = user ? helpCenterUser : helpCenter;
   return (
     <div className={Style.box}>
-      {helpCenter.map((el, i) => (
+      {configRouteForUser.map((el, i) => (
         <Link href={{ pathname: `${el.link}` }}>
           <div key={i + 1} className={Style.helpCenter}>
             {el.name}
