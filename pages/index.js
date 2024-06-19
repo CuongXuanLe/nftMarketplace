@@ -27,9 +27,7 @@ const Home = () => {
   // console.log("checkout: ", currentAccount);
 
   useEffect(() => {
-    if (user) {
-      checkIfWalletConnected();
-    }
+    checkIfWalletConnected();
   }, []);
 
   const [nfts, setNfts] = useState([]);
@@ -38,13 +36,11 @@ const Home = () => {
   const creators = getTopCreator(nfts);
 
   useEffect(() => {
-    if (currentAccount) {
-      fetchNFTs().then((item) => {
-        setNfts(item.reverse());
-        setNftsCopy(item);
-        console.log("check ???: ", nfts);
-      });
-    }
+    fetchNFTs().then((item) => {
+      console.log(item);
+      setNfts(item?.reverse());
+      setNftsCopy(item);
+    });
   }, []);
 
   return (

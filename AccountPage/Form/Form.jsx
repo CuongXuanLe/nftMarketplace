@@ -31,7 +31,7 @@ const Form = ({ user, photo, token }) => {
       description: description,
       website: website,
       photo: image,
-      walletAddress: walletAddress,
+      wallet: walletAddress,
     };
     const action = updateAction(formData, token);
     dispatch(action);

@@ -19,6 +19,10 @@ const Profile = ({ user, currentAccount }) => {
     router.push("/");
   };
 
+  const userAddress = user?.configWalletAddress
+    ? user.configWalletAddress.slice(0, 15)
+    : "null";
+
   return (
     <div className={Style.profile}>
       <div className={Style.profile_account}>
@@ -33,7 +37,7 @@ const Profile = ({ user, currentAccount }) => {
 
         <div className={Style.profile_account_info}>
           <p>{user.name}</p>
-          <small>{user.configWalletAddress.slice(0, 15)}...</small>
+          <small>{userAddress}...</small>
         </div>
       </div>
 

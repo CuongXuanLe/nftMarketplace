@@ -109,18 +109,18 @@ const NavBar = () => {
     NFTMarketplaceContext
   );
 
-  const user = useSelector((state) => state.auth.login.currentUser);
+  const user = useSelector((state) => state.auth.login?.currentUser);
   const token = useSelector((state) => state.auth.login.token);
 
   const updateAddressWalletForUser = () => {
     console.log(currentAccount);
-    if (!user.configWalletAddress) {
+    if (!user.configAddress) {
       const formData = {
-        configWalletAddress: currentAccount,
+        configAddress: currentAccount,
       };
       const action = updateAction(formData, token);
       dispatch(action);
-    } else if (currentAccount !== user.configWalletAddress) {
+    } else if (currentAccount !== user.configAddress) {
       setError("wrong address Wallet");
       setDisplayError(true);
       const action = logoutAction();
@@ -135,7 +135,8 @@ const NavBar = () => {
     }
   }, [currentAccount, user]);
 
-  // console.log('check user: ', user)
+  console.log("check user: ", user);
+  console.log("currentAccount: ", currentAccount);
 
   return (
     <div
@@ -194,7 +195,7 @@ const NavBar = () => {
           </div>
 
           <div className={Style.navbar_container_right_button}>
-            {currentAccount && user ? (
+            {user?.configAddress ? (
               <Button
                 btnName="Create"
                 handleClick={() => router.push("/uploadNFT")}
@@ -219,7 +220,7 @@ const NavBar = () => {
             <div className={Style.navbar_container_right_profile_box}>
               <div className={Style.navbar_container_right_profile}>
                 <img
-                  src={user ? user.photo : images.item11}
+                  src={user.photo ? user.photo : images.item11}
                   alt="Profile"
                   width={40}
                   height={40}

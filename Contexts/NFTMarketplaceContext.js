@@ -200,13 +200,13 @@ export const NFTMarketplaceProvider = ({ children }) => {
   const fetchNFTs = async () => {
     try {
       // if (currentAccount) {
-      // const provider = new ethers.providers.JsonRpcProvider(
-      //   "https://polygon-amoy.g.alchemy.com/v2/FbVL2i2loSp-ZDdf5HWnur4UzvNzhhx8"
-      // );
+      // const web3Modal = new Web3Modal();
+      // const connection = await web3Modal.connect();
+      // const provider = new ethers.providers.Web3Provider(connection);
 
-      const web3Modal = new Web3Modal();
-      const connection = await web3Modal.connect();
-      const provider = new ethers.providers.Web3Provider(connection);
+      const provider = new ethers.providers.JsonRpcProvider(
+        "https://polygon-amoy.g.alchemy.com/v2/FbVL2i2loSp-ZDdf5HWnur4UzvNzhhx8"
+      );
 
       const contract = fetchContract(provider);
       const data = await contract.fetchMarketItems();
@@ -246,51 +246,49 @@ export const NFTMarketplaceProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (currentAccount) {
-      fetchNFTs();
-    }
+    // if (currentAccount) {
+    fetchNFTs();
+    // }
   }, []);
 
   //fetch my nft or list nfts
   const fetchMyNFTsOrListedNFTs = async (type) => {
     try {
-      if (currentAccount) {
-        const contract = await connectingWithSmartContract();
+      const contract = await connectingWithSmartContract();
 
-        const data =
-          type == "fetchItemsListed"
-            ? await contract.fetchItemsListed()
-            : await contract.fetchMyNFTs();
+      const data =
+        type == "fetchItemsListed"
+          ? await contract.fetchItemsListed()
+          : await contract.fetchMyNFTs();
 
-        const items = await Promise.all(
-          data.map(
-            async ({ tokenId, seller, owner, price: unformattedPrice }) => {
-              const tokenURI = await contract.tokenURI(tokenId);
+      const items = await Promise.all(
+        data.map(
+          async ({ tokenId, seller, owner, price: unformattedPrice }) => {
+            const tokenURI = await contract.tokenURI(tokenId);
 
-              const {
-                data: { image, name, description },
-              } = await axios.get(tokenURI);
+            const {
+              data: { image, name, description },
+            } = await axios.get(tokenURI);
 
-              const price = ethers.utils.formatUnits(
-                unformattedPrice.toString(),
-                "ether"
-              );
+            const price = ethers.utils.formatUnits(
+              unformattedPrice.toString(),
+              "ether"
+            );
 
-              return {
-                price,
-                tokenId: tokenId.toNumber(),
-                seller,
-                owner,
-                image,
-                name,
-                description,
-                tokenURI,
-              };
-            }
-          )
-        );
-        return items;
-      }
+            return {
+              price,
+              tokenId: tokenId.toNumber(),
+              seller,
+              owner,
+              image,
+              name,
+              description,
+              tokenURI,
+            };
+          }
+        )
+      );
+      return items;
     } catch (error) {
       setError("Error while fetching listed NFTs");
       setOpenError(true);
@@ -298,7 +296,9 @@ export const NFTMarketplaceProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchMyNFTsOrListedNFTs();
+    if (currentAccount) {
+      fetchMyNFTsOrListedNFTs();
+    }
   }, []);
 
   //buy nfts functions
@@ -331,6 +331,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
       if (currentAccount) {
         const contract = await connectToTransferFunds(currentAccount);
         console.log("transfer ether: ", address, ether, message);
+
         const unFormattedPrice = ethers.utils.parseEther(ether);
         await ethereum.request({
           method: "eth_sendTransaction",
@@ -349,6 +350,8 @@ export const NFTMarketplaceProvider = ({ children }) => {
           unFormattedPrice,
           message
         );
+
+        console.log(transaction);
 
         setLoading(true);
         transaction.wait();
