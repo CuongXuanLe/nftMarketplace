@@ -97,9 +97,9 @@ export const NFTMarketplaceProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    checkIfWalletConnected();
-  }, []);
+  // useEffect(() => {
+  //   checkIfWalletConnected();
+  // }, []);
 
   //connect wallet function
   const connectWallet = async () => {
@@ -246,9 +246,9 @@ export const NFTMarketplaceProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    // if (currentAccount) {
-    fetchNFTs();
-    // }
+    if (currentAccount) {
+      fetchNFTs();
+    }
   }, []);
 
   //fetch my nft or list nfts

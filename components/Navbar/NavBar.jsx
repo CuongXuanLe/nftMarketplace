@@ -10,7 +10,8 @@ import { Button, Error } from "../componentsindex";
 import images from "../../img";
 import { NFTMarketplaceContext } from "../../Contexts/NFTMarketplaceContext";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { updateAction, logoutAction } from "../../API/manageUser.js";
 
 const NavBar = () => {
   const [discover, setDiscover] = useState(false);
@@ -19,7 +20,10 @@ const NavBar = () => {
   const [profile, setProfile] = useState(false);
   const [openSideMenu, setOpenSideMenu] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
+  const [error, setError] = useState(false);
+  const [displayError, setDisplayError] = useState(false);
 
+  const dispatch = useDispatch();
   const router = useRouter();
   const navRef = useRef(null);
 
@@ -96,14 +100,42 @@ const NavBar = () => {
     };
   }, []);
 
+  const goToLogin = () => {
+    router.push("/login");
+  };
+
   //connect smart contract
   const { currentAccount, connectWallet, openError } = useContext(
     NFTMarketplaceContext
   );
 
   const user = useSelector((state) => state.auth.login.currentUser);
+  const token = useSelector((state) => state.auth.login.token);
 
-  console.log('check user: ', user)
+  const updateAddressWalletForUser = () => {
+    console.log(currentAccount);
+    if (!user.configWalletAddress) {
+      const formData = {
+        configWalletAddress: currentAccount,
+      };
+      const action = updateAction(formData, token);
+      dispatch(action);
+    } else if (currentAccount !== user.configWalletAddress) {
+      setError("wrong address Wallet");
+      setDisplayError(true);
+      const action = logoutAction();
+      dispatch(action);
+      router.push("/");
+    }
+  };
+
+  useEffect(() => {
+    if (currentAccount && user) {
+      updateAddressWalletForUser();
+    }
+  }, [currentAccount, user]);
+
+  // console.log('check user: ', user)
 
   return (
     <div
@@ -161,20 +193,25 @@ const NavBar = () => {
             {notification && <Notification />}
           </div>
 
-          {/* create button */}
           <div className={Style.navbar_container_right_button}>
-            {currentAccount == "" ? (
+            {currentAccount && user ? (
+              <Button
+                btnName="Create"
+                handleClick={() => router.push("/uploadNFT")}
+              />
+            ) : currentAccount ? (
               <Button
                 btnName="Connect"
                 handleClick={() => {
-                  connectWallet();
-                  console.log("click");
+                  router.push("/signUp");
                 }}
               />
             ) : (
               <Button
-                btnName="Create"
-                handleClick={() => router.push("/uploadNFT")}
+                btnName="Connect"
+                handleClick={() => {
+                  connectWallet();
+                }}
               />
             )}
           </div>
@@ -197,7 +234,7 @@ const NavBar = () => {
               </div>
             </div>
           ) : (
-            <Button btnName="Login" handleClick={() => router.push("/login")} />
+            <Button btnName="Login" handleClick={() => goToLogin()} />
           )}
 
           <div className={Style.navbar_container_right_menuBtn}>
@@ -219,7 +256,10 @@ const NavBar = () => {
         </div>
       )}
 
-      {openError && <Error />}
+      {openError ||
+        (displayError && (
+          <Error message={error} setDisplayError={setDisplayError} />
+        ))}
     </div>
   );
 };

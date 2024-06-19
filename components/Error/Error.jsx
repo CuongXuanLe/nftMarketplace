@@ -3,21 +3,25 @@ import Style from "./Error.module.css";
 import images from "../../img";
 import { NFTMarketplaceContext } from "../../Contexts/NFTMarketplaceContext";
 
-const Error = () => {
+const Error = ({ message, setDisplayError }) => {
   const { error, setOpenError } = useContext(NFTMarketplaceContext);
+  const errorMessage = message ? message : error;
   return (
-    <div className={Style.Error} onClick={() => setOpenError(false)}>
+    <div
+      className={Style.Error}
+      onClick={() => (message ? setDisplayError(false) : setOpenError(false))}
+    >
       <div className={Style.Error_box}>
         <div className={Style.Error_box_info}>
-          <image
+          <img
             alt="error"
-            src={images.item0}
+            src={images.errorImg}
             width={200}
             height={200}
             className={Style.Error_box_info_img}
             objectFit="cover"
           />
-          <p>{error}</p>
+          <p>{errorMessage}</p>
         </div>
       </div>
     </div>

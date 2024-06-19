@@ -67,6 +67,7 @@ import item11 from "./1111.png";
 import item12 from "./135.jpg";
 import item0 from "./0.webp";
 import loader from "./Loader.gif";
+import errorImg from "./qwe.jpg";
 
 export default {
   item0,
@@ -138,4 +139,5 @@ export default {
   youtube,
   zgcmq,
   loader,
+  errorImg,
 };

@@ -16,15 +16,20 @@ import {
 } from "../components/componentsindex";
 import { getTopCreator } from "../TopCreators/TopCreators";
 import { NFTMarketplaceContext } from "../Contexts/NFTMarketplaceContext";
+import { useSelector } from "react-redux";
 
 const Home = () => {
   const { checkIfWalletConnected, currentAccount, fetchNFTs } = useContext(
     NFTMarketplaceContext
   );
 
+  const user = useSelector((state) => state.auth.login.currentUser);
+  // console.log("checkout: ", currentAccount);
+
   useEffect(() => {
-    // checkContract();
-    checkIfWalletConnected();
+    if (user) {
+      checkIfWalletConnected();
+    }
   }, []);
 
   const [nfts, setNfts] = useState([]);

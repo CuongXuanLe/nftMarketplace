@@ -50,7 +50,6 @@ const logoutAction = () => {
       const userData = null;
       if (res.status === 200) {
         dispatch({ type: "auth/logOutSuccess", userData });
-        console.log("check");
       }
     } catch (err) {
       console.log(err);
@@ -62,15 +61,15 @@ const updateAction = (formData, token) => {
   return async (dispatch) => {
     try {
       const res = await manageService.updateProfile(formData, token);
-      console.log(res)
+      console.log(res);
       if (res.status === 200) {
-        dispatch(updateSuccess({formData: res.data.data.user}));
+        dispatch(updateSuccess({ formData: res.data.data.user }));
       }
       location.reload();
     } catch (error) {
-      console.log(error);
+      console.log("check: ", error);
     }
-  }
-}
+  };
+};
 
 export { registerAction, loginAction, logoutAction, updateAction };

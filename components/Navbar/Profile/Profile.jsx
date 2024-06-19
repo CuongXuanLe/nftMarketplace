@@ -33,7 +33,7 @@ const Profile = ({ user, currentAccount }) => {
 
         <div className={Style.profile_account_info}>
           <p>{user.name}</p>
-          <small>{currentAccount.slice(0, 15)}...</small>
+          <small>{user.configWalletAddress.slice(0, 15)}...</small>
         </div>
       </div>
 
