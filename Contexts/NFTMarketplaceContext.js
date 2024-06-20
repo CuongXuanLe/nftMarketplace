@@ -199,11 +199,6 @@ export const NFTMarketplaceProvider = ({ children }) => {
   //fetch nft function
   const fetchNFTs = async () => {
     try {
-      // if (currentAccount) {
-      // const web3Modal = new Web3Modal();
-      // const connection = await web3Modal.connect();
-      // const provider = new ethers.providers.Web3Provider(connection);
-
       const provider = new ethers.providers.JsonRpcProvider(
         "https://polygon-amoy.g.alchemy.com/v2/FbVL2i2loSp-ZDdf5HWnur4UzvNzhhx8"
       );
@@ -238,18 +233,11 @@ export const NFTMarketplaceProvider = ({ children }) => {
         )
       );
       return items;
-      // }
     } catch (error) {
       setError("Error while fetching NFTs");
       setOpenError(true);
     }
   };
-
-  useEffect(() => {
-    // if (currentAccount) {
-    fetchNFTs();
-    // }
-  }, []);
 
   //fetch my nft or list nfts
   const fetchMyNFTsOrListedNFTs = async (type) => {

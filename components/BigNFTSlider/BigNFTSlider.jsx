@@ -1,104 +1,85 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { AiFillFire, AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { AiFillFire } from "react-icons/ai";
 import { MdVerified, MdTimer } from "react-icons/md";
 import { TbArrowBigLeftLines, TbArrowBigRightLine } from "react-icons/tb";
 import Style from "./BigNFTSlider.module.css";
-import images from "../../img";
 import Button from "../Button/Button";
 
-const BigNFTSlider = () => {
-  const [idNumber, setIdNumber] = useState(0);
+const getRandomTime = () => {
+  const days = Math.floor(Math.random() * 30);
+  const hours = Math.floor(Math.random() * 24);
+  const minutes = Math.floor(Math.random() * 60);
+  const seconds = Math.floor(Math.random() * 60);
+  return { days, hours, minutes, seconds };
+};
 
-  const sliderData = [
-    {
-      title: "Hello NFT",
-      id: 1,
-      name: "Daulat Hussain",
-      collection: "GYm",
-      price: "00664 ETH",
-      like: 243,
-      image: images.user1,
-      nftImage: images.nft_image_1,
-      time: {
-        days: 21,
-        hours: 40,
-        minutes: 81,
-        seconds: 15,
-      },
-    },
-    {
-      title: "Buddy NFT",
-      id: 2,
-      name: "Shoaib Hussain",
-      collection: "Home",
-      price: "0000004 ETH",
-      like: 243,
-      image: images.user2,
-      nftImage: images.nft_image_2,
-      time: {
-        days: 77,
-        hours: 11,
-        minutes: 21,
-        seconds: 45,
-      },
-    },
-    {
-      title: "Gym NFT",
-      id: 3,
-      name: "Raayan Hussain",
-      collection: "GYm",
-      price: "0000064 ETH",
-      like: 243,
-      image: images.user3,
-      nftImage: images.nft_image_3,
-      time: {
-        days: 37,
-        hours: 20,
-        minutes: 11,
-        seconds: 55,
-      },
-    },
-    {
-      title: "Home NFT",
-      id: 4,
-      name: "Raayan Hussain",
-      collection: "GYm",
-      price: "4664 ETH",
-      like: 243,
-      image: images.user4,
-      nftImage: images.nft_image_1,
-      time: {
-        days: 87,
-        hours: 29,
-        minutes: 10,
-        seconds: 15,
-      },
-    },
-  ];
+const BigNFTSlider = ({result}) => {
+  const [idNumber, setIdNumber] = useState(0);
+  const [times, setTimes] = useState(result.map(() => getRandomTime()));
+
+  useEffect(() => {
+    const countdownInterval = setInterval(() => {
+      setTimes((prevTimes) =>
+        prevTimes.map((time) => {
+          let { days, hours, minutes, seconds } = time;
+          if (seconds > 0) {
+            seconds--;
+          } else if (minutes > 0) {
+            minutes--;
+            seconds = 59;
+          } else if (hours > 0) {
+            hours--;
+            minutes = 59;
+            seconds = 59;
+          } else if (days > 0) {
+            days--;
+            hours = 23;
+            minutes = 59;
+            seconds = 59;
+          } else {
+            clearInterval(countdownInterval);
+            return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+          }
+          return { days, hours, minutes, seconds };
+        })
+      );
+    }, 1000);
+
+    return () => clearInterval(countdownInterval);
+  }, []);
+
+  const formatTime = (time) => (time < 10 ? `0${time}` : time);
+  // const inc = useCallback(() => {
+  //   if (idNumber + 1 < result.length) {
+  //     setIdNumber(idNumber + 1);
+  //   }
+  // }, [idNumber, result.length]);
+
+  // const dec = useCallback(() => {
+  //   if (idNumber > 0) {
+  //     setIdNumber(idNumber - 1);
+  //   }
+  // }, [idNumber]);
 
   const inc = useCallback(() => {
-    if (idNumber + 1 < sliderData.length) {
-      setIdNumber(idNumber + 1);
-    }
-  }, [idNumber, sliderData.length]);
+    setIdNumber((prevId) => (prevId + 1) % result.length);
+  }, [result.length]);
 
   const dec = useCallback(() => {
-    if (idNumber > 0) {
-      setIdNumber(idNumber - 1);
-    }
-  }, [idNumber]);
+    setIdNumber((prevId) => (prevId - 1 + result.length) % result.length);
+  }, [result.length]);
 
   return (
     <div className={Style.bigNFTSlider}>
       <div className={Style.bigNFTSlider_box}>
         <div className={Style.bigNFTSlider_box_left}>
-          <h2>{sliderData[idNumber].title}</h2>
+          <h2>{result[idNumber].title}</h2>
           <div className={Style.bigNFTSlider_box_left_creator}>
             <div className={Style.bigNFTSlider_box_left_creator_profile}>
               <Image
                 className={Style.bigNFTSlider_box_left_creator_profile_img}
-                src={sliderData[idNumber].image}
+                src={result[idNumber]?.photo}
                 alt="profile image"
                 width={50}
                 height={50}
@@ -106,7 +87,7 @@ const BigNFTSlider = () => {
               <div className={Style.bigNFTSlider_box_left_creator_profile_info}>
                 <p>Creator</p>
                 <h4>
-                  {sliderData[idNumber].name}{" "}
+                  {result[idNumber]?.name}{" "}
                   <span>
                     <MdVerified color={"rgb(32, 129, 226)"} />
                   </span>
@@ -123,7 +104,7 @@ const BigNFTSlider = () => {
                 className={Style.bigNFTSlider_box_left_creator_collection_info}
               >
                 <p>Collection</p>
-                <h4>{sliderData[idNumber].collection}</h4>
+                <h4>{result[idNumber]?.nfts[0]?.collection ? result[idNumber]?.nfts[0]?.collection : 'null'}</h4>
               </div>
             </div>
           </div>
@@ -132,7 +113,7 @@ const BigNFTSlider = () => {
             <div className={Style.bigNFTSlider_box_left_bidding_box}>
               <small>Current Bid</small>
               <p>
-                {sliderData[idNumber].price} <span>$221,21</span>
+                {result[idNumber]?.nfts[0]?.price} ETH
               </p>
             </div>
 
@@ -147,28 +128,28 @@ const BigNFTSlider = () => {
               <div
                 className={Style.bigNFTSlider_box_left_bidding_box_timer_item}
               >
-                <p>{sliderData[idNumber].time.days}</p>
+                <p>{formatTime(times[idNumber]?.days)}</p>
                 <span>Days</span>
               </div>
 
               <div
                 className={Style.bigNFTSlider_box_left_bidding_box_timer_item}
               >
-                <p>{sliderData[idNumber].time.hours}</p>
+                <p>{formatTime(times[idNumber]?.hours)}</p>
                 <span>Hours</span>
               </div>
 
               <div
                 className={Style.bigNFTSlider_box_left_bidding_box_timer_item}
               >
-                <p>{sliderData[idNumber].time.minutes}</p>
+                <p>{formatTime(times[idNumber]?.minutes)}</p>
                 <span>mins</span>
               </div>
 
               <div
                 className={Style.bigNFTSlider_box_left_bidding_box_timer_item}
               >
-                <p>{sliderData[idNumber].time.seconds}</p>
+                <p>{formatTime(times[idNumber]?.seconds)}</p>
                 <span>secs</span>
               </div>
             </div>
@@ -193,16 +174,11 @@ const BigNFTSlider = () => {
 
         <div className={Style.bigNFTSlider_box_right}>
           <div className={Style.bigNFTSlider_box_right_box}>
-            <Image
-              src={sliderData[idNumber].nftImage}
+            <img
+              src={result[idNumber]?.nfts[0]?.image}
               alt="NFT IMAGE"
               className={Style.bigNFTSlider_box_right_box_img}
             />
-
-            <div className={Style.bigNFTSlider_box_right_box_like}>
-              <AiFillHeart />
-              <span>{sliderData[idNumber].like}</span>
-            </div>
           </div>
         </div>
       </div>

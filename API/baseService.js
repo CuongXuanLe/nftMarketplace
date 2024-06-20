@@ -1,5 +1,5 @@
 import axios from "axios";
-const DOMAIN = "http://127.0.0.1:5000/api/v1/users";
+const DOMAIN = "http://127.0.0.1:5000/api/v1";
 
 export class BaseServices {
   patch = (url, model, token) => {
@@ -15,21 +15,21 @@ export class BaseServices {
       url: `${DOMAIN}/${url}`,
       method: "POST",
       data: model,
-      headers: { Authorization: "Bearer " + localStorage.getItem(token) },
+      headers: { Authorization: "Bearer " + token },
     });
   };
   get = (url, token) => {
     return axios({
       url: `${DOMAIN}/${url}`,
       method: "GET",
-      headers: { Authorization: "Bearer " + localStorage.getItem(token) },
+      headers: { Authorization: "Bearer " + token },
     });
   };
   delete = (url, token) => {
     return axios({
       url: `${DOMAIN}/${url}`,
       method: "DELETE",
-      headers: { Authorization: "Bearer " + localStorage.getItem(token) },
+      headers: { Authorization: "Bearer " + token },
     });
   };
 }

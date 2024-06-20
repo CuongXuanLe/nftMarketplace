@@ -17,21 +17,31 @@ import {
 import { getTopCreator } from "../TopCreators/TopCreators";
 import { NFTMarketplaceContext } from "../Contexts/NFTMarketplaceContext";
 import { useSelector } from "react-redux";
+import { manageService } from "../API/manageService";
 
 const Home = () => {
+  const [nfts, setNfts] = useState([]);
+  const [nftsCopy, setNftsCopy] = useState([]);
+  const [allUsers, setAllUsers] = useState();
+
+  const user = useSelector((state) => state.auth.login.currentUser);
   const { checkIfWalletConnected, currentAccount, fetchNFTs } = useContext(
     NFTMarketplaceContext
   );
 
-  const user = useSelector((state) => state.auth.login.currentUser);
-  // console.log("checkout: ", currentAccount);
+  const getAllUsers = async() => {
+    try {
+      const res = await manageService.getUsers()
+      setAllUsers(res.data.data.users)
+    } catch (error) {
+      console.log('error: ', error)
+    }
+  }
 
   useEffect(() => {
+    getAllUsers()
     checkIfWalletConnected();
   }, []);
-
-  const [nfts, setNfts] = useState([]);
-  const [nftsCopy, setNftsCopy] = useState([]);
 
   const creators = getTopCreator(nfts);
 
@@ -39,16 +49,29 @@ const Home = () => {
     fetchNFTs().then((item) => {
       console.log(item);
       setNfts(item?.reverse());
-      setNftsCopy(item);
     });
   }, []);
 
+  const mapUsersToNFTs = (allUsers, nfts) => {
+    if(allUsers?.length > 0 && nfts?.length > 0) {
+      return allUsers?.map(user => {
+        const userNFTs = nfts?.filter(nft => nft.seller.toLowerCase() === user.wallet.toLowerCase());
+        return {
+          ...user,
+          nfts: userNFTs
+        };
+      });
+    }
+  };
+  
+  const result = mapUsersToNFTs(allUsers, nfts);
+
   return (
     <div className={Style.homePage}>
-      <HeroSection />
-      <BigNFTSlider />
+      <HeroSection NFTData={nfts}  />
+      {result?.length > 0 ? <BigNFTSlider result={result}  /> : <Loader />}
       {creators.length > 0 ? <FollowerTab TopCreator={creators} /> : <Loader />}
-      <Slider />
+      {nfts?.length > 0 ? <Slider nfts={nfts.slice(0, 10)} /> : <Loader />}
       <Collection />
       <Title
         heading="Featured NFTs"

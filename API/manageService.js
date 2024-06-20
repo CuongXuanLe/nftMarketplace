@@ -5,18 +5,20 @@ export class ManageService extends BaseServices {
     super();
   }
   register = (formData) => {
-    return this.post("signup", formData);
+    return this.post("users/signup", formData);
   };
   login = (formData) => {
-    return this.post("login", formData);
+    return this.post("users/login", formData);
   };
   updateProfile = (formData, token) => {
-    return this.patch("updateMe", formData, token);
+    return this.patch("users/updateMe", formData, token);
   }
   logout = () => {
-    return this.post("logout");
+    return this.post("users/logout");
   };
-  
+  getUsers = () => {
+    return this.get("users");
+  }
 }
 
 export const manageService = new ManageService();

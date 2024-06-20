@@ -1,17 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import Style from "./HeroSection.module.css";
-import { Slider } from "../componentsindex";
-import { NFTMarketplaceContext } from "../../Contexts/NFTMarketplaceContext";
+import { Slider, Loader } from "../componentsindex";
 
-const HeroSection = () => {
-  const { titleData } = useContext(NFTMarketplaceContext);
+const HeroSection = ({NFTData}) => {
   return (
-  <>
-    {/* <h1>{titleData}</h1> */}
     <div className={Style.heroSection}>
-      <Slider location={"HeroSection"} />
+      {NFTData?.length > 0 ? <Slider nfts={NFTData.slice(0, 10)} location={"HeroSection"} /> : <Loader/>}
     </div>
-  </>
   );
 };
 

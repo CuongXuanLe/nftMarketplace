@@ -3,56 +3,12 @@ import { motion } from "framer-motion";
 import { TiArrowLeftThick, TiArrowRightThick } from "react-icons/ti";
 import Style from "./Slider.module.css";
 import SliderCard from "./SliderCard/SliderCard";
-import images from "../../img";
 
-const Slider = ({location}) => {
-  const FollowingArray = [
-    {
-      background: images.item1,
-      user: images.user3,
-    },
-    {
-      background: images.item2,
-      user: images.user4,
-    },
-    {
-      background: images.item3,
-      user: images.user5,
-    },
-    {
-      background: images.item8,
-      user: images.user6,
-    },
-    {
-      background: images.item4,
-      user: images.user1,
-    },
-    {
-      background: images.item5,
-      user: images.user2,
-    },
-    {
-      background: images.item6,
-      user: images.user1,
-    },
-    {
-      background: images.item7,
-      user: images.user2,
-    },
-    {
-      background: images.item10,
-      user: images.user1,
-    },
-    {
-      background: images.item9,
-      user: images.user2,
-    },
-  ];
+const Slider = ({nfts, location}) => {
   const [width, setWidth] = useState(0);
   const dragSlider = useRef(null);
 
   useEffect(() => {
-    // setWidth(dragSlider.current.scrollWidth - dragSlider.current.offsetWidth);
     if (dragSlider.current) {
       setWidth(dragSlider.current.scrollWidth - dragSlider.current.offsetWidth);
     }
@@ -65,10 +21,6 @@ const Slider = ({location}) => {
       const perTick = (difference / duration) * 10;
 
       requestAnimationFrame(() => {
-        // dragSlider.current.scrollLeft = start + perTick;
-        // if (dragSlider.current.scrollLeft !== end) {
-        //   smoothScroll(start + perTick, end, duration - 10);
-        // }
         if (dragSlider.current) {
           dragSlider.current.scrollLeft = start + perTick;
           if (dragSlider.current.scrollLeft !== end) {
@@ -79,14 +31,6 @@ const Slider = ({location}) => {
     };
 
     const autoScroll = setInterval(() => {
-      // const { current } = dragSlider;
-      // const scrollAmount = window.innerWidth > 1800 ? 384 : 384;
-
-      // if (current.scrollLeft + current.clientWidth >= current.scrollWidth) {
-      //   smoothScroll(current.scrollLeft, 0, 500);
-      // } else {
-      //   smoothScroll(current.scrollLeft, current.scrollLeft + scrollAmount, 500);
-      // }
       if (dragSlider.current) {
         const { current } = dragSlider;
         const scrollAmount = window.innerWidth > 1800 ? 384 : 384;
@@ -97,7 +41,6 @@ const Slider = ({location}) => {
         }
       }
     }, 5000);
-
     return () => clearInterval(autoScroll);
   }, []);
 
@@ -146,7 +89,7 @@ const Slider = ({location}) => {
                 drag="x"
                 dragConstraints={{ right: 0, left: -width }}
               >
-                {FollowingArray.map((el, i) => (
+                {nfts?.map((el, i) => (
                   <SliderCard key={i + 1} el={el} i={i} card_location={location}/>
                 ))}
               </motion.div>
@@ -179,7 +122,7 @@ const Slider = ({location}) => {
                 drag="x"
                 dragConstraints={{ right: 0, left: -width }}
               >
-                {FollowingArray.map((el, i) => (
+                {nfts?.map((el, i) => (
                   <SliderCard key={i + 1} el={el} i={i} card_location={location}/>
                 ))}
               </motion.div>

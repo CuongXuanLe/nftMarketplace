@@ -1,11 +1,13 @@
 .Loader {
   width: 100%;
-  margin-block: 4trm;
+  margin-block: 5rem;
+  padding-top: 2rem
 }
 
 .Loader_box {
-  width: 50%;
+  width: 10%;
   margin: 0 auto;
+  transform: scaleX(-1);
 }
 
 .Loader_box_img {

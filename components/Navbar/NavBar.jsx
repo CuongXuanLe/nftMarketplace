@@ -104,7 +104,6 @@ const NavBar = () => {
     router.push("/login");
   };
 
-  //connect smart contract
   const { currentAccount, connectWallet, openError } = useContext(
     NFTMarketplaceContext
   );
@@ -134,9 +133,6 @@ const NavBar = () => {
       updateAddressWalletForUser();
     }
   }, [currentAccount, user]);
-
-  console.log("check user: ", user);
-  console.log("currentAccount: ", currentAccount);
 
   return (
     <div
