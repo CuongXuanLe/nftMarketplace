@@ -28,6 +28,8 @@ const AuthorProfileCard = ({currentAccount}) => {
     navigator.clipboard.writeText(copyText.value);
   };
 
+  console.log(currentAccount)
+
   const openShare = () => {
     if (!share) {
       setShare(true);
@@ -61,7 +63,7 @@ const AuthorProfileCard = ({currentAccount}) => {
 
         <div className={Style.AuthorProfileCard_box_info}>
           <h2>
-            Dony Herrera{""}{" "}
+            {currentAccount?.name}{""}{" "}
             <span>
               <MdVerified marginleft="5" color={"rgb(32, 129, 226)"} />
             </span>{" "}
@@ -70,7 +72,7 @@ const AuthorProfileCard = ({currentAccount}) => {
           <div className={Style.AuthorProfileCard_box_info_address}>
             <input
               type="text"
-              value={currentAccount}
+              value={currentAccount?.wallet || currentAccount?.configAddress}
               id="myInput"
             />
             <FiCopy
@@ -80,14 +82,12 @@ const AuthorProfileCard = ({currentAccount}) => {
           </div>
 
           <p>
-            Punk #4786 / An OG Cryptopunk Collector, hoarder of NFTs.
-            Contributing to @ether_cards, an NFT Monetization Platform.
+            {currentAccount?.description}
           </p>
         </div>
 
         <div className={Style.AuthorProfileCard_box_share}>
           <Button btnName="Follow" handleClick={() => {}} />
-
           <BsThreeDots
             onClick={() => openReport()}
             className={Style.AuthorProfileCard_box_share_icon}

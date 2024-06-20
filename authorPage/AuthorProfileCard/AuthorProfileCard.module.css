@@ -89,6 +89,10 @@
   position: relative;
 }
 
+.AuthorProfileCard_box_share Button {
+  visibility: hidden;
+}
+
 .AuthorProfileCard_box_share_icon {
   font-size: 2.5rem;
   cursor: pointer;

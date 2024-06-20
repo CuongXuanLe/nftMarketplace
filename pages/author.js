@@ -9,10 +9,14 @@ import {
   AuthorTaps,
   AuthorNFTCardBox,
 } from "../authorPage/componentIndex";
-
+import { useSelector } from "react-redux";
 import { NFTMarketplaceContext } from "../Contexts/NFTMarketplaceContext";
+import { getTopCreator } from "../TopCreators/TopCreators";
 
 const author = () => {
+  const user = useSelector((state) => state.auth.login.currentUser);
+  const allNFTs = useSelector((state) => state.users.getAllNFTs)
+  const creators = getTopCreator(allNFTs);
   const followerArray = [
     {
       background: images.creatorbackground1,
@@ -52,7 +56,7 @@ const author = () => {
   const [follower, setFollower] = useState(false);
   const [following, setFollowing] = useState(false);
 
-  const { fetchMyNFTsOrListedNFTs, currentAccount } = useContext(
+  const { fetchMyNFTsOrListedNFTs } = useContext(
     NFTMarketplaceContext
   );
   const [nfts, setNfts] = useState([]);
@@ -73,7 +77,7 @@ const author = () => {
   return (
     <div className={Style.author}>
       <Banner bannerImage={images.creatorbackground2} />
-      <AuthorProfileCard currentAccount={currentAccount} />
+      <AuthorProfileCard currentAccount={user} />
       <AuthorTaps
         setCollectiables={setCollectiables}
         setCreated={setCreated}
@@ -93,11 +97,11 @@ const author = () => {
       />
       <Title heading="Popular Creators" />
       <div className={Style.author_box}>
-        {followerArray.map((el, i) => (
+        {creators.map((el, i) => (
           <FollowerTabCard i={i} el={el} />
         ))}
       </div>
-
+ 
       <Brand />
     </div>
   );

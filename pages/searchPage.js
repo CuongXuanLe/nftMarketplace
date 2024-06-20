@@ -25,10 +25,10 @@ const searchPage = () => {
   }, []);
 
   const onHandleSearch = (value) => {
-    const filteredNFTS = nfts.filter(({ name }) => {
-      name.toLowerCase().includes(value.toLowerCase());
-    });
-
+    const filteredNFTS = nfts.filter(({ name }) => 
+      name.toLowerCase().includes(value.toLowerCase())
+    );
+  
     if (filteredNFTS.length === 0) {
       setNfts(nftsCopy);
     } else {
@@ -41,6 +41,8 @@ const searchPage = () => {
       setNfts(nftsCopy);
     }
   };
+
+  console.log(nfts)
 
   return (
     <div className={Style.searchPage}>
@@ -55,7 +57,11 @@ const searchPage = () => {
       ) : (
         <Loader />
       )}
-      <Slider />
+      {nfts?.length > 0 ? (
+      <Slider nfts={nfts.slice(0, 10)} />
+    ) : (
+        <Loader />
+      )}
       <Brand />
     </div>
   );
