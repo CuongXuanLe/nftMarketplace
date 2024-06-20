@@ -18,7 +18,6 @@ const searchPage = () => {
       fetchNFTs().then((item) => {
         setNfts(item?.reverse());
         setNftsCopy(item);
-        console.log("check ???: ", nfts);
       });
     } catch (error) {
       setError("Please reload the browser");
@@ -51,7 +50,11 @@ const searchPage = () => {
         onClearSearch={onClearSearch}
       />
       <Filter />
-      {nfts?.length > 0 ? <NFTCardTwo NFTData={nfts} /> : <Loader />}
+      {nfts?.length > 0 ? (
+        <NFTCardTwo NFTData={nfts} location={"search"} />
+      ) : (
+        <Loader />
+      )}
       <Slider />
       <Brand />
     </div>

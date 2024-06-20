@@ -14,7 +14,7 @@ const getRandomTime = () => {
   return { days, hours, minutes, seconds };
 };
 
-const BigNFTSlider = ({result}) => {
+const BigNFTSlider = ({ result }) => {
   const [idNumber, setIdNumber] = useState(0);
   const [times, setTimes] = useState(result.map(() => getRandomTime()));
 
@@ -50,18 +50,6 @@ const BigNFTSlider = ({result}) => {
   }, []);
 
   const formatTime = (time) => (time < 10 ? `0${time}` : time);
-  // const inc = useCallback(() => {
-  //   if (idNumber + 1 < result.length) {
-  //     setIdNumber(idNumber + 1);
-  //   }
-  // }, [idNumber, result.length]);
-
-  // const dec = useCallback(() => {
-  //   if (idNumber > 0) {
-  //     setIdNumber(idNumber - 1);
-  //   }
-  // }, [idNumber]);
-
   const inc = useCallback(() => {
     setIdNumber((prevId) => (prevId + 1) % result.length);
   }, [result.length]);
@@ -104,7 +92,11 @@ const BigNFTSlider = ({result}) => {
                 className={Style.bigNFTSlider_box_left_creator_collection_info}
               >
                 <p>Collection</p>
-                <h4>{result[idNumber]?.nfts[0]?.collection ? result[idNumber]?.nfts[0]?.collection : 'null'}</h4>
+                <h4>
+                  {result[idNumber]?.nfts[0]?.collection
+                    ? result[idNumber]?.nfts[0]?.collection
+                    : "null"}
+                </h4>
               </div>
             </div>
           </div>
@@ -112,9 +104,7 @@ const BigNFTSlider = ({result}) => {
           <div className={Style.bigNFTSlider_box_left_bidding}>
             <div className={Style.bigNFTSlider_box_left_bidding_box}>
               <small>Current Bid</small>
-              <p>
-                {result[idNumber]?.nfts[0]?.price} ETH
-              </p>
+              <p>{result[idNumber]?.nfts[0]?.price} ETH</p>
             </div>
 
             <p className={Style.bigNFTSlider_box_left_bidding_box_auction}>

@@ -16,6 +16,12 @@
   padding: 10px;
 }
 
+.NFTCardTwo_box_name_item {
+  font-size: 1.2rem;
+  font-weight: 700;
+  padding: 0 5px;
+}
+
 .NFTCardTwo_box:hover {
   border: 1px solid #fff;
   transform: translateY(-10px);

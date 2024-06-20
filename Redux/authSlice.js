@@ -7,7 +7,7 @@ const authSlice = createSlice({
       currentUser: null,
       isFetching: false,
       error: false,
-      token: null
+      token: null,
     },
     register: {
       isFetching: false,
@@ -22,7 +22,6 @@ const authSlice = createSlice({
     },
     loginSuccess: (state, action) => {
       const { dataUser } = action;
-      // console.log('check: ', dataUser)
       state.login.isFetching = false;
       state.login.currentUser = dataUser.data.user;
       state.login.token = dataUser.token;
@@ -34,7 +33,7 @@ const authSlice = createSlice({
     },
     updateSuccess: (state, action) => {
       const { formData } = action.payload;
-      console.log('data user: ',  formData)
+      console.log("data user: ", formData);
       state.login.isFetching = false;
       state.login.currentUser = formData;
       state.login.error = false;
@@ -81,7 +80,7 @@ export const {
   logOutStart,
   logOutSuccess,
   logOutFailed,
-  updateSuccess
+  updateSuccess,
 } = authSlice.actions;
 
 export default authSlice.reducer;

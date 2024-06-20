@@ -38,6 +38,7 @@
 }
 
 .FollowerTabCard_box_info_following a {
+  color: #000;
   background-color: var(--shadow-dark-color);
   padding: 0.7rem 1.5rem;
   border-radius: 0.75rem;

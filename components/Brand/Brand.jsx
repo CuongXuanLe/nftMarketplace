@@ -13,10 +13,10 @@ const Brand = () => {
           <p>A creative agency that lead and inspire.</p>
 
           <div className={Style.Brand_box_left_btn}>
-            <a href="/login">
+            <a href="/uploadNFT">
               <Button btnName="Create" onClick={() => handleClick()} />
             </a>
-            <a href="/collection">
+            <a href="/">
               <Button btnName="Discover" onClick={() => handleClick()} />
             </a>
           </div>

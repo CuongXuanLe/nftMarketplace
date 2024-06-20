@@ -1,23 +1,42 @@
-import React, { useState } from "react";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import React, { useState, useEffect } from "react";
 import { BsImages } from "react-icons/bs";
 import Image from "next/image";
 import Style from "./NFTCard.module.css";
-import images from "../../img";
 import Link from "next/link";
 
 const NFTCard = ({ NFTData }) => {
-  // const featureArray = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-  const [like, setLike] = useState(true);
-
-  const likeNft = () => {
-    if (!like) {
-      setLike(true);
-    } else {
-      setLike(false);
-    }
+  const getRandomTime = () => {
+    const hours = Math.floor(Math.random() * 24);
+    const minutes = Math.floor(Math.random() * 60);
+    const seconds = Math.floor(Math.random() * 60);
+    return { hours, minutes, seconds };
   };
+
+  const initialTimes = NFTData.map(() => getRandomTime());
+  const [times, setTimes] = useState(initialTimes);
+
+  const formatTime = (time) => (time < 10 ? `0${time}` : time);
+
+  useEffect(() => {
+    const countdownInterval = setInterval(() => {
+      setTimes((prevTimes) =>
+        prevTimes.map((time) => {
+          const { hours, minutes, seconds } = time;
+          if (seconds > 0) {
+            return { ...time, seconds: seconds - 1 };
+          } else if (minutes > 0) {
+            return { hours, minutes: minutes - 1, seconds: 59 };
+          } else if (hours > 0) {
+            return { hours: hours - 1, minutes: 59, seconds: 59 };
+          } else {
+            return { hours: 0, minutes: 0, seconds: 0 };
+          }
+        })
+      );
+    }, 1000);
+
+    return () => clearInterval(countdownInterval);
+  }, []);
 
   return (
     <div className={Style.NFTCard}>
@@ -35,26 +54,16 @@ const NFTCard = ({ NFTData }) => {
             </div>
 
             <div className={Style.NFTCard_box_update}>
-              <div className={Style.NFTCard_box_update_left}>
-                <div
-                  className={Style.NFTCard_box_update_left_like}
-                  onClick={() => likeNft()}
-                >
-                  {like ? (
-                    <AiOutlineHeart />
-                  ) : (
-                    <AiFillHeart
-                      className={Style.NFTCard_box_update_left_like_icon}
-                    />
-                  )}
-                  {""} 22
-                </div>
-              </div>
+              <div className={Style.NFTCard_box_update_left}></div>
 
               <div className={Style.NFTCard_box_update_right}>
                 <div className={Style.NFTCard_box_update_right_info}>
                   <small>Remaining time</small>
-                  <p>3h : 15m : 20s</p>
+                  <p>
+                    {formatTime(times[i].hours)}h :{" "}
+                    {formatTime(times[i].minutes)}m :{" "}
+                    {formatTime(times[i].seconds)}s
+                  </p>
                 </div>
               </div>
             </div>
@@ -74,13 +83,6 @@ const NFTCard = ({ NFTData }) => {
                     >
                       <small>Current Bid</small>
                       <p>{el.price}ETH</p>
-                    </div>
-                    <div
-                      className={
-                        Style.NFTCard_box_update_details_price_box_stock
-                      }
-                    >
-                      <small>61 in stock</small>
                     </div>
                   </div>
                 </div>

@@ -42,7 +42,7 @@
 }
 
 .NFTCard_box_update_left {
-  background-color: var(--icons-color);
+  /* background-color: var(--icons-color); */
   padding: 0.5rem 1rem;
   color: var(--main-bg-color);
   border-radius: 1rem;
@@ -131,6 +131,7 @@
   padding: 0.2rem 0.5rem;
   align-items: center;
   border-radius: 0.3rem;
+  width: 50%;
 }
 
 .NFTCard_box_update_details_price_box_bid small {
@@ -141,8 +142,9 @@
 }
 
 .NFTCard_box_update_details_price_box_bid p {
-  padding: 0.5rem 0 0 0;
+  padding: 0.65rem 0 0 0;
   font-weight: 600;
+  text-align: right;
 }
 
 .NFTCard_box_update_details_category {

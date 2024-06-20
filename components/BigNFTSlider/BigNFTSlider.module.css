@@ -90,6 +90,14 @@
   padding: 1rem 2rem;
   border-radius: 0.5rem;
   font-weight: 600;
+  color: black;
+}
+
+.bigNFTSlider_box_left_bidding_box p {
+  text-align: right;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 0 15px;
 }
 
 .bigNFTSlider_box_left_bidding_box_icon {
@@ -124,7 +132,7 @@
   align-items: center;
   gap: 2rem;
   font-size: 2rem;
-  margin-top: 3rem;
+  margin-top: 4rem;
 }
 
 .bigNFTSlider_box_left_sliderBtn_icon {

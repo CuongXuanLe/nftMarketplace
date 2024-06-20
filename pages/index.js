@@ -16,30 +16,31 @@ import {
 } from "../components/componentsindex";
 import { getTopCreator } from "../TopCreators/TopCreators";
 import { NFTMarketplaceContext } from "../Contexts/NFTMarketplaceContext";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { manageService } from "../API/manageService";
+import { getUsersData, getAllNFTs, getUsersSuccess } from "../Redux/userSlice";
 
 const Home = () => {
   const [nfts, setNfts] = useState([]);
-  const [nftsCopy, setNftsCopy] = useState([]);
   const [allUsers, setAllUsers] = useState();
 
-  const user = useSelector((state) => state.auth.login.currentUser);
   const { checkIfWalletConnected, currentAccount, fetchNFTs } = useContext(
     NFTMarketplaceContext
   );
+  const dispatch = useDispatch();
 
-  const getAllUsers = async() => {
+  const getAllUsers = async () => {
     try {
-      const res = await manageService.getUsers()
-      setAllUsers(res.data.data.users)
+      const res = await manageService.getUsers();
+      setAllUsers(res.data.data.users);
+      dispatch(getUsersSuccess(res.data.data.users));
     } catch (error) {
-      console.log('error: ', error)
+      console.log("error: ", error);
     }
-  }
+  };
 
   useEffect(() => {
-    getAllUsers()
+    getAllUsers();
     checkIfWalletConnected();
   }, []);
 
@@ -53,26 +54,30 @@ const Home = () => {
   }, []);
 
   const mapUsersToNFTs = (allUsers, nfts) => {
-    if(allUsers?.length > 0 && nfts?.length > 0) {
-      return allUsers?.map(user => {
-        const userNFTs = nfts?.filter(nft => nft.seller.toLowerCase() === user.wallet.toLowerCase());
+    if (allUsers?.length > 0 && nfts?.length > 0) {
+      return allUsers?.map((user) => {
+        const userNFTs = nfts?.filter(
+          (nft) => nft.seller.toLowerCase() === user.configAddress.toLowerCase()
+        );
         return {
           ...user,
-          nfts: userNFTs
+          nfts: userNFTs,
         };
       });
     }
   };
-  
+
   const result = mapUsersToNFTs(allUsers, nfts);
+  dispatch({ type: "user/getUsersData", dataUsers: getUsersData(result) });
+  dispatch({ type: "user/getAllNFTs", dataNFTs: getAllNFTs(nfts) });
 
   return (
     <div className={Style.homePage}>
-      <HeroSection NFTData={nfts}  />
-      {result?.length > 0 ? <BigNFTSlider result={result}  /> : <Loader />}
+      <HeroSection NFTData={nfts} />
+      {result?.length > 0 ? <BigNFTSlider result={result} /> : <Loader />}
       {creators.length > 0 ? <FollowerTab TopCreator={creators} /> : <Loader />}
       {nfts?.length > 0 ? <Slider nfts={nfts.slice(0, 10)} /> : <Loader />}
-      <Collection />
+      {result?.length > 0 ? <Collection result={result} /> : <Loader />}
       <Title
         heading="Featured NFTs"
         paragraph="Discover the most outstanding NFTs in all topics of life."

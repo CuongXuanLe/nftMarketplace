@@ -4,6 +4,7 @@ import { MdVerified } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
 import Style from "./FollowerTabCard.module.css";
 import images from "../../../img";
+
 const FollowerTabCard = ({ i, el }) => {
   const [following, setFollowing] = useState(false);
   const followMe = () => {
@@ -13,13 +14,14 @@ const FollowerTabCard = ({ i, el }) => {
       setFollowing(false);
     }
   };
+
   return (
     <div className={Style.FollowerTabCard}>
       <div className={Style.FollowerTabCard_box}>
         <div className={Style.FollowerTabCard_box_img}>
           <Image
             className={Style.FollowerTabCard_box_img_img}
-            src={el.background || images.creatorbackground1}
+            src={el.image || images.creatorbackground1}
             alt="profile braground"
             width={500}
             height={300}

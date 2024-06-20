@@ -4,10 +4,10 @@
   transition: all 0.3s ease-in;
   cursor: pointer;
   padding: 5px;
-  background-color: rgba(50, 50, 50, 0.4)
+  background-color: rgba(50, 50, 50, 0.4);
 }
 
-.daysComponent_box_img_container{
+.daysComponent_box_img_container {
   border-radius: 0.75rem;
   overflow: hidden;
 }
@@ -46,7 +46,7 @@
 
 .daysComponent_box_title_info_profile span {
   font-weight: 600;
-  padding-inline: 0.5rem;
+  /* padding-inline: 0.5rem; */
 }
 
 .daysComponent_box_title_info_price small {

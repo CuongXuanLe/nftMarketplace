@@ -8,7 +8,7 @@ import Style from "./Collection.module.css";
 import DaysComponent from "./DaysComponents/DaysComponents";
 import images from "../../img";
 
-const Collection = () => {
+const Collection = ({ result }) => {
   const [activeButton, setActiveButton] = useState("popular");
   const [popular, setPopular] = useState(true);
   const [following, setFollowing] = useState(false);
@@ -165,7 +165,7 @@ const Collection = () => {
       </div>
       {popular && (
         <div className={Style.collection_box}>
-          {CardArray.map((el, i) => (
+          {result.map((el, i) => (
             <DaysComponent key={i + 1} i={i} el={el} />
           ))}
         </div>

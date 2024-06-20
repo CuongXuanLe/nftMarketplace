@@ -1,26 +1,11 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { BsImage } from "react-icons/bs";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { MdVerified, MdTimer } from "react-icons/md";
 import Style from "./NFTCardTwo.module.css";
-import { LikeProfile } from "../../components/componentsindex";
 import Link from "next/link";
 
-const NFTCardTwo = ({ NFTData }) => {
-  const [like, setLike] = useState(false);
-  const [likeInc, setLikeInc] = useState(21);
-
-  const likeNFT = () => {
-    if (!like) {
-      setLike(true);
-      setLikeInc(23);
-    } else {
-      setLike(false);
-      setLikeInc(23 + 1);
-    }
-  };
-
+const NFTCardTwo = ({ NFTData, location }) => {
   return (
     <div className={Style.NFTCardTwo}>
       {NFTData?.map((el, i) => (
@@ -30,11 +15,6 @@ const NFTCardTwo = ({ NFTData }) => {
               <div className={Style.NFTCardTwo_box_like_box}>
                 <div className={Style.NFTCardTwo_box_like_box_box}>
                   <BsImage className={Style.NFTCardTwo_box_like_box_box_icon} />
-                  <p onClick={() => likeNFT()}>
-                    {like ? <AiOutlineHeart /> : <AiFillHeart />}
-                    {""}
-                    <span>{likeInc + 1}</span>
-                  </p>
                 </div>
               </div>
             </div>
@@ -50,14 +30,7 @@ const NFTCardTwo = ({ NFTData }) => {
               />
             </div>
 
-            <div className={Style.NFTCardTwo_box_info}>
-              <div className={Style.NFTCardTwo_box_info_left}>
-                <LikeProfile />
-                <p>{el.name}</p>
-              </div>
-              <small>4{i + 2}</small>
-            </div>
-
+            <p className={Style.NFTCardTwo_box_name_item}>{el?.name}</p>
             <div className={Style.NFTCardTwo_box_price}>
               <div className={Style.NFTCardTwo_box_price_box}>
                 <small>Current Bid</small>

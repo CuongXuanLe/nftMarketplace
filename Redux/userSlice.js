@@ -9,12 +9,15 @@ const userSlice = createSlice({
       error: false,
     },
     msg: "",
+    getUsersData: null,
+    getAllNFTs: null,
   },
   reducers: {
     getUsersStart: (state) => {
       state.users.isFetching = true;
     },
     getUsersSuccess: (state, action) => {
+      console.log("get all user: ", action);
       state.users.isFetching = false;
       state.users.allUsers = action.payload;
     },
@@ -34,6 +37,14 @@ const userSlice = createSlice({
       state.users.error = true;
       state.msg = action.payload;
     },
+    getUsersData: (state, action) => {
+      const { dataUsers } = action;
+      state.getUsersData = dataUsers.payload;
+    },
+    getAllNFTs: (state, action) => {
+      const { dataNFTs } = action;
+      state.getAllNFTs = dataNFTs.payload;
+    },
   },
 });
 
@@ -44,6 +55,8 @@ export const {
   deleteUserStart,
   deleteUsersSuccess,
   deleteUserFailed,
+  getUsersData,
+  getAllNFTs,
 } = userSlice.actions;
 
 export default userSlice.reducer;

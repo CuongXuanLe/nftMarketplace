@@ -2,96 +2,76 @@ import React, { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import {
   MdVerified,
-  MdCloudUpload,
   MdTimer,
   MdReportProblem,
   MdOutlineDeleteSweep,
 } from "react-icons/md";
 import { BsThreeDots } from "react-icons/bs";
 import { FaWallet, FaPercentage } from "react-icons/fa";
-import {
-  TiSocialFacebook,
-  TiSocialLinkedin,
-  TiSocialTwitter,
-  TiSocialYoutube,
-  TiSocialInstagram,
-} from "react-icons/ti";
 import { BiTransferAlt, BiDollar } from "react-icons/bi";
 import Style from "./NFTDescription.module.css";
 import images from "../../img";
 import { Button } from "../../components/componentsindex.js";
-import { NFTTabs } from "../NFTDetailsIndex";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { NFTMarketplaceContext } from "../../Contexts/NFTMarketplaceContext.js";
+import { useSelector } from "react-redux";
+
+const getRandomTime = () => {
+  const days = Math.floor(Math.random() * 30);
+  const hours = Math.floor(Math.random() * 24);
+  const minutes = Math.floor(Math.random() * 60);
+  const seconds = Math.floor(Math.random() * 60);
+  return { days, hours, minutes, seconds };
+};
 
 const NFTDescription = ({ nft }) => {
-  const [social, setSocial] = useState(false);
   const [NFTMenu, setNFTMenu] = useState(false);
-  const [history, setHistory] = useState(true);
-  const [provanance, setProvanance] = useState(false);
-  const [owner, setOwner] = useState(false);
-  const [curTab, setCurTab] = useState();
+  const [times, setTimes] = useState(getRandomTime());
+  const getAllUsers = useSelector((state) => state.users?.users?.allUsers);
 
-  console.log("check nft: ", nft);
+  const getOwnerData = getAllUsers?.filter(
+    (user) => user?.configAddress === nft?.seller.toLowerCase()
+  );
+
+  useEffect(() => {
+    const countdownInterval = setInterval(() => {
+      setTimes((prevTimes) => {
+        let { days, hours, minutes, seconds } = prevTimes;
+        if (seconds > 0) {
+          seconds--;
+        } else if (minutes > 0) {
+          minutes--;
+          seconds = 59;
+        } else if (hours > 0) {
+          hours--;
+          minutes = 59;
+          seconds = 59;
+        } else if (days > 0) {
+          days--;
+          hours = 23;
+          minutes = 59;
+          seconds = 59;
+        } else {
+          clearInterval(countdownInterval);
+          return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+        }
+        return { days, hours, minutes, seconds };
+      });
+    }, 1000);
+
+    return () => clearInterval(countdownInterval);
+  }, []);
+
+  const formatTime = (time) => (time < 10 ? `0${time}` : time);
 
   const router = useRouter();
-
-  const historyArray = [
-    images.user1,
-    images.user2,
-    images.user3,
-    images.user4,
-    images.user5,
-  ];
-  const provananceArray = [
-    images.user6,
-    images.user7,
-    images.user8,
-    images.user9,
-    images.user10,
-  ];
-  const ownerArray = [
-    images.user1,
-    images.user8,
-    images.user2,
-    images.user6,
-    images.user5,
-  ];
 
   const openNFTMenu = () => {
     if (!NFTMenu) {
       setNFTMenu(true);
-      setSocial(false);
     } else {
       setNFTMenu(false);
-    }
-  };
-
-  const openTabs = (e) => {
-    const btnText = e.target.innerText;
-    if (btnText == "Bid History") {
-      setCurTab("Bid History");
-      setHistory(true);
-      setProvanance(false);
-      setOwner(false);
-    } else if (btnText == "Provanance") {
-      setCurTab("Provanance");
-      setHistory(false);
-      setProvanance(true);
-      setOwner(false);
-    }
-  };
-
-  const openOwner = () => {
-    if (!owner) {
-      setCurTab("Owner");
-      setOwner(true);
-      setHistory(false);
-      setProvanance(false);
-    } else {
-      setOwner(false);
-      setHistory(true);
     }
   };
 
@@ -128,41 +108,25 @@ const NFTDescription = ({ nft }) => {
         </div>
         <div className={Style.NFTDescription_box_profile}>
           <h1>
-            {nft.name} #{nft.tokenId}
+            {nft?.name} #{nft?.tokenId}
           </h1>
           <div className={Style.NFTDescription_box_profile_box}>
             <div className={Style.NFTDescription_box_profile_box_left}>
               <Image
-                src={images.user1}
+                src={getOwnerData[0]?.photo || images.item11}
                 alt="profile"
                 width={40}
                 height={40}
                 className={Style.NFTDescription_box_profile_box_left_img}
               />
               <div className={Style.NFTDescription_box_profile_box_left_info}>
-                <small>Creator</small> <br />
+                <small>Owner</small> <br />
                 <Link href={{ pathname: "/author", query: `${nft.seller}` }}>
                   <span>
-                    Karli Costa <MdVerified color={"rgb(32, 129, 226)"} />
+                    {getOwnerData[0]?.name || "null"}{" "}
+                    <MdVerified color={"rgb(32, 129, 226)"} />
                   </span>
                 </Link>
-              </div>
-            </div>
-
-            <div className={Style.NFTDescription_box_profile_box_right}>
-              <Image
-                src={images.user2}
-                alt="profile"
-                width={40}
-                height={40}
-                className={Style.NFTDescription_box_profile_box_left_img}
-              />
-
-              <div className={Style.NFTDescription_box_profile_box_right_info}>
-                <small>Creator</small> <br />
-                <span>
-                  Karli Costa <MdVerified color={"rgb(32, 129, 226)"} />
-                </span>
               </div>
             </div>
           </div>
@@ -178,7 +142,7 @@ const NFTDescription = ({ nft }) => {
                   Style.NFTDescription_box_profile_biding_box_timer_item
                 }
               >
-                <p>2</p>
+                <p>{formatTime(times?.days)} :</p>
                 <span>Days</span>
               </div>
               <div
@@ -186,7 +150,7 @@ const NFTDescription = ({ nft }) => {
                   Style.NFTDescription_box_profile_biding_box_timer_item
                 }
               >
-                <p>22</p>
+                <p>{formatTime(times?.hours)} :</p>
                 <span>hours</span>
               </div>
               <div
@@ -194,7 +158,7 @@ const NFTDescription = ({ nft }) => {
                   Style.NFTDescription_box_profile_biding_box_timer_item
                 }
               >
-                <p>45</p>
+                <p>{formatTime(times?.minutes)} :</p>
                 <span>mins</span>
               </div>
               <div
@@ -202,7 +166,7 @@ const NFTDescription = ({ nft }) => {
                   Style.NFTDescription_box_profile_biding_box_timer_item
                 }
               >
-                <p>12</p>
+                <p>{formatTime(times?.seconds)}</p>
                 <span>secs</span>
               </div>
             </div>
@@ -248,54 +212,7 @@ const NFTDescription = ({ nft }) => {
                   classStyle={Style.button}
                 />
               )}
-              <Button
-                icon=<FaPercentage />
-                btnName="Make an offer"
-                handleClick={() => {}}
-                classStyle={Style.button}
-              />
             </div>
-
-            <div className={Style.NFTDescription_box_profile_biding_box_tabs}>
-              <button
-                className={curTab === "Bid History" ? Style.active : ""}
-                onClick={(e) => openTabs(e)}
-              >
-                Bid History
-              </button>
-              <button
-                className={curTab === "Provanance" ? Style.active : ""}
-                onClick={(e) => openTabs(e)}
-              >
-                Provanance
-              </button>
-              <button
-                className={curTab === "Owner" ? Style.active : ""}
-                onClick={() => openOwner()}
-              >
-                Owner
-              </button>
-            </div>
-
-            {history && (
-              <div className={Style.NFTDescription_box_profile_biding_box_card}>
-                <NFTTabs dataTab={historyArray} />
-              </div>
-            )}
-            {provanance && (
-              <div className={Style.NFTDescription_box_profile_biding_box_card}>
-                <NFTTabs dataTab={provananceArray} />
-              </div>
-            )}
-
-            {owner && (
-              <div className={Style.NFTDescription_box_profile_biding_box_card}>
-                <NFTTabs
-                  dataTab={ownerArray}
-                  icon=<MdVerified color={"rgb(32, 129, 226)"} />
-                />
-              </div>
-            )}
           </div>
         </div>
       </div>
