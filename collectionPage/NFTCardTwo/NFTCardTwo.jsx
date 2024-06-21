@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { BsImage } from "react-icons/bs";
-import { MdVerified, MdTimer } from "react-icons/md";
+import { MdTimer } from "react-icons/md";
 import Style from "./NFTCardTwo.module.css";
 import Link from "next/link";
 

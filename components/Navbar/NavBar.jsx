@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { MdNotifications } from "react-icons/md";
 import { BsSearch } from "react-icons/bs";
 import { CgMenuLeft, CgMenuRight } from "react-icons/cg";
 import Style from "./NavBar.module.css";
@@ -16,7 +15,6 @@ import { updateAction, logoutAction } from "../../API/manageUser.js";
 const NavBar = () => {
   const [discover, setDiscover] = useState(false);
   const [help, setHelp] = useState(false);
-  const [notification, setNotification] = useState(false);
   const [profile, setProfile] = useState(false);
   const [openSideMenu, setOpenSideMenu] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
@@ -32,12 +30,10 @@ const NavBar = () => {
     if (btnText === "Discover") {
       setDiscover((prev) => !prev);
       setHelp(false);
-      setNotification(false);
       setProfile(false);
     } else if (btnText === "Support") {
       setHelp((prev) => !prev);
       setDiscover(false);
-      setNotification(false);
       setProfile(false);
     }
   };
@@ -46,7 +42,6 @@ const NavBar = () => {
     if (navRef.current && !navRef.current.contains(event.target)) {
       setDiscover(false);
       setHelp(false);
-      setNotification(false);
       setProfile(false);
     }
   };
@@ -58,23 +53,11 @@ const NavBar = () => {
     };
   }, []);
 
-  const openNotification = () => {
-    if (!notification) {
-      setNotification(true);
-      setDiscover(false);
-      setHelp(false);
-      setProfile(false);
-    } else {
-      setNotification(false);
-    }
-  };
-
   const openProfile = () => {
     if (!profile) {
       setProfile(true);
       setHelp(false);
       setDiscover(false);
-      setNotification(false);
     } else {
       setProfile(false);
     }
@@ -112,7 +95,6 @@ const NavBar = () => {
   const token = useSelector((state) => state.auth.login.token);
 
   const updateAddressWalletForUser = () => {
-    console.log(currentAccount);
     if (!user.configAddress) {
       const formData = {
         configAddress: currentAccount,
@@ -181,13 +163,6 @@ const NavBar = () => {
               <BsSearch onClick={() => {}} className={Style.search_icon} />
               <input type="text" placeholder="Search NFT" />
             </div>
-          </div>
-          <div className={Style.navbar_container_right_notify}>
-            <MdNotifications
-              className={Style.notify}
-              onClick={() => openNotification()}
-            />
-            {notification && <Notification />}
           </div>
 
           <div className={Style.navbar_container_right_button}>

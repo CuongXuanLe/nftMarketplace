@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 import { MdVerified } from "react-icons/md";
 import Style from "./DaysComponents.module.css";
-import images from "../../../img";
 import empty from "../../../img/images-empty.png";
 
 const DaysComponents = ({ el }) => {

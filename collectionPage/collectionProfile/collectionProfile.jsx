@@ -1,17 +1,11 @@
 import React from "react";
 import Image from "next/image";
-import {
-  TiSocialFacebook,
-  TiSocialLinkedin,
-  TiSocialTwitter,
-  TiSocialInstagram,
-} from "react-icons/ti";
 import Style from "./collectionProfile.module.css";
 import images from "../../img";
 
 const collectionProfile = ({ profileData }) => {
   const cardArray = [1, 2, 3, 4];
-  console.log("profileData: ", profileData);
+
   return (
     <div className={Style.collectionProfile}>
       <div className={Style.collectionProfile_box}>

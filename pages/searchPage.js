@@ -42,8 +42,6 @@ const searchPage = () => {
     }
   };
 
-  console.log(nfts)
-
   return (
     <div className={Style.searchPage}>
       <Banner bannerImage={images.creatorbackground2} />

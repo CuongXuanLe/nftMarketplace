@@ -29,7 +29,7 @@ const reSellToken = () => {
 
   const resell = async () => {
     try {
-      console.log(tokenURI, price, id);
+      // console.log(tokenURI, price, id);
       await createSale(tokenURI, price, true, id);
       router.push("/author");
     } catch (error) {

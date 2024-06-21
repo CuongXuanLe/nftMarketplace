@@ -24,8 +24,6 @@ const connectingWithSmartContract = async () => {
     const provider = new ethers.providers.Web3Provider(connection);
     const signer = provider.getSigner();
     const contract = fetchContract(signer);
-
-    console.log("check connect: ", web3Modal, connection, provider);
     return contract;
   } catch (error) {
     console.log("Something went wrong while connecting with contract", error);
@@ -110,7 +108,6 @@ export const NFTMarketplaceProvider = ({ children }) => {
       const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",
       });
-      console.log("connect Wallet: ", accounts);
 
       setCurrentAccount(accounts[0]);
       window.location.reload();
@@ -178,7 +175,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
         },
       });
       const url = `https://gateway.pinata.cloud/ipfs/${response.data.IpfsHash}`;
-      console.log(url);
+      // console.log(url);
       await createSale(url, price);
       router.push("/searchPage");
     } catch (error) {
@@ -311,14 +308,14 @@ export const NFTMarketplaceProvider = ({ children }) => {
       const contract = await connectingWithSmartContract();
       const price = ethers.utils.parseUnits(nft.price.toString(), "ether");
 
-      console.log("check: ", nft);
-      console.log("contract: ", contract);
+      // console.log("check: ", nft);
+      // console.log("contract: ", contract);
 
       const transaction = await contract.createMarketSale(nft.tokenId, {
         value: price,
       });
 
-      console.log("check transaction: ", transaction, price);
+      // console.log("check transaction: ", transaction, price);
 
       await transaction.wait();
       router.push("/author");
@@ -337,7 +334,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
     try {
       if (currentAccount) {
         const contract = await connectToTransferFunds(currentAccount);
-        console.log("transfer ether: ", address, ether, message);
+        // console.log("transfer ether: ", address, ether, message);
 
         const unFormattedPrice = ethers.utils.parseEther(ether);
         await ethereum.request({
@@ -358,7 +355,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
           message
         );
 
-        console.log(transaction);
+        // console.log(transaction);
 
         setLoading(true);
         transaction.wait();

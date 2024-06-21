@@ -10,12 +10,10 @@ import Category from "./Category/Category";
 import Collection from "./Collection/Collection";
 import Filter from "./Filter/Filter";
 import NFTCard from "./NFTCard/NFTCard";
-import AudioLive from "./AudioLive/AudioLive";
 import LikeProfile from "./LikeProfile/LikeProfile";
 import FollowerTab from "./FollowerTab/FollowerTab";
 import Slider from "./Slider/Slider";
 import Brand from "./Brand/Brand";
-import Video from "./Video/Video";
 import Loader from "./Loader/Loader";
 import Error from "./Error/Error";
 
@@ -33,11 +31,9 @@ export {
   Collection,
   Filter,
   NFTCard,
-  AudioLive,
   LikeProfile,
   FollowerTab,
   Slider,
   Brand,
-  Video,
   Loader,
 };

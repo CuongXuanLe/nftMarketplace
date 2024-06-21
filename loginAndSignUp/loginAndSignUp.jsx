@@ -13,7 +13,6 @@ const loginAndSignUp = ({ pageName }) => {
 
   const dispatch = useDispatch();
   const router = useRouter();
-  // const user = useSelector((state) => state.auth.login.currentUser);
 
   const handleLogin = () => {
     try {

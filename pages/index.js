@@ -24,7 +24,7 @@ const Home = () => {
   const [nfts, setNfts] = useState([]);
   const [allUsers, setAllUsers] = useState();
 
-  const { checkIfWalletConnected, currentAccount, fetchNFTs } = useContext(
+  const { checkIfWalletConnected, fetchNFTs } = useContext(
     NFTMarketplaceContext
   );
   const dispatch = useDispatch();
@@ -48,7 +48,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchNFTs().then((item) => {
-      console.log(item);
+      // console.log(item);
       setNfts(item?.reverse());
     });
   }, []);

@@ -1,48 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   RiUserFollowFill,
-  RiUserUnfollowFill,
   RiAwardLine,
 } from "react-icons/ri";
 import Style from "./FollowerTab.module.css";
 import FollowerTabCard from "./FollowerTabCard/FollowerTabCard";
 import images from "../../img";
+import Link from "next/link";
 
 const FollowerTab = ({ TopCreator }) => {
-  const CardArray = [
-    {
-      background: images.item9,
-      user: images.user1,
-    },
-    {
-      background: images.item10,
-      user: images.user2,
-    },
-    {
-      background: images.item8,
-      user: images.user3,
-    },
-    {
-      background: images.creatorbackground4,
-      user: images.user4,
-    },
-    {
-      background: images.item1,
-      user: images.user5,
-    },
-    {
-      background: images.creatorbackground6,
-      user: images.user6,
-    },
-    {
-      background: images.item4,
-      user: images.user7,
-    },
-    {
-      background: images.creatorbackground8,
-      user: images.user8,
-    },
-  ];
   const FollowingArray = [
     {
       background: images.creatorbackground3,
@@ -165,7 +131,11 @@ const FollowerTab = ({ TopCreator }) => {
       {popular && (
         <div className={Style.followerTab_box}>
           {TopCreator.map((el, i) => (
-            <FollowerTabCard key={i + 1} i={i} el={el} />
+            <Link href={{ pathname: "/author", query: el }}>
+              <a>
+                <FollowerTabCard key={i + 1} i={i} el={el} />
+              </a>
+            </Link>
           ))}
         </div>
       )}

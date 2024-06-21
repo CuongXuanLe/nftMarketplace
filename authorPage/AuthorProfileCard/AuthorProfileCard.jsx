@@ -18,7 +18,6 @@ import images from "../../img";
 import { Button } from "../../components/componentsindex.js";
 
 const AuthorProfileCard = ({ currentAccount }) => {
-  const [share, setShare] = useState(false);
   const [report, setReport] = useState(false);
 
   const copyAddress = () => {
@@ -28,21 +27,9 @@ const AuthorProfileCard = ({ currentAccount }) => {
     navigator.clipboard.writeText(copyText.value);
   };
 
-  console.log(currentAccount);
-
-  const openShare = () => {
-    if (!share) {
-      setShare(true);
-      setReport(false);
-    } else {
-      setShare(false);
-    }
-  };
-
   const openReport = () => {
     if (!report) {
       setReport(true);
-      setShare(false);
     } else {
       setReport(false);
     }
@@ -53,7 +40,7 @@ const AuthorProfileCard = ({ currentAccount }) => {
       <div className={Style.AuthorProfileCard_box}>
         <div className={Style.AuthorProfileCard_box_img}>
           <Image
-            src={currentAccount.photo || images.item11}
+            src={currentAccount?.photo || images.item11}
             className={Style.AuthorProfileCard_box_img_img}
             alt="NFT IMAGES"
             width={220}

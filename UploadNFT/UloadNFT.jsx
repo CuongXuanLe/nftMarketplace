@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { MdOutlineHttp, MdOutlineAttachFile } from "react-icons/md";
-import { FaPercent } from "react-icons/fa";
+import { MdOutlineHttp } from "react-icons/md";
 import { AiTwotonePropertySafety } from "react-icons/ai";
 import { TiTick } from "react-icons/ti";
 import Image from "next/image";
@@ -17,10 +16,7 @@ const UloadNFT = ({ uploadToPinata, createNFT }) => {
   const [name, setName] = useState("");
   const [website, setWebsite] = useState("");
   const [description, setDescription] = useState("");
-  // const [royalties, setRoyalties] = useState("");
-  // const [fileSize, setFileSize] = useState("");
   const [category, setCategory] = useState(0);
-  // const [properties, setProperties] = useState("");
   const [image, setImage] = useState(null);
 
   const router = useRouter();

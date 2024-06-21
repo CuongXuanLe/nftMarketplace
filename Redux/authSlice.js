@@ -33,7 +33,6 @@ const authSlice = createSlice({
     },
     updateSuccess: (state, action) => {
       const { formData } = action.payload;
-      console.log("data user: ", formData);
       state.login.isFetching = false;
       state.login.currentUser = formData;
       state.login.error = false;

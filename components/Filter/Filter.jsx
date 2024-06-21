@@ -4,8 +4,6 @@ import {
   FaAngleDown,
   FaAngleUp,
   FaWallet,
-  FaMusic,
-  FaVideo,
   FaImages,
   FaUserAlt,
 } from "react-icons/fa";
@@ -17,8 +15,6 @@ import Style from "./Filter.module.css";
 const Filter = () => {
   const [filter, setFilter] = useState(true);
   const [image, setImage] = useState(true);
-  const [video, setVideo] = useState(true);
-  const [music, setMusic] = useState(true);
 
   const openFilter = () => {
     if (!filter) {
@@ -33,22 +29,6 @@ const Filter = () => {
       setImage(true);
     } else {
       setImage(false);
-    }
-  };
-
-  const openVideo = () => {
-    if (!video) {
-      setVideo(true);
-    } else {
-      setVideo(false);
-    }
-  };
-
-  const openMusic = () => {
-    if (!music) {
-      setMusic(true);
-    } else {
-      setMusic(false);
     }
   };
 

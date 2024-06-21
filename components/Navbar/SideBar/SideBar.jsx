@@ -175,7 +175,6 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
             btnName="Connect"
             handleClick={() => {
               connectWallet();
-              console.log("click");
             }}
           />
         ) : (
@@ -184,7 +183,6 @@ const SideBar = ({ setOpenSideMenu, currentAccount, connectWallet }) => {
             handleClick={() => router.push("/uploadNFT")}
           />
         )}
-        {/* <Button btnName="Create" handleClick={() => {}} /> */}
         <Button btnName="Connect Wallet" handleClick={() => {}} />
       </div>
     </div>

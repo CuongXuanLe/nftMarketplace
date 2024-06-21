@@ -121,7 +121,7 @@ const NFTDescription = ({ nft }) => {
               />
               <div className={Style.NFTDescription_box_profile_box_left_info}>
                 <small>Owner</small> <br />
-                <Link href={{ pathname: "/author", query: `${nft.seller}` }}>
+                <Link href={{ pathname: "/author", query: nft }}>
                   <span>
                     {getOwnerData[0]?.name || "null"}{" "}
                     <MdVerified color={"rgb(32, 129, 226)"} />

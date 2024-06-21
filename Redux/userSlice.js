@@ -17,7 +17,6 @@ const userSlice = createSlice({
       state.users.isFetching = true;
     },
     getUsersSuccess: (state, action) => {
-      console.log("get all user: ", action);
       state.users.isFetching = false;
       state.users.allUsers = action.payload;
     },

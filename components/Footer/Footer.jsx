@@ -6,15 +6,16 @@ import {
   TiSocialTwitter,
   TiSocialYoutube,
   TiSocialInstagram,
-  TiArrowSortedDown,
-  TiArrowSortedUp,
 } from "react-icons/ti";
 import { RiSendPlaneFill } from "react-icons/ri";
 import Style from "./Footer.module.css";
 import images from "../../img";
 import { Discover, HelpCenter } from "../Navbar/index";
+import { useSelector } from "react-redux";
 
 const Footer = () => {
+
+  const user = useSelector((state) => state.auth.login?.currentUser);
   return (
     <div className={Style.footer}>
       <div className={Style.footer_box}>
@@ -47,12 +48,12 @@ const Footer = () => {
 
         <div className={Style.footer_box_discover}>
           <h3>Discover</h3>
-          <Discover />
+          <Discover user={user} />
         </div>
 
         <div className={Style.footer_box_help}>
           <h3>Help Center</h3>
-          <HelpCenter />
+          <HelpCenter user={user}/>
         </div>
 
         <div className={Style.subscribe}>
