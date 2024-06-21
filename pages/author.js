@@ -15,40 +15,8 @@ import { getTopCreator } from "../TopCreators/TopCreators";
 
 const author = () => {
   const user = useSelector((state) => state.auth.login.currentUser);
-  const allNFTs = useSelector((state) => state.users.getAllNFTs)
+  const allNFTs = useSelector((state) => state.users.getAllNFTs);
   const creators = getTopCreator(allNFTs);
-  const followerArray = [
-    {
-      background: images.creatorbackground1,
-      user: images.user1,
-      seller: "apsdiasdpaipdaosidpasdapd",
-    },
-    {
-      background: images.creatorbackground2,
-      user: images.user2,
-      seller: "apsdiasdpaipdaosidpasdapd",
-    },
-    {
-      background: images.creatorbackground3,
-      user: images.user3,
-      seller: "apsdiasdpaipdaosidpasdapd",
-    },
-    {
-      background: images.creatorbackground4,
-      user: images.user4,
-      seller: "apsdiasdpaipdaosidpasdapd",
-    },
-    {
-      background: images.creatorbackground5,
-      user: images.user5,
-      seller: "apsdiasdpaipdaosidpasdapd",
-    },
-    {
-      background: images.creatorbackground6,
-      user: images.user6,
-      seller: "apsdiasdpaipdaosidpasdapd",
-    },
-  ];
 
   const [collectiables, setCollectiables] = useState(true);
   const [created, setCreated] = useState(false);
@@ -56,9 +24,7 @@ const author = () => {
   const [follower, setFollower] = useState(false);
   const [following, setFollowing] = useState(false);
 
-  const { fetchMyNFTsOrListedNFTs } = useContext(
-    NFTMarketplaceContext
-  );
+  const { fetchMyNFTsOrListedNFTs } = useContext(NFTMarketplaceContext);
   const [nfts, setNfts] = useState([]);
   const [myNFTs, setMyNFTs] = useState([]);
 
@@ -101,7 +67,7 @@ const author = () => {
           <FollowerTabCard i={i} el={el} />
         ))}
       </div>
- 
+
       <Brand />
     </div>
   );

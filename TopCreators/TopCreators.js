@@ -12,7 +12,7 @@ export const getTopCreator = (creators) => {
   if (finalResults && Object.keys(finalResults).length > 0) {
     Object.entries(finalResults).forEach((item) => {
       const seller = item[0];
-      const image = item[1][Math.floor(Math.random() * item.length)].image;
+      const image = item[1][Math.floor(Math.random() * item.length)]?.image;
       const total = item[1]
         .map((newItem) => Number(newItem.price))
         .reduce(

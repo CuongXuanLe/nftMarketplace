@@ -17,7 +17,7 @@ import Style from "./AuthorProfileCard.module.css";
 import images from "../../img";
 import { Button } from "../../components/componentsindex.js";
 
-const AuthorProfileCard = ({currentAccount}) => {
+const AuthorProfileCard = ({ currentAccount }) => {
   const [share, setShare] = useState(false);
   const [report, setReport] = useState(false);
 
@@ -28,7 +28,7 @@ const AuthorProfileCard = ({currentAccount}) => {
     navigator.clipboard.writeText(copyText.value);
   };
 
-  console.log(currentAccount)
+  console.log(currentAccount);
 
   const openShare = () => {
     if (!share) {
@@ -53,7 +53,7 @@ const AuthorProfileCard = ({currentAccount}) => {
       <div className={Style.AuthorProfileCard_box}>
         <div className={Style.AuthorProfileCard_box_img}>
           <Image
-            src={images.nft_image_1}
+            src={currentAccount.photo || images.item11}
             className={Style.AuthorProfileCard_box_img_img}
             alt="NFT IMAGES"
             width={220}
@@ -63,7 +63,8 @@ const AuthorProfileCard = ({currentAccount}) => {
 
         <div className={Style.AuthorProfileCard_box_info}>
           <h2>
-            {currentAccount?.name}{""}{" "}
+            {currentAccount?.name}
+            {""}{" "}
             <span>
               <MdVerified marginleft="5" color={"rgb(32, 129, 226)"} />
             </span>{" "}
@@ -81,9 +82,7 @@ const AuthorProfileCard = ({currentAccount}) => {
             />
           </div>
 
-          <p>
-            {currentAccount?.description}
-          </p>
+          <p>{currentAccount?.description}</p>
         </div>
 
         <div className={Style.AuthorProfileCard_box_share}>

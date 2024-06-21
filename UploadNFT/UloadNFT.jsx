@@ -17,10 +17,10 @@ const UloadNFT = ({ uploadToPinata, createNFT }) => {
   const [name, setName] = useState("");
   const [website, setWebsite] = useState("");
   const [description, setDescription] = useState("");
-  const [royalties, setRoyalties] = useState("");
-  const [fileSize, setFileSize] = useState("");
+  // const [royalties, setRoyalties] = useState("");
+  // const [fileSize, setFileSize] = useState("");
   const [category, setCategory] = useState(0);
-  const [properties, setProperties] = useState("");
+  // const [properties, setProperties] = useState("");
   const [image, setImage] = useState(null);
 
   const router = useRouter();
@@ -57,10 +57,7 @@ const UloadNFT = ({ uploadToPinata, createNFT }) => {
         name={name}
         website={website}
         description={description}
-        royalties={royalties}
-        fileSize={fileSize}
         category={category}
-        properties={properties}
         setImage={setImage}
         uploadToPinata={uploadToPinata}
       />
@@ -142,53 +139,13 @@ const UloadNFT = ({ uploadToPinata, createNFT }) => {
                     <TiTick />
                   </div>
                 </div>
-                <p>Crypto Legend - {el.category} </p>
+                <p>{el.category} </p>
               </div>
             ))}
           </div>
         </div>
 
         <div className={formStyle.Form_box_input_social}>
-          <div className={formStyle.Form_box_input}>
-            <label htmlFor="Royalties">Royalties</label>
-            <div className={formStyle.Form_box_input_box}>
-              <div className={formStyle.Form_box_input_box_icon}>
-                <FaPercent />
-              </div>
-              <input
-                type="text"
-                placeholder="20%"
-                onChange={(e) => setRoyalties(e.target.value)}
-              />
-            </div>
-          </div>
-          <div className={formStyle.Form_box_input}>
-            <label htmlFor="size">Size</label>
-            <div className={formStyle.Form_box_input_box}>
-              <div className={formStyle.Form_box_input_box_icon}>
-                <MdOutlineAttachFile />
-              </div>
-              <input
-                type="text"
-                placeholder="165MB"
-                onChange={(e) => setFileSize(e.target.value)}
-              />
-            </div>
-          </div>
-          <div className={formStyle.Form_box_input}>
-            <label htmlFor="Properties">Properties</label>
-            <div className={formStyle.Form_box_input_box}>
-              <div className={formStyle.Form_box_input_box_icon}>
-                <AiTwotonePropertySafety />
-              </div>
-              <input
-                type="text"
-                placeholder="Properties"
-                onChange={(e) => setProperties(e.target.value)}
-              />
-            </div>
-          </div>
-
           <div className={formStyle.Form_box_input}>
             <label htmlFor="Price">Price</label>
             <div className={formStyle.Form_box_input_box}>
@@ -215,10 +172,7 @@ const UloadNFT = ({ uploadToPinata, createNFT }) => {
                 description,
                 router,
                 website,
-                royalties,
-                fileSize,
-                category,
-                properties
+                category
               )
             }
             classStyle={Style.upload_box_btn_style}

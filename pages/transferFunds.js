@@ -76,7 +76,6 @@ const transferFunds = () => {
                   </div>
                   <input
                     type="number"
-                    min={1}
                     placeholder="ETH"
                     onChange={(e) => setTransferAmount(e.target.value)}
                   />

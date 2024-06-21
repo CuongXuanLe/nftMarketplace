@@ -25,7 +25,7 @@ const collection = () => {
         <Loader />
       )}
       <Filter />
-      {allNFTs?.length > 0 ? (
+      {allNFTs?.length > 0 && currentUserNFT ? (
         <NFTCardTwo NFTData={currentUserNFT[0]?.nfts} />
       ) : (
         <Loader />

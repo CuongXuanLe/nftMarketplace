@@ -99,7 +99,7 @@
   align-items: flex-end;
 
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
+  grid-template-columns: 2fr 1fr;
   overflow: hidden;
 }
 
@@ -131,7 +131,7 @@
   padding: 0.2rem 0.5rem;
   align-items: center;
   border-radius: 0.3rem;
-  width: 50%;
+  width: 70%;
 }
 
 .NFTCard_box_update_details_price_box_bid small {
@@ -142,7 +142,7 @@
 }
 
 .NFTCard_box_update_details_price_box_bid p {
-  padding: 0.65rem 0 0 0;
+  padding: 0.65rem 0.5rem 0 0;
   font-weight: 600;
   text-align: right;
 }

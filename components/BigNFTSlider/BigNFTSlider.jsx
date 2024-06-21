@@ -5,6 +5,7 @@ import { MdVerified, MdTimer } from "react-icons/md";
 import { TbArrowBigLeftLines, TbArrowBigRightLine } from "react-icons/tb";
 import Style from "./BigNFTSlider.module.css";
 import Button from "../Button/Button";
+import Link from "next/link";
 
 const getRandomTime = () => {
   const days = Math.floor(Math.random() * 30);
@@ -92,11 +93,7 @@ const BigNFTSlider = ({ result }) => {
                 className={Style.bigNFTSlider_box_left_creator_collection_info}
               >
                 <p>Collection</p>
-                <h4>
-                  {result[idNumber]?.nfts[0]?.collection
-                    ? result[idNumber]?.nfts[0]?.collection
-                    : "null"}
-                </h4>
+                <h4>{result[idNumber]?.nfts[0]?.category || "null"}</h4>
               </div>
             </div>
           </div>
@@ -146,7 +143,21 @@ const BigNFTSlider = ({ result }) => {
 
             <div className={Style.bigNFTSlider_box_left_button}>
               <Button btnName="Place" handleClick={() => {}} />
-              <Button btnName="View" handleClick={() => {}} />
+              <Link
+                href={{
+                  pathname: "/NFT-details",
+                  query: result[idNumber]?.nfts[0],
+                }}
+              >
+                <a>
+                  <Button
+                    btnName="View"
+                    handleClick={() => {
+                      console.log(result[idNumber]?.nfts[0]);
+                    }}
+                  />
+                </a>
+              </Link>
             </div>
           </div>
 

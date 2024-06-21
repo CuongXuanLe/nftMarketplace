@@ -38,16 +38,22 @@
 }
 
 .FollowerTabCard_box_info_following a {
-  color: #000;
-  background-color: var(--shadow-dark-color);
+  /* color: #000; */
+  /* background-color: var(--shadow-dark-color); */
   padding: 0.7rem 1.5rem;
-  border-radius: 0.75rem;
-  border: 1px solid var(--shadow-dark-color);
+  /* border-radius: 0.75rem; */
+  /* border: 1px solid var(--shadow-dark-color); */
   transition: all 0.3s ease-in;
+}
+.FollowerTabCard_box_info_following a:nth-child(1) {
+  background-color: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+  border-radius: 0.75rem;
 }
 
 .FollowerTabCard_box_info_following a:hover {
-  background-color: transparent;
+  background-color: #63636353;
 }
 
 @media screen and (min-device-width: 320px) {

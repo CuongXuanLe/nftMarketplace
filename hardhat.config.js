@@ -13,6 +13,7 @@ require("@nomicfoundation/hardhat-toolbox");
 
 module.exports = {
   defaultNetwork: "polygon_amoy",
+  solidity: "0.8.17",
   networks: {
     hardhat: {
       chainId: 80002,
@@ -24,13 +25,15 @@ module.exports = {
       ],
     },
   },
-  solidity: {
-    version: "0.8.9",
-    settings: {
-      optimizer: {
-        enabled: true,
-        runs: 200,
-      },
-    },
-  },
+  // compilers: [
+  //   {
+  //     version: "0.8.4", // Primary version, can be adjusted based on your needs
+  //     settings: {
+  //       optimizer: {
+  //         enabled: true,
+  //         runs: 200,
+  //       },
+  //     },
+  //   },
+  // ],
 };

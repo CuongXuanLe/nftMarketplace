@@ -15,7 +15,7 @@ const DaysComponents = ({ el }) => {
         <div className={Style.daysComponent_box_img_container}>
           <div className={Style.daysComponent_box_img}>
             <Image
-              src={el?.nfts[0].image}
+              src={el?.nfts[0]?.image}
               className={Style.daysComponent_box_img_img}
               alt="profile background"
               width={500}

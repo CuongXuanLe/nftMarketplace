@@ -147,11 +147,25 @@ export const NFTMarketplaceProvider = ({ children }) => {
     }
   };
 
-  const createNFT = async (name, price, image, description, router) => {
+  const createNFT = async (
+    name,
+    price,
+    image,
+    description,
+    router,
+    website,
+    category
+  ) => {
     if (!name || !description || !price || !image)
       return console.log("Data is missing");
 
-    const data = JSON.stringify({ name, description, image });
+    const data = JSON.stringify({
+      name,
+      description,
+      image,
+      website,
+      category,
+    });
     try {
       const response = await axios({
         method: "Post",
@@ -211,7 +225,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
             const tokenURI = await contract.tokenURI(tokenId);
 
             const {
-              data: { image, name, description },
+              data: { image, name, description, website, category },
             } = await axios.get(tokenURI);
 
             const price = ethers.utils.formatUnits(
@@ -227,6 +241,8 @@ export const NFTMarketplaceProvider = ({ children }) => {
               image,
               name,
               description,
+              website,
+              category,
               tokenURI,
             };
           }
@@ -294,6 +310,9 @@ export const NFTMarketplaceProvider = ({ children }) => {
     try {
       const contract = await connectingWithSmartContract();
       const price = ethers.utils.parseUnits(nft.price.toString(), "ether");
+
+      console.log("check: ", nft);
+      console.log("contract: ", contract);
 
       const transaction = await contract.createMarketSale(nft.tokenId, {
         value: price,
