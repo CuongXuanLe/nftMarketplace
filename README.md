@@ -26,4 +26,4 @@ npx hardhat ignition deploy ./ignition/modules/Lock.js
 npx hardhat run scripts/deploy.js
 ```
 
-![123](https://github.com/CuongXuanLe/nftMarketplace/assets/90383072/b7d9f9b7-d167-46b5-9c83-3d1bff66f038)
+
