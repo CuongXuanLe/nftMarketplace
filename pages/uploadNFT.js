@@ -17,12 +17,12 @@ const uploadNFT = () => {
           </p>
         </div>
 
-        <div className={Style.uploadNFT_box_title}>
+        {/* <div className={Style.uploadNFT_box_title}>
           <h2>Image, GIF</h2>
           <p>
             File types supported: JPG, PNG, GIF, SVG, WEBM. Max size: 100 MB
           </p>
-        </div>
+        </div> */}
 
         <div className={Style.uploadNFT_box_form}>
           <UploadNFT uploadToPinata={uploadToPinata} createNFT={createNFT} />

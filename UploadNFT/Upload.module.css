@@ -3,6 +3,15 @@
   gap: 1rem;
 }
 
+.upload {
+  display: flex;
+  flex-direction: row;
+}
+
+.upload_box {
+  width: 48%;
+}
+
 .upload_box_slider {
   border: 1px solid var(--icons-color);
   border-radius: 1rem;

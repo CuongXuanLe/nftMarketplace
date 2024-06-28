@@ -44,9 +44,17 @@
 }
 
 .account_box_img_para {
+  padding: 15px;
+  border-radius: 10px;
+  border: 2px solid #fff;
   font-weight: 700;
   font-size: 1rem;
   line-height: 0;
+}
+
+.account_box_img_para:hover {
+  background-color: #fff;
+  color: #000;
 }
 
 @media screen and (max-width: 35em) {
