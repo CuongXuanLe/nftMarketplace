@@ -39,6 +39,7 @@ import item12 from "./135.jpg";
 import item0 from "./0.webp";
 import loader from "./Loader.gif";
 import errorImg from "./qwe.jpg";
+import bg from "./bg.gif"
 
 export default {
   item0,
@@ -82,4 +83,5 @@ export default {
   logoLight,
   loader,
   errorImg,
+  bg
 };

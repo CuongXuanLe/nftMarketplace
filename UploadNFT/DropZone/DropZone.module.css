@@ -5,7 +5,7 @@
 
 .DropZone_box{
     border: 5px dotted var(--icons-color);
-   border-radius: 1rem;
+    border-radius: 1rem;
     text-align: center;
     padding: 1rem;
     cursor: pointer;
@@ -17,7 +17,6 @@
 
 .DropZone_box_input_img_img{
     border-radius: 1rem;
-    /* filter: invert(); */
 }
 
 .DropZone_box_aside{
@@ -31,6 +30,36 @@
     display: grid;
     grid-template-columns: 1.5fr 4fr;
     gap: 3rem;
+}
+
+.DropZone_box_del_img{
+    position: absolute;
+    z-index: 9999;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 2px solid #fff;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}
+
+.DropZone_upload_img {
+    border-radius: 1rem;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: max-content;
+    border: 5px dotted var(--icons-color);
+}
+
+.DropZone_upload_img img{
+    width: 350px;
+    height: 350px;
+    object-fit: cover;
+    padding: 10px;
 }
 
 .DropZone_box_aside_box_preview p span{

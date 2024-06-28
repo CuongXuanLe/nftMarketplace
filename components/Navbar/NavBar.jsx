@@ -20,6 +20,8 @@ const NavBar = () => {
   const [isSticky, setIsSticky] = useState(false);
   const [error, setError] = useState(false);
   const [displayError, setDisplayError] = useState(false);
+  const [getNFTs, setGetNFTs] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -43,6 +45,7 @@ const NavBar = () => {
       setDiscover(false);
       setHelp(false);
       setProfile(false);
+      setSearchTerm("")
     }
   };
 
@@ -93,7 +96,7 @@ const NavBar = () => {
 
   const user = useSelector((state) => state.auth.login?.currentUser);
   const token = useSelector((state) => state.auth.login.token);
-
+  const allNFTs = useSelector((state) => state.users.getAllNFTs)
   const updateAddressWalletForUser = () => {
     if (!user.configAddress) {
       const formData = {
@@ -115,6 +118,15 @@ const NavBar = () => {
       updateAddressWalletForUser();
     }
   }, [currentAccount, user]);
+
+  useEffect(() => {
+    const filteredNFTs = allNFTs.filter((nft) => 
+      nft.name.includes(searchTerm)
+    );
+    setGetNFTs(filteredNFTs);
+  }, [searchTerm, allNFTs]);
+
+  console.log('allNFTs: ', getNFTs)
 
   return (
     <div
@@ -161,8 +173,28 @@ const NavBar = () => {
           <div className={Style.navbar_container_left_box_input}>
             <div className={Style.navbar_container_left_box_input_box}>
               <BsSearch onClick={() => {}} className={Style.search_icon} />
-              <input type="text" placeholder="Search NFT" />
+              <input type="text" placeholder="Search NFT" value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)} />
             </div>
+            {searchTerm ? (
+              <div className={Style.navbar_container_results} >
+                {getNFTs.length > 0 ? (
+                  getNFTs.map((item, i) => (
+                  <div className={Style.navbar_container_results_item}>
+                    <img src={item.image} alt="item"/>
+                    <div className={Style.navbar_container_results_item_title}>
+                      <strong>{item.name}</strong>
+                      <p><strong>Price:</strong> {item.price} MATIC</p>
+                    </div>
+                  </div>
+                  ))
+                ): (
+                  <div className={Style.navbar_search_notFound}>
+                    <p>Not found NFTs</p>
+                  </div>
+                )}
+                </div>
+              ) : ""}
           </div>
 
           <div className={Style.navbar_container_right_button}>

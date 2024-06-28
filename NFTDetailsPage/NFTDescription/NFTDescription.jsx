@@ -34,6 +34,10 @@ const NFTDescription = ({ nft }) => {
     (user) => user?.configAddress === nft?.seller.toLowerCase()
   );
 
+  const getCreatorData = getAllUsers?.filter(
+    (user) => user?.configAddress === nft?.owner.toLowerCase()
+  )
+  
   useEffect(() => {
     const countdownInterval = setInterval(() => {
       setTimes((prevTimes) => {
@@ -113,6 +117,24 @@ const NFTDescription = ({ nft }) => {
           <div className={Style.NFTDescription_box_profile_box}>
             <div className={Style.NFTDescription_box_profile_box_left}>
               <Image
+                src={getCreatorData[0]?.photo || images.item11}
+                alt="profile"
+                width={40}
+                height={40}
+                className={Style.NFTDescription_box_profile_box_left_img}
+              />
+              <div className={Style.NFTDescription_box_profile_box_left_info}>
+                <small>Creator</small> <br />
+                <Link href={{ pathname: "/author", query: nft }}>
+                  <span>
+                    {getCreatorData[0]?.name || "null"}{" "}
+                    <MdVerified color={"rgb(32, 129, 226)"} />
+                  </span>
+                </Link>
+              </div>
+            </div>
+            <div className={Style.NFTDescription_box_profile_box_left}>
+              <Image
                 src={getOwnerData[0]?.photo || images.item11}
                 alt="profile"
                 width={40}
@@ -180,14 +202,6 @@ const NFTDescription = ({ nft }) => {
                 <small>Current Bid</small>
                 <p>{nft.price} ETH</p>
               </div>
-
-              <span
-                className={
-                  Style.NFTDescription_box_profile_biding_box_price_span
-                }
-              >
-                [96 in stock]
-              </span>
             </div>
 
             <div className={Style.NFTDescription_box_profile_biding_box_button}>

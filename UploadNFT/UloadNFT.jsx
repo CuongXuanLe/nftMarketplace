@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { MdOutlineHttp } from "react-icons/md";
 import { AiTwotonePropertySafety } from "react-icons/ai";
 import { TiTick } from "react-icons/ti";
-import Image from "next/image";
 import Style from "./Upload.module.css";
 import formStyle from "../AccountPage/Form/Form.module.css";
-import images from "../img";
 import { Button } from "../components/componentsindex.js";
 import { DropZone } from "../UploadNFT/uploadNFTIndex.js";
 import { useRouter } from "next/router";
+import { NFTMarketplaceContext } from "../Contexts/NFTMarketplaceContext.js";
 
 const UloadNFT = ({ uploadToPinata, createNFT }) => {
+  const { currentAccount } = useContext(NFTMarketplaceContext);
+
   const [price, setPrice] = useState("");
   const [active, setActive] = useState(0);
   const [name, setName] = useState("");
@@ -18,34 +19,36 @@ const UloadNFT = ({ uploadToPinata, createNFT }) => {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState(0);
   const [image, setImage] = useState(null);
-
+  const [creator, setCreator] = useState("")
   const router = useRouter();
+
+  console.log('currentAccount: ', currentAccount)
 
   const categoryArry = [
     {
-      image: images.item2,
       category: "Sports",
     },
     {
-      image: images.item8,
       category: "Arts",
     },
     {
-      image: images.item5,
       category: "Digital",
     },
     {
-      image: images.nft_image_2,
       category: "Time",
     },
     {
-      image: images.item10,
       category: "Photography",
     },
   ];
 
+  useEffect(() => {
+    setCreator(currentAccount)
+  }, [currentAccount])
+
   return (
     <div className={Style.upload}>
+    <div className={Style.upload_box}>
       <DropZone
         title="JPG, PNG, WEBM , MAX 100MB"
         heading="Drag & drop file"
@@ -56,7 +59,9 @@ const UloadNFT = ({ uploadToPinata, createNFT }) => {
         category={category}
         setImage={setImage}
         uploadToPinata={uploadToPinata}
+        creator={creator}
       />
+    </div>
 
       <div className={Style.upload_box}>
         <div className={formStyle.Form_box_input}>
@@ -121,21 +126,13 @@ const UloadNFT = ({ uploadToPinata, createNFT }) => {
                 key={i + 1}
                 onClick={() => (setActive(i + 1), setCategory(el.category))}
               >
-                <div className={Style.upload_box_slider_box}>
-                  <div className={Style.upload_box_slider_box_img}>
-                    <Image
-                      src={el.image}
-                      alt="background image"
-                      width={70}
-                      height={70}
-                      className={Style.upload_box_slider_box_img_img}
-                    />
-                  </div>
-                  <div className={Style.upload_box_slider_box_img_icon}>
+                <p>{el.category} </p>
+                <div 
+                  className={`${Style.upload_box_slider_box_img_icon} ${
+                  active == i + 1 ? Style.upload_box_slider_box_img_icon_active : ""
+                }`}>
                     <TiTick />
                   </div>
-                </div>
-                <p>{el.category} </p>
               </div>
             ))}
           </div>
@@ -168,14 +165,10 @@ const UloadNFT = ({ uploadToPinata, createNFT }) => {
                 description,
                 router,
                 website,
-                category
+                category, 
+                creator
               )
             }
-            classStyle={Style.upload_box_btn_style}
-          />
-          <Button
-            btnName="Preview"
-            handleClick={() => {}}
             classStyle={Style.upload_box_btn_style}
           />
         </div>

@@ -1,11 +1,14 @@
 .upload_box_slider_div {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 
 .upload {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .upload_box {
@@ -17,6 +20,9 @@
   border-radius: 1rem;
   padding: 1rem;
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .upload_box_slider_box {
@@ -35,6 +41,9 @@
   border-radius: 50%;
   display: grid;
   padding: 0.2rem;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
 }
 
 .upload_box_slider p {
@@ -44,8 +53,6 @@
 }
 
 .upload_box_btn {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
   margin-block: 4rem;
   gap: 2rem;
 }
@@ -58,8 +65,13 @@
 }
 
 .active {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgb(255, 255, 255);
   color: rgb(18, 18, 18, 1);
+}
+
+.upload_box_slider_box_img_icon_active{
+  background-color: #000;
+  color: #fff;
 }
 
 @media screen and (max-width: 35em) {

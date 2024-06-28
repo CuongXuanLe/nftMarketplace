@@ -151,7 +151,8 @@ export const NFTMarketplaceProvider = ({ children }) => {
     description,
     router,
     website,
-    category
+    category,
+    creator
   ) => {
     if (!name || !description || !price || !image)
       return console.log("Data is missing");
@@ -162,6 +163,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
       image,
       website,
       category,
+      creator
     });
     try {
       const response = await axios({
