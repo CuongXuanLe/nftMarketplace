@@ -1,20 +1,10 @@
 import React, { useState } from "react";
-import {
-  FaFilter,
-  FaAngleDown,
-  FaAngleUp,
-  FaWallet,
-  FaImages,
-  FaUserAlt,
-} from "react-icons/fa";
-import { AiFillCloseCircle } from "react-icons/ai";
-import { MdVerified } from "react-icons/md";
-import { TiTick } from "react-icons/ti";
+import { FaFilter, FaAngleDown, FaAngleUp } from "react-icons/fa";
 import Style from "./Filter.module.css";
 
-const Filter = () => {
+const Filter = ({ setType }) => {
   const [filter, setFilter] = useState(true);
-  const [image, setImage] = useState(true);
+  const [active, setActive] = useState("All");
 
   const openFilter = () => {
     if (!filter) {
@@ -24,21 +14,46 @@ const Filter = () => {
     }
   };
 
-  const openImage = () => {
-    if (!image) {
-      setImage(true);
-    } else {
-      setImage(false);
-    }
+  const categoryArry = [
+    {
+      category: "All",
+    },
+    {
+      category: "Sports",
+    },
+    {
+      category: "Arts",
+    },
+    {
+      category: "Digital",
+    },
+    {
+      category: "Time",
+    },
+    {
+      category: "Photography",
+    },
+  ];
+
+  const handleFilterChange = (event) => {
+    setType(event);
   };
 
   return (
     <div className={Style.filter}>
       <div className={Style.filter_box}>
         <div className={Style.filter_box_left}>
-          <button onClick={() => {}}>NFTs</button>
-          <button onClick={() => {}}>Arts</button>
-          <button onClick={() => {}}>Photography</button>
+          {categoryArry.map((item, i) => (
+            <button
+              className={item.category === active ? Style.active : null}
+              onClick={() => {
+                setActive(item.category);
+                handleFilterChange(item.category);
+              }}
+            >
+              {item.category}
+            </button>
+          ))}
         </div>
 
         <div className={Style.filter_box_right}>
@@ -49,36 +64,16 @@ const Filter = () => {
             <FaFilter />
             <span>Filter</span> {filter ? <FaAngleDown /> : <FaAngleUp />}
           </div>
+          <div className={Style.backHover}></div>
+          <ul className={Style.filter_box_func}>
+            <li>Sort by A-Z</li>
+            <li>Sort by Z-A</li>
+            <li>Low to High</li>
+            <li>High to Low</li>
+          </ul>
         </div>
       </div>
-
-      {filter && (
-        <div className={Style.filter_box_items}>
-          <div className={Style.filter_box_items_box}>
-            <div className={Style.filter_box_items_box_item}>
-              <FaWallet /> <span>10 ETH</span>
-              <AiFillCloseCircle />
-            </div>
-          </div>
-
-          <div className={Style.filter_box_items_box}>
-            <div
-              className={Style.filter_box_items_box_item_trans}
-              onClick={() => openImage()}
-            >
-              <FaImages /> <small>Images</small>
-              {image ? <AiFillCloseCircle /> : <TiTick />}
-            </div>
-          </div>
-
-          <div className={Style.filter_box_items_box}>
-            <div className={Style.filter_box_items_box_item}>
-              <FaUserAlt /> <span>Verified</span>
-              <MdVerified color={"rgb(32, 129, 226)"} />
-            </div>
-          </div>
-        </div>
-      )}
+      <div className={Style.filter_box_items}></div>
     </div>
   );
 };

@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 4rem;
+  padding-bottom: 2rem;
 }
 
 .filter_box_left {
@@ -20,18 +20,47 @@
 .filter_box_left button {
   border: none;
   outline: none;
-  padding: 1rem 1.5rem;
-  border-radius: 1rem;
+  padding: 0.75rem 1.3rem;
+  border-radius: 0.75rem;
   border: 1px solid var(--main-bg-color);
   transition: all 0.3s ease-in;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
+  font-weight: 700;
   cursor: pointer;
   background-color: var(--main-bg-color);
 }
 
 .filter_box_left button:hover {
-  border: 1px solid var(--icons-color);
-  color: var(--icons-color);
+  background-color: rgba(105, 105, 105, 0.4);
+}
+
+.filter_box_right {
+  position: relative;
+}
+
+.filter_box_func {
+  display: none;
+  position: absolute;
+  width: 100%;
+  background-color: rgb(66, 66, 66);
+  padding: 10px;
+  z-index: 9999999;
+  list-style-type: none;
+  border-radius: 0.75rem;
+}
+
+.filter_box_func li {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.filter_box_func li:hover {
+  background-color: rgba(161, 161, 161, 0.9);
+  border-radius: 0.2rem;
+}
+
+.active {
+  background-color: rgba(255, 255, 255, 0.3) !important;
 }
 
 .filter_box_right_box {
@@ -47,13 +76,24 @@
 
 .filter_box_right_box:hover {
   background-color: rgba(105, 105, 105, 0.4) !important;
+  border: 1px solid transparent;
+}
+
+.filter_box_right:hover ul {
+  display: block;
+}
+
+.backHover {
+  width: 100%;
+  height: 20px;
+  position: absolute;
+  background-color: transparent;
 }
 
 .filter_box_items {
   width: 80%;
   margin: 0 auto;
   display: flex;
-  padding: 2rem 0;
   border-top: 1px solid var(--icons-light-color);
 }
 

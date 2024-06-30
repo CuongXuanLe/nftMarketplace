@@ -115,7 +115,7 @@ const Collection = ({ result }) => {
             >
               <BsFillAlarmFill /> 24 hours
             </button>
-            <button
+            {/* <button
               onClick={() => openFollower()}
               className={activeButton === "following" ? Style.active : ""}
             >
@@ -126,7 +126,7 @@ const Collection = ({ result }) => {
               className={activeButton === "news" ? Style.active : ""}
             >
               <BsFillCalendarDateFill /> 30 days
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

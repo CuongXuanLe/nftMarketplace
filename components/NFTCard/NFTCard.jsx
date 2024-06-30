@@ -4,7 +4,7 @@ import Image from "next/image";
 import Style from "./NFTCard.module.css";
 import Link from "next/link";
 
-const NFTCard = ({ NFTData }) => {
+const NFTCard = ({ NFTData, getType }) => {
   const getRandomTime = () => {
     const hours = Math.floor(Math.random() * 24);
     const minutes = Math.floor(Math.random() * 60);
@@ -21,16 +21,18 @@ const NFTCard = ({ NFTData }) => {
     const countdownInterval = setInterval(() => {
       setTimes((prevTimes) =>
         prevTimes.map((time) => {
-          const { hours, minutes, seconds } = time;
+          let { hours, minutes, seconds } = time;
           if (seconds > 0) {
-            return { ...time, seconds: seconds - 1 };
+            seconds -= 1;
           } else if (minutes > 0) {
-            return { hours, minutes: minutes - 1, seconds: 59 };
+            minutes -= 1;
+            seconds = 59;
           } else if (hours > 0) {
-            return { hours: hours - 1, minutes: 59, seconds: 59 };
-          } else {
-            return { hours: 0, minutes: 0, seconds: 0 };
+            hours -= 1;
+            minutes = 59;
+            seconds = 59;
           }
+          return { hours, minutes, seconds };
         })
       );
     }, 1000);
@@ -38,9 +40,14 @@ const NFTCard = ({ NFTData }) => {
     return () => clearInterval(countdownInterval);
   }, []);
 
+  const filteredNFTs =
+    getType.length && getType !== "All"
+      ? NFTData.filter((nft) => nft.category === getType)
+      : NFTData;
+
   return (
     <div className={Style.NFTCard}>
-      {NFTData.map((el, i) => (
+      {filteredNFTs.map((el, i) => (
         <Link href={{ pathname: "/NFT-details", query: el }}>
           <div className={Style.NFTCard_box} key={i + 1}>
             <div className={Style.NFTCard_box_img}>

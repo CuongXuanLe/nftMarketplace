@@ -23,6 +23,7 @@ import { getUsersData, getAllNFTs, getUsersSuccess } from "../Redux/userSlice";
 const Home = () => {
   const [nfts, setNfts] = useState([]);
   const [allUsers, setAllUsers] = useState();
+  const [getType, setType] = useState("");
 
   const { checkIfWalletConnected, fetchNFTs } = useContext(
     NFTMarketplaceContext
@@ -81,8 +82,12 @@ const Home = () => {
         heading="Featured NFTs"
         paragraph="Discover the most outstanding NFTs in all topics of life."
       />
-      <Filter />
-      {nfts?.length > 0 ? <NFTCard NFTData={nfts} /> : <Loader />}
+      <Filter setType={setType} />
+      {nfts?.length > 0 ? (
+        <NFTCard NFTData={nfts} getType={getType} />
+      ) : (
+        <Loader />
+      )}
       <Title
         heading="Explore Categories"
         paragraph="Explore the NFTs in the most featured categories."
