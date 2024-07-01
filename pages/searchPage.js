@@ -12,6 +12,8 @@ const searchPage = () => {
   const { fetchNFTs, setError } = useContext(NFTMarketplaceContext);
   const [nfts, setNfts] = useState([]);
   const [nftsCopy, setNftsCopy] = useState([]);
+  const [getType, setType] = useState("");
+  const [sortMethod, setSortMethod] = useState("");
 
   useEffect(() => {
     try {
@@ -25,10 +27,10 @@ const searchPage = () => {
   }, []);
 
   const onHandleSearch = (value) => {
-    const filteredNFTS = nfts.filter(({ name }) => 
+    const filteredNFTS = nfts.filter(({ name }) =>
       name.toLowerCase().includes(value.toLowerCase())
     );
-  
+
     if (filteredNFTS.length === 0) {
       setNfts(nftsCopy);
     } else {
@@ -49,17 +51,18 @@ const searchPage = () => {
         onHandleSearch={onHandleSearch}
         onClearSearch={onClearSearch}
       />
-      <Filter />
+      <Filter setType={setType} setSortMethod={setSortMethod} />
       {nfts?.length > 0 ? (
-        <NFTCardTwo NFTData={nfts} location={"search"} />
+        <NFTCardTwo
+          NFTData={nfts}
+          location={"search"}
+          getType={getType}
+          sortMethod={sortMethod}
+        />
       ) : (
         <Loader />
       )}
-      {nfts?.length > 0 ? (
-      <Slider nfts={nfts.slice(0, 10)} />
-    ) : (
-        <Loader />
-      )}
+      {nfts?.length > 0 ? <Slider nfts={nfts.slice(0, 10)} /> : <Loader />}
       <Brand />
     </div>
   );

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Style from "../styles/collection.module.css";
 import images from "../img";
 import {
@@ -6,13 +6,17 @@ import {
   CollectionProfile,
   NFTCardTwo,
 } from "../collectionPage/collectionIndex";
-import { Slider, Brand, Loader, Collection } from "../components/componentsindex";
+import {
+  Slider,
+  Brand,
+  Loader,
+  Collection,
+} from "../components/componentsindex";
 import Filter from "../components/Filter/Filter";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 
 const collection = () => {
-
   const [nft, setNft] = useState({
     image: "",
     tokenId: "",
@@ -20,7 +24,9 @@ const collection = () => {
     owner: "",
     price: "",
     seller: "",
-  })
+  });
+  const [getType, setType] = useState("");
+  const [sortMethod, setSortMethod] = useState("");
 
   const router = useRouter();
 
@@ -28,13 +34,16 @@ const collection = () => {
     if (!router.isReady) return;
     setNft(router.query);
   }, [router.isReady, router.query]);
-  
+
   const usersData = useSelector((state) => state.users.getUsersData);
   const allNFTs = useSelector((state) => state.users.getAllNFTs);
 
   const users = useSelector((state) => state.auth.login?.currentUser);
 
-  const currentUserNFT = nft?._id?.length > 0 ? usersData?.filter((el) => el._id === nft?._id) :  usersData?.filter((el) => el._id === users?._id)
+  const currentUserNFT =
+    nft?._id?.length > 0
+      ? usersData?.filter((el) => el._id === nft?._id)
+      : usersData?.filter((el) => el._id === users?._id);
 
   return (
     <div className={Style.collection}>
@@ -44,9 +53,13 @@ const collection = () => {
       ) : (
         <Loader />
       )}
-      <Filter />
+      <Filter setType={setType} setSortMethod={setSortMethod} />
       {allNFTs?.length > 0 && currentUserNFT ? (
-        <NFTCardTwo NFTData={currentUserNFT[0]?.nfts} />
+        <NFTCardTwo
+          NFTData={currentUserNFT[0]?.nfts}
+          getType={getType}
+          sortMethod={sortMethod}
+        />
       ) : (
         <Loader />
       )}

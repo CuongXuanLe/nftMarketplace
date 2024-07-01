@@ -81,6 +81,9 @@
 
 .filter_box_right:hover ul {
   display: block;
+  opacity: 1;
+  transform: translateY(0);
+  animation: dropdown 0.2s ease-out forwards;
 }
 
 .backHover {
@@ -235,5 +238,16 @@
 
   .filter_box_items_box_item_trans {
     justify-content: space-between;
+  }
+}
+
+@keyframes dropdown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
