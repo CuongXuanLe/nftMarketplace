@@ -41,6 +41,10 @@
   align-items: center;
 }
 
+.navbar_container_left_box_input {
+  cursor: pointer;
+}
+
 .navbar_container_left_box_input_box {
   width: 100%;
   border: 1px solid #fff;
@@ -50,10 +54,11 @@
   border-radius: 10px;
 }
 
-.navbar_container_left_box_input:hover {
+.navbar_container_left_box_input_box:hover {
   border-color: transparent;
   transition: background-color 0.2s cubic-bezier(0.05, 0, 0.2, 1) 0s;
   background-color: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
 }
 
 .navbar_container_left_box_input_box input {
@@ -64,9 +69,9 @@
   margin-left: 10px;
 }
 
-.navbar_container_results{
+.navbar_container_results {
   position: absolute;
-  width: calc((100% / 6.95)*2);
+  width: calc((100% / 7.2) * 2);
   background-color: rgba(18, 18, 18, 0.9);
   padding: 10px;
   margin-top: 10px;
@@ -74,7 +79,7 @@
   border-radius: 0.5rem;
 }
 
-.navbar_container_results_item{
+.navbar_container_results_item {
   display: flex;
   flex-direction: row;
   padding: 5px;
@@ -86,11 +91,11 @@
   text-align: center;
 }
 
-.navbar_container_results_item img{
+.navbar_container_results_item img {
   width: 70px;
   height: 70px;
 }
-.navbar_container_results_item_title{
+.navbar_container_results_item_title {
   margin-left: 10px;
 }
 .search_icon {
@@ -123,19 +128,35 @@
 
 .navbar_container_right_discover_text:hover,
 .navbar_container_right_help_text:hover {
-  color: var(--shadow-dark-color);
-  border-bottom: 3px solid var(--shadow-dark-color);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.navbar_container_right_profile_box_opts {
+  position: absolute;
+  display: none;
+  top: -10px;
 }
 
 .navbar_container_right_discover_box,
 .navbar_container_right_help_box {
+  display: none;
   position: absolute;
-  padding: 1rem 0.5rem;
+  padding: 0.7rem 0.5rem;
   font-size: 1rem;
   width: 15rem;
-  border-radius: 1rem;
+  border-radius: 0.7rem;
   background-color: rgba(18, 18, 18, 0.9);
   border: 1px solid #fff;
+}
+
+.navbar_container_right_discover:hover .navbar_container_right_discover_box,
+.navbar_container_right_help:hover .navbar_container_right_help_box,
+.navbar_container_right_profile_box:hover
+  .navbar_container_right_profile_box_opts {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  animation: dropdown 0.2s ease-out forwards;
 }
 
 .navbar_container_right_notify {
@@ -165,6 +186,7 @@
 }
 
 .navbar_container_right_profile {
+  position: relative;
   border-radius: 50%;
 }
 
@@ -175,6 +197,14 @@
 .menuIcon {
   font-size: 2.5rem;
   cursor: pointer;
+}
+
+.backHover {
+  width: 100%;
+  height: 20px;
+  position: absolute;
+  background-color: transparent;
+  left: -10px;
 }
 
 .sideBar {
@@ -227,5 +257,27 @@
 
   .sideBar {
     display: block;
+  }
+}
+
+@keyframes dropdown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dropdownHide {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
   }
 }

@@ -24,6 +24,7 @@ const Home = () => {
   const [nfts, setNfts] = useState([]);
   const [allUsers, setAllUsers] = useState();
   const [getType, setType] = useState("");
+  const [sortMethod, setSortMethod] = useState("");
 
   const { checkIfWalletConnected, fetchNFTs } = useContext(
     NFTMarketplaceContext
@@ -82,9 +83,9 @@ const Home = () => {
         heading="Featured NFTs"
         paragraph="Discover the most outstanding NFTs in all topics of life."
       />
-      <Filter setType={setType} />
+      <Filter setType={setType} setSortMethod={setSortMethod} />
       {nfts?.length > 0 ? (
-        <NFTCard NFTData={nfts} getType={getType} />
+        <NFTCard NFTData={nfts} getType={getType} sortMethod={sortMethod} />
       ) : (
         <Loader />
       )}

@@ -2,17 +2,9 @@ import React, { useState } from "react";
 import { FaFilter, FaAngleDown, FaAngleUp } from "react-icons/fa";
 import Style from "./Filter.module.css";
 
-const Filter = ({ setType }) => {
-  const [filter, setFilter] = useState(true);
+const Filter = ({ setType, setSortMethod }) => {
   const [active, setActive] = useState("All");
-
-  const openFilter = () => {
-    if (!filter) {
-      setFilter(true);
-    } else {
-      setFilter(false);
-    }
-  };
+  const [isHovered, setIsHovered] = useState(false);
 
   const categoryArry = [
     {
@@ -39,6 +31,10 @@ const Filter = ({ setType }) => {
     setType(event);
   };
 
+  const handleSortChange = (event) => {
+    setSortMethod(event);
+  };
+
   return (
     <div className={Style.filter}>
       <div className={Style.filter_box}>
@@ -59,17 +55,18 @@ const Filter = ({ setType }) => {
         <div className={Style.filter_box_right}>
           <div
             className={Style.filter_box_right_box}
-            onClick={() => openFilter()}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
           >
             <FaFilter />
-            <span>Filter</span> {filter ? <FaAngleDown /> : <FaAngleUp />}
+            <span>Filter</span> {isHovered ? <FaAngleDown /> : <FaAngleUp />}
           </div>
           <div className={Style.backHover}></div>
           <ul className={Style.filter_box_func}>
-            <li>Sort by A-Z</li>
-            <li>Sort by Z-A</li>
-            <li>Low to High</li>
-            <li>High to Low</li>
+            <li onClick={() => handleSortChange("a-z")}>Sort by A-Z</li>
+            <li onClick={() => handleSortChange("z-a")}>Sort by Z-A</li>
+            <li onClick={() => handleSortChange("low-high")}>Low to High</li>
+            <li onClick={() => handleSortChange("high-low")}>High to Low</li>
           </ul>
         </div>
       </div>
